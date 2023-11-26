@@ -16,6 +16,14 @@ public class CarEngine : MonoBehaviour, IMovable
     [SerializeField] private Wheel[] _wheels;
     private Wheel[] _drivingWheels;
 
+    [SerializeField, Range(0, 200)] private float _speedKMH;
+    public float _speedMS;
+    public float _angleSpeedRad;
+    public float _wheelAngleSpeed;
+
+    public float fl_torq;
+    public float fr_torq;
+
     [SerializeField, Range(0, 5_000)] private float _torqueForce;
     [SerializeField, Range(0, 50)] private float _decelerationForce;
     [SerializeField, Range(0, 15_000)] private float _brakeForce;
@@ -27,6 +35,8 @@ public class CarEngine : MonoBehaviour, IMovable
         ConfigureDriveMode();
         Deceleration();
     }
+
+
 
     private void ConfigureDriveMode()
     {
@@ -51,26 +61,40 @@ public class CarEngine : MonoBehaviour, IMovable
     }
 
 
+    private void FixedUpdate()
+    {
+        _speedMS = _speedKMH * 1000 / 3600;
+        _angleSpeedRad = _speedMS / _drivingWheels[0].WheelCollider.radius;
+        _wheelAngleSpeed = _angleSpeedRad * Mathf.Rad2Deg;
+
+        fl_torq = _drivingWheels[0].WheelCollider.motorTorque;
+        fr_torq = _drivingWheels[1].WheelCollider.motorTorque;
+    }
+
     public void Acceleration()
     {
         _motorTorque = _torqueForce;
+        //_motorTorque = 1f;
 
         for (int i = 0; i < _wheels.Length; i++)
             _wheels[i].WheelCollider.brakeTorque = 0;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
-            _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+            //_drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+            _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngleSpeed;
     }
 
     public void Reverse()
     {
         _motorTorque = -_torqueForce / 2;
+        //_motorTorque = -1f;
 
         for (int i = 0; i < _wheels.Length; i++)
             _wheels[i].WheelCollider.brakeTorque = 0;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
             _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+            //_drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngleSpeed / 2;
     }
 
     public void Deceleration()

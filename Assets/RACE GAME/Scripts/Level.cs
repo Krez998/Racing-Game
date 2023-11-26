@@ -6,7 +6,7 @@ public class Level : MonoBehaviour
     private void Awake()
     {
         Numbers.GenerateNums();
-        SpawnPlayerCar();
+        //SpawnPlayerCar();
     }
 
     private void SpawnPlayerCar()

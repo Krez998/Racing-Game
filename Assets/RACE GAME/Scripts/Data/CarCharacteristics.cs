@@ -11,5 +11,5 @@ public class CarCharacteristics : ScriptableObject
     [SerializeField] private int _numberOfGears;
     [SerializeField] private int _horsepower;
     [SerializeField] private string _registrationPlate;
-    [SerializeField] private float[] _torqueValues;
+    [SerializeField] private float[] _engineSpeed;
 }
