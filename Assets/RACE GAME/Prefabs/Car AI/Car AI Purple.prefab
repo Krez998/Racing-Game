@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
-  _currentTarget: {fileID: 0}
+  _currentWaypoint: {fileID: 0}
   _currentTargetIndex: 0
   rotationAngle: 0
 --- !u!114 &5415031176025236281
@@ -387,9 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61343cc49e34c684e9b88c58ca3f24f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angreRot: 0
   _maxRotationAngle: 40
-  _defaultSteeringPosition: 0
+  _defaultSteeringAngle: 0
   _wheels:
   - {fileID: 7987739522270722007}
   - {fileID: 8780918702011395461}
@@ -411,13 +410,19 @@ MonoBehaviour:
   - {fileID: 8780918702011395461}
   - {fileID: 9055295238738541223}
   - {fileID: 8121921802502423118}
+  _speedKPH: 40
+  _speedMPS: 0
+  _angleSpeedRad: 0
+  _wheelAngleSpeed: 0
+  fl_gas: 0
+  fr_gas: 0
+  fl_brake: 0
+  fr_brake: 0
+  rl_brake: 0
+  rr_brake: 0
   _torqueForce: 2000
   _decelerationForce: 0
   _brakeForce: 10000
-  torq1: 0
-  torq2: 0
-  torq3: 0
-  torq4: 0
 --- !u!114 &8042322221683954811
 MonoBehaviour:
   m_ObjectHideFlags: 0

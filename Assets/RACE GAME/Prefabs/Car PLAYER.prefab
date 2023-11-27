@@ -79,7 +79,7 @@ WheelCollider:
   m_Radius: 0.38
   m_SuspensionSpring:
     spring: 50000
-    damper: 2000
+    damper: 1500
     targetPosition: 0.5
   m_SuspensionDistance: 0.35
   m_ForceAppPointDistance: 0
@@ -471,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3891037485863812168}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.04, y: 0.5, z: -29.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -600,14 +600,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752225c22d721b442bad3b68edab3fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheelDriveMode: 1
+  _wheelDriveMode: 0
   _wheels:
   - {fileID: 1151132858695969470}
   - {fileID: 1359310593452191876}
   - {fileID: 8565881440043841577}
   - {fileID: 1229715867122175887}
+  _drivingWheels: []
+  _speedKMH: 30
+  _speedMS: 0
+  _angleSpeedRad: 0
+  _wheelAngleSpeed: 0
+  fl_gas: 0
+  fr_gas: 0
+  fl_brake: 0
+  fr_brake: 0
+  rl_brake: 0
+  rr_brake: 0
   _torqueForce: 500
-  _decelerationForce: 10
+  _decelerationForce: 20
   _brakeForce: 8000
 --- !u!114 &2496671167973543948
 MonoBehaviour:
@@ -681,7 +692,7 @@ WheelCollider:
   m_Radius: 0.38
   m_SuspensionSpring:
     spring: 50000
-    damper: 2000
+    damper: 1500
     targetPosition: 0.5
   m_SuspensionDistance: 0.35
   m_ForceAppPointDistance: 0
@@ -849,7 +860,7 @@ WheelCollider:
   m_Radius: 0.38
   m_SuspensionSpring:
     spring: 50000
-    damper: 2000
+    damper: 1500
     targetPosition: 0.5
   m_SuspensionDistance: 0.35
   m_ForceAppPointDistance: 0
@@ -1052,7 +1063,7 @@ WheelCollider:
   m_Radius: 0.38
   m_SuspensionSpring:
     spring: 50000
-    damper: 2000
+    damper: 1500
     targetPosition: 0.5
   m_SuspensionDistance: 0.35
   m_ForceAppPointDistance: 0

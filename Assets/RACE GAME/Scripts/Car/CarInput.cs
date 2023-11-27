@@ -28,7 +28,7 @@ public class CarInput : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             _steerable.TurnLeft(_rotationAngle);
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             _steerable.TurnRight(_rotationAngle);
         else
             _steerable.StraightenSteeringWheel();

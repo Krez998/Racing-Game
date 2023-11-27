@@ -123,7 +123,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799144836277180990}
   serializedVersion: 4
-  m_Mass: 1500
+  m_Mass: 1000
   m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0.1, z: 0}
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
-  _currentTarget: {fileID: 0}
+  _currentWaypoint: {fileID: 0}
   _currentTargetIndex: 0
   rotationAngle: 0
 --- !u!114 &6778461805922051601
@@ -219,9 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61343cc49e34c684e9b88c58ca3f24f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angreRot: 0
   _maxRotationAngle: 40
-  _defaultSteeringPosition: 0
+  _defaultSteeringAngle: 0
   _wheels:
   - {fileID: 3347141041457432485}
   - {fileID: 6772979292000282048}
@@ -243,13 +242,19 @@ MonoBehaviour:
   - {fileID: 6772979292000282048}
   - {fileID: 4034901617764040273}
   - {fileID: 1157149550237195334}
-  _torqueForce: 2000
+  _speedKPH: 40
+  _speedMPS: 0
+  _angleSpeedRad: 0
+  _wheelAngleSpeed: 0
+  fl_gas: 0
+  fr_gas: 0
+  fl_brake: 0
+  fr_brake: 0
+  rl_brake: 0
+  rr_brake: 0
+  _torqueForce: 1
   _decelerationForce: 0
   _brakeForce: 10000
-  torq1: 0
-  torq2: 0
-  torq3: 0
-  torq4: 0
 --- !u!114 &1726115125311395476
 MonoBehaviour:
   m_ObjectHideFlags: 0

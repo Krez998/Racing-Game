@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 
 public class Path : MonoBehaviour
 {
@@ -21,7 +20,6 @@ public class Path : MonoBehaviour
         newTransform.name = $"Waypoint {_waypoints.Count}";
         newTransform.transform.SetParent(transform);
         _waypoints.Add(newTransform.transform);
-
     }
 
     public void RemoveLastWaypoint()

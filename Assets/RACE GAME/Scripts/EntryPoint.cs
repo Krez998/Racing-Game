@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private Car _playerCar;
     private void Awake()

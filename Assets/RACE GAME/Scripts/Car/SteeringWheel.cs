@@ -15,7 +15,7 @@ public class SteeringWheel : MonoBehaviour, ISteerable
         if (angle > _maxRotationAngle)
             angle = _maxRotationAngle;
         for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[0].WheelCollider.steerAngle, -angle, 0.1f);
+            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[i].WheelCollider.steerAngle, -angle, 0.1f);
     }
 
     public void TurnRight(float angle)
@@ -23,13 +23,13 @@ public class SteeringWheel : MonoBehaviour, ISteerable
         if (angle > _maxRotationAngle)
             angle = _maxRotationAngle;
         for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[0].WheelCollider.steerAngle, angle, 0.1f);
+            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[i].WheelCollider.steerAngle, angle, 0.1f);
     }
 
     public void StraightenSteeringWheel()
     {
         for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[0].WheelCollider.steerAngle, _defaultSteeringAngle, 0.1f);
+            _wheels[i].WheelCollider.steerAngle = Mathf.Lerp(_wheels[i].WheelCollider.steerAngle, _defaultSteeringAngle, 0.1f);
     }
 
 }
