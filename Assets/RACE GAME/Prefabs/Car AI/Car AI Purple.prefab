@@ -449,8 +449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carCharacteristics: {fileID: 0}
+  _carCharacteristics: {fileID: 11400000, guid: 7e476c5364bb8f74eb5c5a0636e2d772, type: 2}
   _currentGear: 0
+  _speedValues: []
 --- !u!1 &967366597837063694
 GameObject:
   m_ObjectHideFlags: 0

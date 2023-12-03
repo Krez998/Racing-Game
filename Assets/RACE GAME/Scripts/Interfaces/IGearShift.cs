@@ -1,5 +1,5 @@
 public interface IGearShift
 {
-    public void GearShiftUp();
+    public void GearShift();
     public void GearShiftDown();
 }

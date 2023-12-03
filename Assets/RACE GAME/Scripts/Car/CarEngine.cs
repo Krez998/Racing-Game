@@ -8,22 +8,20 @@ public enum WheelDriveMode
     AWD
 }
 
+[RequireComponent(typeof(GearShift))]
 public class CarEngine : MonoBehaviour, IMovable
 {
+    public float MotorTorque => _motorTorque;
+
+    public Wheel[] DrivingWheels => _drivingWheels;
+
     [SerializeField] private WheelDriveMode _wheelDriveMode;
 
-    [Header("Wheels")]
+    [Header("All Wheels")]
     [SerializeField] private Wheel[] _wheels;
-    private Wheel[] _drivingWheels;
-
-    [Header("Speed Km/h")]
-    [SerializeField, Range(0, 200)] private float _speedKPH;
+    public Wheel[] _drivingWheels;
 
     // временно
-    [Header("Speed Params (Very Demo)")]
-    public float _speedMPS;
-    public float _angleSpeedRad;
-    public float _wheelAngleSpeed; 
     [Header("Gases (Very Demo)")]
     public float fl_gas;
     public float fr_gas;
@@ -38,10 +36,20 @@ public class CarEngine : MonoBehaviour, IMovable
     [SerializeField, Range(0, 50)] private float _decelerationForce;
     [SerializeField, Range(0, 15_000)] private float _brakeForce;
 
+    
+    private Rigidbody _rb;
+    private GearShift _gearShift;
+    private Vector3 _lastPosition;
+    private Vector3 _differencePosition;
+
     private float _motorTorque;
+    private float _wheelAngularVelocity;
+
 
     private void Awake()
     {
+        _rb = GetComponent<Rigidbody>();
+        _gearShift = GetComponent<GearShift>();
         ConfigureDriveMode();
         Deceleration();
     }
@@ -68,13 +76,10 @@ public class CarEngine : MonoBehaviour, IMovable
         }
     }
 
+    public void SetWheelAngularVelocity(float velocity) => _wheelAngularVelocity = velocity;
 
     private void FixedUpdate()
     {
-        _speedMPS = _speedKPH * 1000 / 3600;
-        _angleSpeedRad = _speedMPS / _drivingWheels[0].WheelCollider.radius;
-        _wheelAngleSpeed = _angleSpeedRad * Mathf.Rad2Deg;
-
         fl_gas = _drivingWheels[0].WheelCollider.motorTorque;
         fr_gas = _drivingWheels[1].WheelCollider.motorTorque;
 
@@ -82,6 +87,8 @@ public class CarEngine : MonoBehaviour, IMovable
         fr_brake = _wheels[1].WheelCollider.brakeTorque;
         rl_brake = _wheels[2].WheelCollider.brakeTorque;
         rr_brake = _wheels[3].WheelCollider.brakeTorque;
+
+        _gearShift.GetEngineData(_motorTorque);
     }
 
     public void Acceleration()
@@ -94,22 +101,32 @@ public class CarEngine : MonoBehaviour, IMovable
         for (int i = 0; i < _drivingWheels.Length; i++)
         {
             _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
-            _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngleSpeed;
+            _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
         }
     }
 
     public void Reverse()
     {
-        _motorTorque = -_torqueForce;
+        _differencePosition = transform.position - _lastPosition;
+        _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.brakeTorque = 0;
-
-        for (int i = 0; i < _drivingWheels.Length; i++)
+        if (_differencePosition.z > 0)
+            Brake();
+        else
         {
-            _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
-            _drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngleSpeed;
+            _motorTorque = -_torqueForce;
+
+            for (int i = 0; i < _wheels.Length; i++)
+                _wheels[i].WheelCollider.brakeTorque = 0;
+
+            for (int i = 0; i < _drivingWheels.Length; i++)
+            {
+                _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+                _drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngularVelocity;
+            }
         }
+
+        _lastPosition = transform.position;
     }
 
     public void Deceleration()

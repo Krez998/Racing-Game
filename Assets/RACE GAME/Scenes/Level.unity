@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 829fef7ec38106d40a5e39c2ea2d5109, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.24
+      value: -5.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 829fef7ec38106d40a5e39c2ea2d5109, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3416,6 +3416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car AI Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 437262061857452961, guid: 09297421a316b4a458baa3b6aad01538, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1407752095708902523, guid: 09297421a316b4a458baa3b6aad01538, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.02
@@ -3534,6 +3538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car AI Red
       objectReference: {fileID: 0}
+    - target: {fileID: 799144836277180990, guid: 72bea9ce256c9bc4c84124555e1aef9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1106480640595822728, guid: 72bea9ce256c9bc4c84124555e1aef9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.07
@@ -3591,6 +3599,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1128839359620173365, guid: 33f13750576b365428793ceaa2b49248, type: 3}
+      propertyPath: _gearText
+      value: 
+      objectReference: {fileID: 55453668}
     - target: {fileID: 2496671167973543948, guid: 33f13750576b365428793ceaa2b49248, type: 3}
       propertyPath: _spedometerText
       value: 

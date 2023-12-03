@@ -454,8 +454,8 @@ GameObject:
   - component: {fileID: 2430499978387984702}
   - component: {fileID: 7423461205266967488}
   - component: {fileID: 8714457509065778732}
-  - component: {fileID: 2496671167973543948}
   - component: {fileID: 1128839359620173365}
+  - component: {fileID: 2496671167973543948}
   m_Layer: 0
   m_Name: Car PLAYER
   m_TagString: Untagged
@@ -607,19 +607,39 @@ MonoBehaviour:
   - {fileID: 8565881440043841577}
   - {fileID: 1229715867122175887}
   _drivingWheels: []
-  _speedKMH: 30
-  _speedMS: 0
-  _angleSpeedRad: 0
-  _wheelAngleSpeed: 0
   fl_gas: 0
   fr_gas: 0
   fl_brake: 0
   fr_brake: 0
   rl_brake: 0
   rr_brake: 0
-  _torqueForce: 500
+  _torqueForce: 5000
   _decelerationForce: 20
   _brakeForce: 8000
+--- !u!114 &1128839359620173365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891037485863812168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedKPH: 0
+  _gearText: {fileID: 0}
+  _speedMPS: 0
+  _wheelAngleSpeed: 0
+  _wheelRotationSpeed: 0
+  _carCharacteristics: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
+  _currentGear: 0
+  _speedValues: []
+  _currGearMinSpeed: 0
+  _currGearMaxSpeed: 0
+  RPM: 0
+  movZ: 0
 --- !u!114 &2496671167973543948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,20 +654,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _spedometerText: {fileID: 0}
---- !u!114 &1128839359620173365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3891037485863812168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carCharacteristics: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
-  _currentGear: 0
 --- !u!1 &6064628122993584071
 GameObject:
   m_ObjectHideFlags: 0

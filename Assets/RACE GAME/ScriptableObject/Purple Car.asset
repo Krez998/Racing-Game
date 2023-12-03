@@ -10,17 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b9f19294da979244971ef85d65a40c9, type: 3}
-  m_Name: Car1
+  m_Name: Purple Car
   m_EditorClassIdentifier: 
-  _name: Toyota
+  _vehicleId: 2
+  _name: 
+  _speed: 250
   _numberOfGears: 8
-  _horsepower: 500
-  _registrationPlate: 
-  _engineSpeed:
-  - 20
-  - 40
-  - 60
-  - 80
-  - 100
-  - 120
-  - 140
