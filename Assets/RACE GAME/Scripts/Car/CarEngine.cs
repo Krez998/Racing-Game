@@ -19,7 +19,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     [Header("All Wheels")]
     [SerializeField] private Wheel[] _wheels;
-    public Wheel[] _drivingWheels;
+    [SerializeField] private Wheel[] _drivingWheels;
 
     // временно
     [Header("Gases (Very Demo)")]
@@ -36,8 +36,6 @@ public class CarEngine : MonoBehaviour, IMovable
     [SerializeField, Range(0, 50)] private float _decelerationForce;
     [SerializeField, Range(0, 15_000)] private float _brakeForce;
 
-    
-    private Rigidbody _rb;
     private GearShift _gearShift;
     private Vector3 _lastPosition;
     private Vector3 _differencePosition;
@@ -48,7 +46,6 @@ public class CarEngine : MonoBehaviour, IMovable
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
         _gearShift = GetComponent<GearShift>();
         ConfigureDriveMode();
         Deceleration();

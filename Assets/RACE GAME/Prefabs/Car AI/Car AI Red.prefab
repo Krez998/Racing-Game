@@ -242,6 +242,7 @@ MonoBehaviour:
   - {fileID: 6772979292000282048}
   - {fileID: 4034901617764040273}
   - {fileID: 1157149550237195334}
+  _drivingWheels: []
   fl_gas: 0
   fr_gas: 0
   fl_brake: 0
@@ -263,13 +264,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedKPH: 0
+  _gearText: {fileID: 0}
   _speedMPS: 0
-  _angleSpeedRad: 0
-  _wheelAngularVelocity: 0
+  _wheelAngleSpeed: 0
+  _wheelRotationSpeed: 0
   _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _currentGear: 0
   _speedValues: []
+  _currGearMinSpeed: 0
+  _currGearMaxSpeed: 0
+  _speedZ: 0
+  Torque: 0
 --- !u!114 &1726115125311395476
 MonoBehaviour:
   m_ObjectHideFlags: 0
