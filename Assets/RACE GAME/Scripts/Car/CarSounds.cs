@@ -34,9 +34,9 @@ public class CarSounds : MonoBehaviour
             //_engineIdlingAudio.pitch = _minPitch;
         }
 
-        if (_currentSpeed > _minSpeed)
+        if (Mathf.Abs(_currentSpeed) > _minSpeed)
         {
-            _engineAudio.pitch = _minPitch + _pitchFromCar;       
+            //_engineAudio.pitch = _minPitch + _pitchFromCar;
         }
 
         if (_currentSpeed > _maxSpeed)
@@ -51,7 +51,10 @@ public class CarSounds : MonoBehaviour
     private void ChangePitchFromCar()
     {
         if (_gearShift.CurrentGearMaxSpeed != 0)
-            _pitchFromCar = _currentSpeed / _gearShift.CurrentGearMaxSpeed;
+            _engineAudio.pitch = _minPitch + _currentSpeed / _gearShift.CurrentGearMaxSpeed;
+
+        if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) == 0)
+            _engineAudio.pitch = 0.5f;
     }
 
     private void ChangeIdleVolume()
@@ -70,11 +73,11 @@ public class CarSounds : MonoBehaviour
         {
             _engineAudio.volume -= 0.01f;
         }
-        else if (_carEngine.MotorTorque == 0 && _engineAudio.volume > 0f && _currentSpeed < 5)
+        else if (_carEngine.MotorTorque == 0 && _engineAudio.volume > 0.2f && Mathf.Abs(_currentSpeed) < 5)
         {
-            _engineAudio.volume -= 0.005f;
+            _engineAudio.volume -= 0.01f;
         }
-        else if (_carEngine.MotorTorque > 0 && _engineAudio.volume < 0.5f)
+        else if (_carEngine.MotorTorque != 0 && _engineAudio.volume < 0.5f)
             _engineAudio.volume += 0.01f;
     }
 

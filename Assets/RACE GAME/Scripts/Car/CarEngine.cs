@@ -40,9 +40,12 @@ public class CarEngine : MonoBehaviour, IMovable
     private Vector3 _lastPosition;
     private Vector3 _differencePosition;
 
-    private float _motorTorque;
+    private float _motorTorque; // крутящий момент мотора
+    private float _wheelTorque; // крутящий момент на колеса
     private float _wheelAngularVelocity;
 
+    public bool IsAllowMove { set => _isAllowMove = value; }
+    public bool _isAllowMove;
 
     private void Awake()
     {
@@ -92,33 +95,53 @@ public class CarEngine : MonoBehaviour, IMovable
     {
         _motorTorque = _torqueForce;
 
-        for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.brakeTorque = 0;
-
-        for (int i = 0; i < _drivingWheels.Length; i++)
-        {
-            _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
-            _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
-        }
-    }
-
-    public void Reverse()
-    {
         _differencePosition = transform.position - _lastPosition;
         _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        if (_differencePosition.z > 0)
-            Brake();
-        else
-        {
-            _motorTorque = -_torqueForce;
+        //if (_differencePosition.z > 0.01f)
+        //    Brake();
+        //else
+        //{
+            if (_isAllowMove)
+                _wheelTorque = _motorTorque;
+            else
+                _wheelTorque = 0f;
+
 
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
 
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
-                _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+                _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
+                _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
+            }
+        //}
+    }
+
+    public void Reverse()
+    {
+        _motorTorque = -_torqueForce;
+
+        _differencePosition = transform.position - _lastPosition;
+        _differencePosition = transform.InverseTransformDirection(_differencePosition);
+
+        if (_differencePosition.z > 0.01f)
+            Brake();
+        else
+        {           
+            if (_isAllowMove)
+                _wheelTorque = _motorTorque;
+            else
+                _wheelTorque = 0f;
+
+            
+            for (int i = 0; i < _wheels.Length; i++)
+                _wheels[i].WheelCollider.brakeTorque = 0;
+
+            for (int i = 0; i < _drivingWheels.Length; i++)
+            {
+                _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
                 _drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngularVelocity;
             }
         }
@@ -128,6 +151,8 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Deceleration()
     {
+        //Debug.Log("Deceleration");
+
         _motorTorque = 0f;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
@@ -139,6 +164,8 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Brake()
     {
+        //Debug.Log("Brake");
+
         _motorTorque = 0f;
 
         for (int i = 0; i < _drivingWheels.Length; i++)

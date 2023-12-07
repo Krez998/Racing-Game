@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class GearShift : MonoBehaviour // IGearShift
     public int CurrentGear => _currentGear;
     public float CurrentGearMaxSpeed => _currentGearMaxSpeed;
     public float SpeedZ => _speedZ;
+    public bool IsShifting => _isShifting;
 
     [Header("Gear Hud")]
     [SerializeField] private TextMeshProUGUI _gearText;
@@ -21,6 +23,8 @@ public class GearShift : MonoBehaviour // IGearShift
     [SerializeField] int _currentGear;
     private Rigidbody _rb;
     private CarEngine _engine;
+    private WaitForSeconds _gearShiftDelay;
+    public bool _isShifting;
 
     public float[] _speedValues;
 
@@ -36,6 +40,7 @@ public class GearShift : MonoBehaviour // IGearShift
     {
         _rb = GetComponent<Rigidbody>();
         _engine = GetComponent<CarEngine>();
+        _gearShiftDelay = new WaitForSeconds(0.5f);
         InitSpeedValues();
     }
 
@@ -90,60 +95,101 @@ public class GearShift : MonoBehaviour // IGearShift
         Torque = motorTorque;
         _speedZ = Mathf.Round(transform.InverseTransformDirection(_rb.velocity).z * 3.6f);
 
+        if (!_isShifting && _speedZ == 0 && motorTorque > 0 && _currentGear == 0)
+        {
+            Debug.Log("Moving Away");
+            StartCoroutine(SetGear(++_currentGear));
+        }
 
-
-        if (_speedZ > 0 && _speedZ >= _currentGearMaxSpeed - 5f)
+        if (!_isShifting && _speedZ > 0 && _speedZ >= _currentGearMaxSpeed - 3f)
         {
             Debug.Log("Gear UP");
-            SetGear(++_currentGear);
+            StartCoroutine(SetGear(++_currentGear));
         }
 
-        if (_speedZ > 0 && _speedZ < _currentGearMinSpeed - 5f)
+        if (!_isShifting && _speedZ > 0 && _speedZ < _currentGearMinSpeed - 3f)
         {
             Debug.Log("Gear DOWN");
-            SetGear(--_currentGear);
+            StartCoroutine(SetGear(--_currentGear));
         }
 
-        if (motorTorque < 0 && _currentGear != -1)
+        if (!_isShifting && motorTorque < 0 && _currentGear != -1)
         {
             Debug.Log("R");
-            SetGear(_currentGear = -1);
+            StartCoroutine(SetGear(_currentGear = -1));
         }
 
-        if (motorTorque == 0 && _currentGear != 0 && _speedZ == 0)
+        if (!_isShifting && motorTorque == 0 && _currentGear != 0 && _speedZ == 0)
         {
             Debug.Log("N");
-            SetGear(_currentGear = 0);
+            StartCoroutine(SetGear(_currentGear = 0));
         }
     }
 
-    public void SetGear(int gear)
+    private IEnumerator SetGear(int gear)
     {
+        _isShifting = true;
+        _engine.IsAllowMove = false;
+        UpdateGearText();
+        yield return _gearShiftDelay;
         switch (gear)
         {
             case 1:
+                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = _speedValues[gear - 1];
                 break;
             case 0:
+                _engine.IsAllowMove = false;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = 0;
                 break;
             case -1:
+                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = -_speedValues[0];
                 break;
             default:
+                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = _speedValues[gear - 2];
                 _currentGearMaxSpeed = _speedValues[gear - 1];
                 break;
         }
+        _isShifting = false;
 
         CalculateWheelRotationSpeed();
         _engine.SetWheelAngularVelocity(_wheelRotationSpeed);
 
         UpdateGearText();
     }
+
+    //public void SetGear(int gear)
+    //{
+    //    switch (gear)
+    //    {
+    //        case 1:
+    //            _currentGearMinSpeed = 0;
+    //            _currentGearMaxSpeed = _speedValues[gear - 1];
+    //            break;
+    //        case 0:
+    //            _currentGearMinSpeed = 0;
+    //            _currentGearMaxSpeed = 0;
+    //            break;
+    //        case -1:
+    //            _currentGearMinSpeed = 0;
+    //            _currentGearMaxSpeed = -_speedValues[0];
+    //            break;
+    //        default:
+    //            _currentGearMinSpeed = _speedValues[gear - 2];
+    //            _currentGearMaxSpeed = _speedValues[gear - 1];
+    //            break;
+    //    }
+
+    //    CalculateWheelRotationSpeed();
+    //    _engine.SetWheelAngularVelocity(_wheelRotationSpeed);
+
+    //    UpdateGearText();
+    //}
 
     private void UpdateGearText()
     {
@@ -152,6 +198,8 @@ public class GearShift : MonoBehaviour // IGearShift
             if (_currentGear == -1)
                 _gearText.text = "R";
             else if(_currentGear == 0)
+                _gearText.text = "N";
+            else if(_isShifting)
                 _gearText.text = "N";
             else
                 _gearText.text = Numbers.GeneratedNumsStr[_currentGear];
