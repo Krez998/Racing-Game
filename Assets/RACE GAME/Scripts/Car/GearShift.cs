@@ -9,7 +9,7 @@ public class GearShift : MonoBehaviour // IGearShift
     public int CurrentGear => _currentGear;
     public float CurrentGearMaxSpeed => _currentGearMaxSpeed;
     public float SpeedZ => _speedZ;
-    public bool IsShifting => _isShifting;
+    //public bool IsShifting => _isShifting;
 
     [Header("Gear Hud")]
     [SerializeField] private TextMeshProUGUI _gearText;
@@ -40,7 +40,7 @@ public class GearShift : MonoBehaviour // IGearShift
     {
         _rb = GetComponent<Rigidbody>();
         _engine = GetComponent<CarEngine>();
-        _gearShiftDelay = new WaitForSeconds(0.5f);
+        _gearShiftDelay = new WaitForSeconds(0.2f);
         InitSpeedValues();
     }
 
@@ -95,33 +95,33 @@ public class GearShift : MonoBehaviour // IGearShift
         Torque = motorTorque;
         _speedZ = Mathf.Round(transform.InverseTransformDirection(_rb.velocity).z * 3.6f);
 
-        if (!_isShifting && _speedZ == 0 && motorTorque > 0 && _currentGear == 0)
+        if (!_isShifting && _currentGear == 0 && _speedZ == 0 && motorTorque > 0)
         {
             Debug.Log("Moving Away");
-            StartCoroutine(SetGear(++_currentGear));
+            StartCoroutine(SetGear(1));
         }
 
         if (!_isShifting && _speedZ > 0 && _speedZ >= _currentGearMaxSpeed - 3f)
         {
             Debug.Log("Gear UP");
-            StartCoroutine(SetGear(++_currentGear));
+            StartCoroutine(SetGear(1));
         }
 
         if (!_isShifting && _speedZ > 0 && _speedZ < _currentGearMinSpeed - 3f)
         {
             Debug.Log("Gear DOWN");
-            StartCoroutine(SetGear(--_currentGear));
+            StartCoroutine(SetGear(-1));
         }
 
         if (!_isShifting && motorTorque < 0 && _currentGear != -1)
         {
             Debug.Log("R");
-            StartCoroutine(SetGear(_currentGear = -1));
+            StartCoroutine(SetGear(-1));
         }
 
         if (!_isShifting && motorTorque == 0 && _currentGear != 0 && _speedZ == 0)
         {
-            Debug.Log("N");
+            Debug.Log("Stop Car");
             StartCoroutine(SetGear(_currentGear = 0));
         }
     }
@@ -130,14 +130,22 @@ public class GearShift : MonoBehaviour // IGearShift
     {
         _isShifting = true;
         _engine.IsAllowMove = false;
+        Debug.Log("N");
+        int tempGear = _currentGear;
+        _currentGear = 0;
         UpdateGearText();
         yield return _gearShiftDelay;
-        switch (gear)
+
+        _currentGear = tempGear;
+        _currentGear += gear;
+        Debug.Log("GEAR: " + _currentGear);
+
+        switch (_currentGear)
         {
             case 1:
                 _engine.IsAllowMove = true;
                 _currentGearMinSpeed = 0;
-                _currentGearMaxSpeed = _speedValues[gear - 1];
+                _currentGearMaxSpeed = _speedValues[_currentGear - 1];
                 break;
             case 0:
                 _engine.IsAllowMove = false;
@@ -151,16 +159,16 @@ public class GearShift : MonoBehaviour // IGearShift
                 break;
             default:
                 _engine.IsAllowMove = true;
-                _currentGearMinSpeed = _speedValues[gear - 2];
-                _currentGearMaxSpeed = _speedValues[gear - 1];
+                _currentGearMinSpeed = _speedValues[_currentGear - 2];
+                _currentGearMaxSpeed = _speedValues[_currentGear - 1];
                 break;
         }
+        UpdateGearText();
+
         _isShifting = false;
 
         CalculateWheelRotationSpeed();
-        _engine.SetWheelAngularVelocity(_wheelRotationSpeed);
-
-        UpdateGearText();
+        _engine.SetWheelAngularVelocity(_wheelRotationSpeed);     
     }
 
     //public void SetGear(int gear)
@@ -199,8 +207,8 @@ public class GearShift : MonoBehaviour // IGearShift
                 _gearText.text = "R";
             else if(_currentGear == 0)
                 _gearText.text = "N";
-            else if(_isShifting)
-                _gearText.text = "N";
+            //else if(_isShifting)
+            //    _gearText.text = "N";
             else
                 _gearText.text = Numbers.GeneratedNumsStr[_currentGear];
         }

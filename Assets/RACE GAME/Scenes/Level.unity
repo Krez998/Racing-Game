@@ -3154,10 +3154,6 @@ PrefabInstance:
       propertyPath: _gearText
       value: 
       objectReference: {fileID: 55453668}
-    - target: {fileID: 1128839359620173365, guid: 33f13750576b365428793ceaa2b49248, type: 3}
-      propertyPath: _isShifting
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2496671167973543948, guid: 33f13750576b365428793ceaa2b49248, type: 3}
       propertyPath: _spedometerText
       value: 
