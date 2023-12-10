@@ -97,31 +97,31 @@ public class GearShift : MonoBehaviour // IGearShift
 
         if (!_isShifting && _currentGear == 0 && _speedZ == 0 && motorTorque > 0)
         {
-            Debug.Log("Moving Away");
+           // Debug.Log("Moving Away");
             StartCoroutine(SetGear(1));
         }
 
         if (!_isShifting && _speedZ > 0 && _speedZ >= _currentGearMaxSpeed - 3f)
         {
-            Debug.Log("Gear UP");
+            //Debug.Log("Gear UP");
             StartCoroutine(SetGear(1));
         }
 
         if (!_isShifting && _speedZ > 0 && _speedZ < _currentGearMinSpeed - 3f)
         {
-            Debug.Log("Gear DOWN");
+            //Debug.Log("Gear DOWN");
             StartCoroutine(SetGear(-1));
         }
 
         if (!_isShifting && motorTorque < 0 && _currentGear != -1)
         {
-            Debug.Log("R");
+            //Debug.Log("R");
             StartCoroutine(SetGear(-1));
         }
 
         if (!_isShifting && motorTorque == 0 && _currentGear != 0 && _speedZ == 0)
         {
-            Debug.Log("Stop Car");
+            //Debug.Log("Stop Car");
             StartCoroutine(SetGear(_currentGear = 0));
         }
     }
@@ -130,7 +130,7 @@ public class GearShift : MonoBehaviour // IGearShift
     {
         _isShifting = true;
         _engine.IsAllowMove = false;
-        Debug.Log("N");
+        //Debug.Log("N");
         int tempGear = _currentGear;
         _currentGear = 0;
         UpdateGearText();
@@ -138,7 +138,7 @@ public class GearShift : MonoBehaviour // IGearShift
 
         _currentGear = tempGear;
         _currentGear += gear;
-        Debug.Log("GEAR: " + _currentGear);
+        //Debug.Log("GEAR: " + _currentGear);
 
         switch (_currentGear)
         {

@@ -20,12 +20,12 @@ public class CarInput : MonoBehaviour
             _movable.Acceleration();
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             _movable.Reverse();
+        else if (Input.GetKey(KeyCode.Space))
+            _movable.Brake();
         else
             _movable.Deceleration();
 
-        if (Input.GetKey(KeyCode.Space))
-            _movable.Brake();
-
+        
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             _steerable.TurnLeft(_rotationAngle);
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))

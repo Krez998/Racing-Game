@@ -151,7 +151,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Deceleration()
     {
-        //Debug.Log("Deceleration");
+        Debug.Log("Deceleration");
 
         _motorTorque = 0f;
 
@@ -160,11 +160,14 @@ public class CarEngine : MonoBehaviour, IMovable
 
         for (int i = 0; i < _wheels.Length; i++)
             _wheels[i].WheelCollider.brakeTorque = _decelerationForce;
+
+        for (int i = 0; i < _drivingWheels.Length; i++)
+            _drivingWheels[i].WheelCollider.brakeTorque = _decelerationForce;
     }
 
     public void Brake()
     {
-        //Debug.Log("Brake");
+        Debug.Log("Brake");
 
         _motorTorque = 0f;
 
