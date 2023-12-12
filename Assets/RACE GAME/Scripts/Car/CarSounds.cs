@@ -17,7 +17,7 @@ public class CarSounds : MonoBehaviour
 
     private Rigidbody _rb;
     private CarEngine _carEngine;
-    private GearShift _gearShift;
+    private GearBox _gearShift;
 
     public float idlingPitch;
 
@@ -133,7 +133,7 @@ public class CarSounds : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _carEngine = GetComponent<CarEngine>();
-        _gearShift = GetComponent<GearShift>();
+        _gearShift = GetComponent<GearBox>();
     }
 
     private void Update()

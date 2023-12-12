@@ -8,7 +8,7 @@ public enum WheelDriveMode
     AWD
 }
 
-[RequireComponent(typeof(GearShift))]
+[RequireComponent(typeof(GearBox))]
 public class CarEngine : MonoBehaviour, IMovable
 {
     public float MotorTorque => _motorTorque;
@@ -36,7 +36,7 @@ public class CarEngine : MonoBehaviour, IMovable
     [SerializeField, Range(0, 50)] private float _decelerationForce;
     [SerializeField, Range(0, 15_000)] private float _brakeForce;
 
-    private GearShift _gearShift;
+    private GearBox _gearShift;
     private Vector3 _lastPosition;
     private Vector3 _differencePosition;
 
@@ -49,7 +49,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     private void Awake()
     {
-        _gearShift = GetComponent<GearShift>();
+        _gearShift = GetComponent<GearBox>();
         ConfigureDriveMode();
         Deceleration();
     }
@@ -151,7 +151,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Deceleration()
     {
-        Debug.Log("Deceleration");
+        //Debug.Log("Deceleration");
 
         _motorTorque = 0f;
 
@@ -167,7 +167,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Brake()
     {
-        Debug.Log("Brake");
+        //Debug.Log("Brake");
 
         _motorTorque = 0f;
 

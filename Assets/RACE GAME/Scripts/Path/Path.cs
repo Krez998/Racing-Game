@@ -4,28 +4,29 @@ using System.Collections.Generic;
 
 public class Path : MonoBehaviour
 {
-    public List<Transform> Waypoints => _waypoints;
+    public List<PathNode> Waypoints => _waypoints;
 
-    [SerializeField] private List<Transform> _waypoints;
+    [SerializeField] private List<PathNode> _waypoints;
+    [SerializeField] private PathNode _pathNodePrefab;
 
-    [SerializeField] private Transform _transform;
+    private Transform _newNodeTransform;
 
     public void AddNewWaypoint()
     {
-        Transform newPos = transform;
+        _newNodeTransform = transform;
         if (_waypoints.Count > 0)
-            newPos = _waypoints[_waypoints.Count - 1].transform;
+            _newNodeTransform = _waypoints[_waypoints.Count - 1].transform;
 
-        Transform newTransform = Instantiate(_transform, newPos.position, Quaternion.identity);
+        PathNode newTransform = Instantiate(_pathNodePrefab, _newNodeTransform.position, Quaternion.identity);
         newTransform.name = $"Waypoint {_waypoints.Count}";
         newTransform.transform.SetParent(transform);
-        _waypoints.Add(newTransform.transform);
+        _waypoints.Add(newTransform);
     }
 
     public void RemoveLastWaypoint()
     {
         if (_waypoints.Count > 0)
-        {          
+        {
             DestroyImmediate(_waypoints[_waypoints.Count - 1].gameObject);
             _waypoints.Remove(_waypoints[_waypoints.Count - 1]);
         }

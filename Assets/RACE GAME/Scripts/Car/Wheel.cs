@@ -7,12 +7,15 @@ public class Wheel : MonoBehaviour
 
     [SerializeField] private WheelCollider _wheelCollider;
     [SerializeField] private TrailRenderer _skidTrail;
+    [SerializeField] private ParticleSystem _tyreBurnoutSmoke;
 
     [SerializeField, Range(0, 1)] private float _skidAudioVolume;
 
     private AudioSource _skidAudio;
 
-    private WheelHit _hit;
+    private WheelHit _wheelHit;
+    private RaycastHit _hit;
+
     public float _sidewaysSlip;
     public float _forwardSlip;
     //public Vector3 direction;
@@ -25,12 +28,11 @@ public class Wheel : MonoBehaviour
         _skidAudio.Play();
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         _wheelCollider.GetWorldPose(out Vector3 posiition, out Quaternion rotation);
         transform.position = posiition;
         transform.rotation = rotation;
-
 
         isGrounded = _wheelCollider.isGrounded;
 
@@ -39,30 +41,39 @@ public class Wheel : MonoBehaviour
 
     private void Skid()
     {
-        _wheelCollider.GetGroundHit(out _hit);
+        _wheelCollider.GetGroundHit(out _wheelHit);
 
-        if (Mathf.Abs(_hit.forwardSlip) > 0.8f || Mathf.Abs(_hit.sidewaysSlip) > 0.4f && _wheelCollider.isGrounded)
+        _sidewaysSlip = _wheelHit.sidewaysSlip;
+        _forwardSlip = _wheelHit.forwardSlip;
+
+        if ((Mathf.Abs(_wheelHit.forwardSlip) > 0.9f || Mathf.Abs(_wheelHit.sidewaysSlip) > 0.5f) && isGrounded)
         {
-            Debug.Log("GROUNDED");
+            //Debug.Log("GROUNDED");
             if (_skidTrail)
                 _skidTrail.emitting = true;
 
-            if(_skidAudio.volume < _skidAudioVolume)
-            _skidAudio.volume += 0.01f;
+            if (_tyreBurnoutSmoke)
+            {
+                //_tyreBurnoutSmoke.Simulate(1);
+                _tyreBurnoutSmoke.Play(true);
+            }
+
+            if (_skidAudio.volume < _skidAudioVolume)
+                _skidAudio.volume += 0.01f;
         }
         else
         {
-            Debug.Log("NOT GROUNDED");
+            //Debug.Log("NOT GROUNDED");
             if (_skidTrail)
                 _skidTrail.emitting = false;
+
+            if (_tyreBurnoutSmoke)
+                _tyreBurnoutSmoke.Stop();
 
             if (_skidAudio.volume > 0)
                 _skidAudio.volume -= 0.01f;
         }
 
-
-        _sidewaysSlip = _hit.sidewaysSlip;
-        _forwardSlip = _hit.forwardSlip;
         //direction = _hit.sidewaysDir;
 
     }
