@@ -10703,7 +10703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61343cc49e34c684e9b88c58ca3f24f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxRotationAngle: 30
+  _maxRotationAngle: 40
   _defaultSteeringAngle: 0
   _wheels:
   - {fileID: 1151132858695969470}
@@ -10734,9 +10734,8 @@ MonoBehaviour:
   rl_brake: 0
   rr_brake: 0
   _torqueForce: 500
-  _decelerationForce: 50
-  _brakeForce: 8000
-  _isAllowMove: 0
+  _brakeForce: 3000
+  _brakeForceAxlesRatio: 0.2
 --- !u!114 &1128839359620173365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10750,12 +10749,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gearText: {fileID: 0}
-  _speedLimit: 9999
   _speedMPS: 0
   _wheelAngleSpeed: 0
   _wheelRotationSpeed: 0
   _carCharacteristics: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
   _currentGear: 0
+  _gearBoxMode: 0
   _isShifting: 0
   _speedValues: []
   _currentGearMinSpeed: 0

@@ -31,10 +31,16 @@ public class CarEngine : MonoBehaviour, IMovable
     public float rl_brake;
     public float rr_brake;
 
-
+    [Tooltip("Крутящий момент")]
     [SerializeField, Range(0, 5_000)] private float _torqueForce;
-    [SerializeField, Range(0, 50)] private float _decelerationForce;
-    [SerializeField, Range(0, 15_000)] private float _brakeForce;
+    
+    [Tooltip("Тормозной момент")]
+    [SerializeField, Range(2500, 5000)] private float _brakeForce;
+
+    [Tooltip("Распределение тормозных сил между осями: 0 - передняя; 1 - задняя")]
+    [SerializeField, Range(0, 1)] private float _brakeForceAxlesRatio;
+
+    //[SerializeField, Range(0, 50)] private float _decelerationForce;
 
     private GearBox _gearShift;
     private Vector3 _lastPosition;
@@ -44,13 +50,15 @@ public class CarEngine : MonoBehaviour, IMovable
     private float _wheelTorque; // крутящий момент на колеса
     private float _wheelAngularVelocity;
 
-    public bool IsAllowMove { set => _isAllowMove = value; }
-    public bool _isAllowMove;
+    // временно
+    //public float ROT_SPEED;
+    //public float DIFF_POS_Z;
 
     private void Awake()
     {
         _gearShift = GetComponent<GearBox>();
         ConfigureDriveMode();
+        SetBrakesBetweenAxles();
         Deceleration();
     }
 
@@ -76,10 +84,18 @@ public class CarEngine : MonoBehaviour, IMovable
         }
     }
 
+    private void SetBrakesBetweenAxles()
+    {
+
+    }
+
     public void SetWheelAngularVelocity(float velocity) => _wheelAngularVelocity = velocity;
 
     private void FixedUpdate()
     {
+        //ROT_SPEED = _drivingWheels[0].WheelCollider.rotationSpeed;
+        //DIFF_POS_Z = (float)Math.Round(_differencePosition.z, 2);
+
         fl_gas = _drivingWheels[0].WheelCollider.motorTorque;
         fr_gas = _drivingWheels[1].WheelCollider.motorTorque;
 
@@ -98,25 +114,26 @@ public class CarEngine : MonoBehaviour, IMovable
         _differencePosition = transform.position - _lastPosition;
         _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        //if (_differencePosition.z > 0.01f)
-        //    Brake();
-        //else
-        //{
-            if (_isAllowMove)
+        if (_differencePosition.z < -0.001)
+            Brake();
+        else
+        {
+            for (int i = 0; i < _wheels.Length; i++)
+                _wheels[i].WheelCollider.brakeTorque = 0;
+
+            if (_gearShift.GearBoxMode == GearBoxMode.Forward)
                 _wheelTorque = _motorTorque;
             else
                 _wheelTorque = 0f;
-
-
-            for (int i = 0; i < _wheels.Length; i++)
-                _wheels[i].WheelCollider.brakeTorque = 0;
 
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
                 _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
             }
-        //}
+        }
+
+        _lastPosition = transform.position;
     }
 
     public void Reverse()
@@ -126,19 +143,18 @@ public class CarEngine : MonoBehaviour, IMovable
         _differencePosition = transform.position - _lastPosition;
         _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        if (_differencePosition.z > 0.01f)
+        if (_differencePosition.z > 0.001f)
             Brake();
         else
-        {           
-            if (_isAllowMove)
-                _wheelTorque = _motorTorque;
-            else
-                _wheelTorque = 0f;
-
-            
+        {
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
 
+            if (_gearShift.GearBoxMode == GearBoxMode.Backward)
+                _wheelTorque = _motorTorque;
+            else
+                _wheelTorque = 0f;
+            
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
@@ -149,33 +165,32 @@ public class CarEngine : MonoBehaviour, IMovable
         _lastPosition = transform.position;
     }
 
-    public void Deceleration()
-    {
-        //Debug.Log("Deceleration");
-
-        _motorTorque = 0f;
-
-        for (int i = 0; i < _drivingWheels.Length; i++)
-            _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
-
-        for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.brakeTorque = _decelerationForce;
-
-        for (int i = 0; i < _drivingWheels.Length; i++)
-            _drivingWheels[i].WheelCollider.brakeTorque = _decelerationForce;
-    }
-
     public void Brake()
     {
         //Debug.Log("Brake");
+        _motorTorque = 0f;
 
+        for (int i = 0; i < _drivingWheels.Length; i++)
+            _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
+
+        for (int i = 0; i < _wheels.Length - 2; i++)
+            _wheels[i].WheelCollider.brakeTorque = _brakeForce * (1 - _brakeForceAxlesRatio);
+
+        for (int i = 2; i < _wheels.Length; i++)
+            _wheels[i].WheelCollider.brakeTorque = _brakeForce * _brakeForceAxlesRatio;
+    }
+
+    public void Deceleration()
+    {
+        //Debug.Log("Deceleration");
         _motorTorque = 0f;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
             _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
 
         for (int i = 0; i < _wheels.Length; i++)
-            _wheels[i].WheelCollider.brakeTorque = _brakeForce;
+            _wheels[i].WheelCollider.brakeTorque = 0f;
+            //_wheels[i].WheelCollider.brakeTorque = _decelerationForce;
     }
 
     public void SetRWDWheelDriveMode()

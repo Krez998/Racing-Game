@@ -3,17 +3,24 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+public enum GearBoxMode
+{
+    Neutral,
+    Forward,
+    Backward
+}
+
 [RequireComponent(typeof(CarEngine), typeof(Rigidbody))]
-public class GearBox : MonoBehaviour, IGearShift
+public class GearBox : MonoBehaviour, IGearBox
 {
     public int CurrentGear => _currentGear;
+    public GearBoxMode GearBoxMode => _gearBoxMode;
     public float CurrentGearMaxSpeed => _currentGearMaxSpeed;
     public float Speed => _speed;
 
     [Header("Gear Hud")]
     [SerializeField] private TextMeshProUGUI _gearText;
 
-    [SerializeField, Tooltip("ќграничение скорости")] private float _speedLimit = 9999f;
 
     [Header("Wheel Speed Params")]
     public float _speedMPS; // скорость колеса в м/с
@@ -22,7 +29,9 @@ public class GearBox : MonoBehaviour, IGearShift
 
     [SerializeField] private CarCharacteristics _carCharacteristics;
     [SerializeField, Tooltip("“екуща€ передача")] int _currentGear;
-    private Rigidbody _rb;
+
+    public GearBoxMode _gearBoxMode;
+    private Rigidbody _rigidbody;
     private CarEngine _engine;
     private WaitForSeconds _gearShiftDelay;
     public bool _isShifting;
@@ -39,10 +48,11 @@ public class GearBox : MonoBehaviour, IGearShift
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
         _engine = GetComponent<CarEngine>();
         _gearShiftDelay = new WaitForSeconds(0.2f);
         InitSpeedValues();
+
     }
 
     private void Start()
@@ -67,7 +77,7 @@ public class GearBox : MonoBehaviour, IGearShift
     {
         for (int i = 0; i < _speedValues.Length; i++)
         {
-            if (Mathf.Round(transform.InverseTransformDirection(_rb.velocity).z * 3.6f) < _speedValues[i])
+            if (Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f) < _speedValues[i])
             {
                 _currentGear = i;
                 UpdateGearText();
@@ -93,50 +103,43 @@ public class GearBox : MonoBehaviour, IGearShift
     public void GetEngineData(float motorTorque)
     {
         Torque = motorTorque;
-        _speed = Mathf.Round(transform.InverseTransformDirection(_rb.velocity).z * 3.6f);
+        _speed = Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f);
 
-        if (_speed < _speedLimit)
+        if (!_isShifting && _currentGear == 0 && _speed == 0 && motorTorque > 0)
         {
-            SetWheelAngularVelocity(_currentGearMaxSpeed);
-
-            if (!_isShifting && _currentGear == 0 && _speed == 0 && motorTorque > 0)
-            {
-                // Debug.Log("Moving Away");
-                StartCoroutine(SwitchGearbox(1));
-            }
-
-            if (!_isShifting && _speed > 0 && _speed >= _currentGearMaxSpeed - 3f)
-            {
-                //Debug.Log("Gear UP");
-                StartCoroutine(SwitchGearbox(1));
-            }
-
-            if (!_isShifting && _speed > 0 && _speed < _currentGearMinSpeed - 3f)
-            {
-                //Debug.Log("Gear DOWN");
-                StartCoroutine(SwitchGearbox(-1));
-            }
-
-            if (!_isShifting && motorTorque < 0 && _currentGear != -1)
-            {
-                //Debug.Log("R");
-                StartCoroutine(SwitchGearbox(-1));
-            }
-
-            if (!_isShifting && motorTorque == 0 && _currentGear != 0 && _speed == 0)
-            {
-                //Debug.Log("Stop Car");
-                StartCoroutine(SwitchGearbox(_currentGear = 0));
-            }
+            // Debug.Log("Moving Away");
+            StartCoroutine(SwitchGearbox(1));
         }
-        else
-            SetWheelAngularVelocity(_speedLimit);
+
+        if (!_isShifting && _speed > 0 && _speed >= _currentGearMaxSpeed - 3f)
+        {
+            //Debug.Log("Gear UP");
+            StartCoroutine(SwitchGearbox(1));
+        }
+
+        if (!_isShifting && _speed > 0 && _speed < _currentGearMinSpeed - 3f)
+        {
+            //Debug.Log("Gear DOWN");
+            StartCoroutine(SwitchGearbox(-1));
+        }
+
+        if (!_isShifting && motorTorque < 0 && _currentGear != -1)
+        {
+            //Debug.Log("R");
+            StartCoroutine(SwitchGearbox(-1));
+        }
+
+        if (!_isShifting && motorTorque == 0 && _currentGear != 0 && _speed == 0)
+        {
+            //Debug.Log("Stop Car");
+            StartCoroutine(SwitchGearbox(_currentGear = 0));
+        }
     }
 
     private IEnumerator SwitchGearbox(int gear)
     {
         _isShifting = true;
-        _engine.IsAllowMove = false;
+        _gearBoxMode = GearBoxMode.Neutral;
         //Debug.Log("N");
         int tempGear = _currentGear;
         _currentGear = 0;
@@ -150,24 +153,24 @@ public class GearBox : MonoBehaviour, IGearShift
         switch (_currentGear)
         {
             case 1:
-                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = _speedValues[_currentGear - 1];
+                _gearBoxMode = GearBoxMode.Forward;
                 break;
             case 0:
-                _engine.IsAllowMove = false;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = 0;
+                _gearBoxMode = GearBoxMode.Neutral;
                 break;
             case -1:
-                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = 0;
                 _currentGearMaxSpeed = -_speedValues[0];
+                _gearBoxMode = GearBoxMode.Backward;
                 break;
             default:
-                _engine.IsAllowMove = true;
                 _currentGearMinSpeed = _speedValues[_currentGear - 2];
                 _currentGearMaxSpeed = _speedValues[_currentGear - 1];
+                _gearBoxMode = GearBoxMode.Forward;
                 break;
         }
         UpdateGearText();
@@ -183,7 +186,7 @@ public class GearBox : MonoBehaviour, IGearShift
         {
             if (_currentGear == -1)
                 _gearText.text = "R";
-            else if(_currentGear == 0)
+            else if (_currentGear == 0)
                 _gearText.text = "N";
             else
                 _gearText.text = Numbers.GeneratedNumsStr[_currentGear];
@@ -198,8 +201,18 @@ public class GearBox : MonoBehaviour, IGearShift
         _engine.SetWheelAngularVelocity(_wheelRotationSpeed);
     }
 
-    public void SetSpeedLimit(float speedLimit)
+    public float GetSpeed()
     {
-        _speedLimit = speedLimit;
+        return _speed;
+    }
+
+    /// <summary>
+    /// отображает центр массы автомобил€
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (_rigidbody)
+            Gizmos.DrawSphere(_rigidbody.worldCenterOfMass, 0.1f);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PathNode : MonoBehaviour
+public class Waypoint : MonoBehaviour
 {
     public float TargetSpeed => _targetSpeed;
 

@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class Path : MonoBehaviour
+public class AIPath : MonoBehaviour
 {
-    public List<PathNode> Waypoints => _waypoints;
+    public List<Waypoint> Waypoints => _waypoints;
 
-    [SerializeField] private List<PathNode> _waypoints;
-    [SerializeField] private PathNode _pathNodePrefab;
+    [SerializeField] private List<Waypoint> _waypoints;
+    [SerializeField] private Waypoint _pathNodePrefab;
 
     private Transform _newNodeTransform;
 
@@ -17,7 +17,7 @@ public class Path : MonoBehaviour
         if (_waypoints.Count > 0)
             _newNodeTransform = _waypoints[_waypoints.Count - 1].transform;
 
-        PathNode newTransform = Instantiate(_pathNodePrefab, _newNodeTransform.position, Quaternion.identity);
+        Waypoint newTransform = Instantiate(_pathNodePrefab, _newNodeTransform.position, Quaternion.identity);
         newTransform.name = $"Waypoint {_waypoints.Count}";
         newTransform.transform.SetParent(transform);
         _waypoints.Add(newTransform);
@@ -45,14 +45,14 @@ public class Path : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(Path))]
+[CustomEditor(typeof(AIPath))]
 [CanEditMultipleObjects]
 public class PathEditor : Editor
 {   
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        Path path = (Path)target;
+        AIPath path = (AIPath)target;
         if (GUILayout.Button("Add new waypoint"))
         {
             path.AddNewWaypoint();
