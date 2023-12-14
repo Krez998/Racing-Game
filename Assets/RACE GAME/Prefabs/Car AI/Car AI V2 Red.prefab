@@ -21334,6 +21334,8 @@ MonoBehaviour:
   _rotationAngleToPathNode: 0
   _speedLimit: 9999
   _waypointRange: 2
+  _jamTime: 0
+  _isStucked: 0
 --- !u!114 &5706390765568179403
 MonoBehaviour:
   m_ObjectHideFlags: 0
