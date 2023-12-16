@@ -25,8 +25,11 @@ public class GearBox : MonoBehaviour, IGearBox
     [Header("Wheel Speed Params")]
     public float _speedMPS; // скорость колеса в м/с
     public float _wheelAngleSpeed; // угловая скорость колеса м/с, Рад./с 
-    public float _wheelRotationSpeed; // скорость вращения колеса Град./сек.
+    public float _wheelMinAngularVelocity;
+    public float _wheelMaxAngularVelocity; // скорость вращения колеса Град./сек.
 
+
+    [Header("Car Characteristics")]
     [SerializeField] private CarCharacteristics _carCharacteristics;
     [SerializeField, Tooltip("Текущая передача")] int _currentGear;
 
@@ -178,6 +181,21 @@ public class GearBox : MonoBehaviour, IGearBox
         _isShifting = false;
 
         SetWheelAngularVelocity(_currentGearMaxSpeed);
+        _engine.ResetGasInput();
+    }
+
+    private void SetWheelAngularVelocity(float speed)
+    {
+        _wheelMinAngularVelocity = _wheelMaxAngularVelocity;
+
+        _speedMPS = Mathf.Abs(speed) * 1000 / 3600;
+        _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
+        _wheelMaxAngularVelocity = _wheelAngleSpeed * Mathf.Rad2Deg;
+
+        if (_wheelMinAngularVelocity > _wheelMaxAngularVelocity)
+            _wheelMinAngularVelocity -= _wheelMaxAngularVelocity;
+
+        _engine.SetWheelAngularVelocity(_wheelMinAngularVelocity, _wheelMaxAngularVelocity);
     }
 
     private void UpdateGearText()
@@ -191,14 +209,6 @@ public class GearBox : MonoBehaviour, IGearBox
             else
                 _gearText.text = Numbers.GeneratedNumsStr[_currentGear];
         }
-    }
-
-    private void SetWheelAngularVelocity(float speed)
-    {
-        _speedMPS = Mathf.Abs(speed) * 1000 / 3600;
-        _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
-        _wheelRotationSpeed = _wheelAngleSpeed * Mathf.Rad2Deg;
-        _engine.SetWheelAngularVelocity(_wheelRotationSpeed);
     }
 
     public float GetSpeed()

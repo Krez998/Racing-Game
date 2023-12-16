@@ -45,20 +45,20 @@ public class CarEngine : MonoBehaviour, IMovable
     private GearBox _gearShift;
     private Vector3 _lastPosition;
     private Vector3 _differencePosition;
-
     private float _motorTorque; // крутящий момент мотора
     private float _wheelTorque; // крутящий момент на колеса
-    private float _wheelAngularVelocity;
+    private float _wheelMinAngularVelocity;
+    private float _wheelMaxAngularVelocity;
 
     // временно
     //public float ROT_SPEED;
     //public float DIFF_POS_Z;
+    public float _gasInput;
 
     private void Awake()
     {
         _gearShift = GetComponent<GearBox>();
         ConfigureDriveMode();
-        SetBrakesBetweenAxles();
         Deceleration();
     }
 
@@ -84,12 +84,24 @@ public class CarEngine : MonoBehaviour, IMovable
         }
     }
 
-    private void SetBrakesBetweenAxles()
+    public void SetWheelAngularVelocity(float wheelMinAngularVelocity, float wheelMaxAngularVelocity)
     {
-
+        _wheelMinAngularVelocity = wheelMinAngularVelocity;
+        _wheelMaxAngularVelocity = wheelMaxAngularVelocity;
     }
 
-    public void SetWheelAngularVelocity(float velocity) => _wheelAngularVelocity = velocity;
+    private void CheckGasInput()
+    {
+        if (_motorTorque != 0 && _gasInput < 1f)
+            _gasInput += Time.deltaTime * 0.5f;
+        else if (_motorTorque == 0 && _gasInput > 0f)
+            _gasInput -= Time.deltaTime * 0.5f;
+    }
+
+    public void ResetGasInput()
+    {
+        _gasInput = 0f;
+    }
 
     private void FixedUpdate()
     {
@@ -105,12 +117,11 @@ public class CarEngine : MonoBehaviour, IMovable
         rr_brake = _wheels[3].WheelCollider.brakeTorque;
 
         _gearShift.GetEngineData(_motorTorque);
+        CheckGasInput();
     }
 
     public void Acceleration()
-    {
-        _motorTorque = _torqueForce;
-
+    {        
         _differencePosition = transform.position - _lastPosition;
         _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
@@ -118,6 +129,8 @@ public class CarEngine : MonoBehaviour, IMovable
             Brake();
         else
         {
+            _motorTorque = _torqueForce;
+
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
 
@@ -129,7 +142,7 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
-                _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
+                _drivingWheels[i].WheelCollider.rotationSpeed = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
             }
         }
 
@@ -137,9 +150,7 @@ public class CarEngine : MonoBehaviour, IMovable
     }
 
     public void Reverse()
-    {
-        _motorTorque = -_torqueForce;
-
+    {      
         _differencePosition = transform.position - _lastPosition;
         _differencePosition = transform.InverseTransformDirection(_differencePosition);
 
@@ -147,6 +158,8 @@ public class CarEngine : MonoBehaviour, IMovable
             Brake();
         else
         {
+            _motorTorque = -_torqueForce;
+
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
 
@@ -158,7 +171,7 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
-                _drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngularVelocity;
+                _drivingWheels[i].WheelCollider.rotationSpeed = -Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
             }
         }
 

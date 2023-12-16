@@ -21329,13 +21329,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
-  _currentWaypoint: {fileID: 0}
+  _targetWaypoint: {fileID: 0}
   _currentTargetIndex: 0
   _rotationAngleToPathNode: 0
   _speedLimit: 9999
   _waypointRange: 2
   _jamTime: 0
   _isStucked: 0
+  _isOverturned: 0
+  _rotationZ: 0
 --- !u!114 &5706390765568179403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21395,6 +21397,7 @@ MonoBehaviour:
   _torqueForce: 500
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
+  _gasInput: 0
 --- !u!114 &2184050593775687720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21410,7 +21413,8 @@ MonoBehaviour:
   _gearText: {fileID: 0}
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelRotationSpeed: 0
+  _wheelMinAngularVelocity: 0
+  _wheelMaxAngularVelocity: 0
   _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _currentGear: 0
   _gearBoxMode: 0

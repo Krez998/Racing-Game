@@ -10736,6 +10736,7 @@ MonoBehaviour:
   _torqueForce: 500
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
+  _gasInput: 0
 --- !u!114 &1128839359620173365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10751,7 +10752,8 @@ MonoBehaviour:
   _gearText: {fileID: 0}
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelRotationSpeed: 0
+  _wheelMinAngularVelocity: 0
+  _wheelMaxAngularVelocity: 0
   _carCharacteristics: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
   _currentGear: 0
   _gearBoxMode: 0
@@ -21209,7 +21211,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21337,7 +21339,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

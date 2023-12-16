@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class AI : MonoBehaviour
 {
     [Header("Path Params")]
     [SerializeField] private AIPath _path;
-    [SerializeField] private Waypoint _currentWaypoint;
+    [SerializeField] private Waypoint _targetWaypoint;
     [SerializeField] private int _currentTargetIndex;
     [SerializeField, Tooltip("Угол поворота колеса в сторону чекпоинта")] private float _rotationAngleToPathNode;
     [SerializeField, Tooltip("Ограничение скорости")] private float _speedLimit = 9999f;
@@ -17,8 +18,11 @@ public class AI : MonoBehaviour
     private float _distanceToWaypoint;
     private Vector3 _vectorToTarget;
     [SerializeField] private float _waypointRange = 2f;
-    public float _jamTime;
+
+    public float _jamTimer;
     public bool _isStucked;
+    public bool _isOverturned;
+    public float _rotationZ;
 
     private void Awake()
     {
@@ -34,30 +38,31 @@ public class AI : MonoBehaviour
         if (_path != null && _path.Waypoints.Count > 0)
         {
             _currentTargetIndex = 0;
-            _currentWaypoint = _path.Waypoints[_currentTargetIndex];
-            SetSpeedLimit(_currentWaypoint.TargetSpeed);
+            _targetWaypoint = _path.Waypoints[_currentTargetIndex];
+            SetSpeedLimit(_targetWaypoint.TargetSpeed);
         }
     }
 
     private void FixedUpdate()
     {
-        if (_currentWaypoint != null)
+        if (_targetWaypoint != null)
         {
             if (_distanceToWaypoint < _waypointRange)
             {
                 _currentTargetIndex = (_currentTargetIndex + 1) % _path.Waypoints.Count;
-                _currentWaypoint = _path.Waypoints[_currentTargetIndex];
-                SetSpeedLimit(_currentWaypoint.TargetSpeed);
+                _targetWaypoint = _path.Waypoints[_currentTargetIndex];
+                SetSpeedLimit(_targetWaypoint.TargetSpeed);
             }
 
-            _distanceToWaypoint = Vector3.Distance(transform.position, _currentWaypoint.transform.position);
-            _vectorToTarget = new Vector3(_currentWaypoint.transform.position.x, transform.position.y, _currentWaypoint.transform.position.z);
+            _distanceToWaypoint = Vector3.Distance(transform.position, _targetWaypoint.transform.position);
+            _vectorToTarget = new Vector3(_targetWaypoint.transform.position.x, transform.position.y, _targetWaypoint.transform.position.z);
             _rotationAngleToPathNode = Vector3.SignedAngle(_vectorToTarget - transform.position, transform.forward, Vector3.up);         
         }
 
         _speed = _gearBox.GetSpeed();
         Steer(_rotationAngleToPathNode);
         DetectJam();
+        CheckOverturn();
     }
 
     private void Steer(float angle)
@@ -70,17 +75,17 @@ public class AI : MonoBehaviour
 
         if (_speed < _speedLimit && !_isStucked)
         {
-            Debug.Log("Ускоряюсь");
+            //Debug.Log("Ускоряюсь");
             _movable.Acceleration();
         }
         else if((_speed - _speedLimit) <= 5f && !_isStucked)
         {
-            Debug.Log("Качусь по инерции");
+            //Debug.Log("Качусь по инерции");
             _movable.Deceleration();
         }
         else if ((_speed - _speedLimit) > 10f && !_isStucked)
         {
-            Debug.Log("Торможу");
+            //Debug.Log("Торможу");
             _movable.Brake();
         }
     }
@@ -88,28 +93,51 @@ public class AI : MonoBehaviour
     private void DetectJam()
     {
         if (!_isStucked)
-            _jamTime = _speed < 5 ? _jamTime += Time.deltaTime : _jamTime = 0;
+            _jamTimer = _speed < 5 ? _jamTimer += Time.deltaTime : _jamTimer = 0;
 
-        if (_jamTime > 3f)
+        if (_jamTimer > 3f && !_isOverturned)
             StartCoroutine(Reverse());
+    }
+
+    private void CheckOverturn()
+    {
+        _rotationZ = transform.rotation.eulerAngles.z;
+
+        if (transform.rotation.eulerAngles.z <= 180f)
+            _rotationZ = transform.rotation.eulerAngles.z;
+        else
+            _rotationZ = transform.rotation.eulerAngles.z - 360f;
+
+        if (Mathf.Abs(_rotationZ) > 80f)
+        {
+            _isOverturned = true;
+
+            if (_jamTimer > 5f)
+            {
+                _jamTimer = 0f; // исправляет баг с лишним задним ходом, когда машина встает на колеса
+                transform.LookAt(_targetWaypoint.transform);
+                transform.position = _targetWaypoint.transform.position;
+            }
+        }
+        else
+            _isOverturned = false;
     }
 
     private IEnumerator Reverse()
     {
         _isStucked = true;
-        _jamTime = 0f;
+        _jamTimer = 0f;
 
         float duration = Time.time + 3.0f;
         while (Time.time < duration)
         {
-            Debug.Log("BAAAAAAACKKK");
+            //Debug.Log("BAAAAAAACKKK");
             _movable.Reverse();
             yield return null;
         }
 
         _isStucked = false;
     }
-
 
     public void SetSpeedLimit(float speedLimit)
     {
