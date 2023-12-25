@@ -95,7 +95,7 @@ public class CarEngine : MonoBehaviour, IMovable
         if (_motorTorque != 0 && _gasInput < 1f)
             _gasInput += Time.deltaTime * 0.5f;
         else if (_motorTorque == 0 && _gasInput > 0f)
-            _gasInput -= Time.deltaTime * 0.5f;
+            _gasInput -= Time.deltaTime * 0.1f;
     }
 
     public void ResetGasInput()

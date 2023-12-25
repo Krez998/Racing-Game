@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8932266446250355288}
   - component: {fileID: 4924795701482260581}
   - component: {fileID: 4639406255269709547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FR Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5439176092667464973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4884,7 +4884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7079659861005226014}
   - component: {fileID: 8665477903668352562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RR Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4958,7 +4958,7 @@ GameObject:
   - component: {fileID: 4329564779134647348}
   - component: {fileID: 2191737558835768532}
   - component: {fileID: 8565881440043841577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5101,7 +5101,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5155,8 +5155,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5802755090409527895}
   - component: {fileID: 4903721625483865615}
-  m_Layer: 0
-  m_Name: Gear
+  m_Layer: 6
+  m_Name: Car Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5187,7 +5187,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2503b4b0093d0364899b537d88b8e515, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5248,7 +5248,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5285,8 +5285,8 @@ GameObject:
   - component: {fileID: 564646312955187200}
   - component: {fileID: 3414531681576095524}
   - component: {fileID: 4633066465259172071}
-  m_Layer: 0
-  m_Name: Body
+  m_Layer: 6
+  m_Name: Car Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5377,7 +5377,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.3, z: 5}
+  m_Size: {x: 2, y: 1.3, z: 4.5}
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &2567820069287598967
 GameObject:
@@ -5388,7 +5388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6484211069557290224}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5422,7 +5422,7 @@ GameObject:
   - component: {fileID: 3244970735557192227}
   - component: {fileID: 1493905982222993762}
   - component: {fileID: 1412919845711064889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RR Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10259,7 +10259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6330128212948157349}
   - component: {fileID: 5544761209118647064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10352,7 +10352,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10390,7 +10390,7 @@ GameObject:
   - component: {fileID: 7675781960281329774}
   - component: {fileID: 6449999742928113990}
   - component: {fileID: 1229715867122175887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10533,7 +10533,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10587,7 +10587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428618512415990846}
   - component: {fileID: 8547355321443121798}
-  - component: {fileID: 2136082108925728548}
+  - component: {fileID: 2197476896472213120}
   - component: {fileID: 7555388642147856610}
   - component: {fileID: 2430499978387984702}
   - component: {fileID: 7423461205266967488}
@@ -10595,7 +10595,8 @@ GameObject:
   - component: {fileID: 1128839359620173365}
   - component: {fileID: 2496671167973543948}
   - component: {fileID: 8724143695070027380}
-  m_Layer: 0
+  - component: {fileID: 3765985018924107342}
+  m_Layer: 6
   m_Name: Car PLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10649,21 +10650,39 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &2136082108925728548
+  m_CollisionDetection: 2
+--- !u!114 &2197476896472213120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3891037485863812168}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6323de03bcd85a4c9009d134963ea1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0db65ae7a5c0ff847963bcbadcd09ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object1: {fileID: 0}
-  _opponentAngle: 0
+  _audioSource: {fileID: 4903721625483865615}
+  _impact:
+  - {fileID: 8300000, guid: daffdb0600e6c90499b10f5184105869, type: 3}
+  - {fileID: 8300000, guid: d2b42a7c76614c74bbbb3f300b7cc884, type: 3}
+  - {fileID: 8300000, guid: 10ddda24a056dbd4a8ced893bd2f1d48, type: 3}
+  - {fileID: 8300000, guid: 3853ffdad2c220e49a27a43c84869c86, type: 3}
+  _accident:
+  - {fileID: 8300000, guid: 47075770dac7c534d88d23c4a3994e9f, type: 3}
+  - {fileID: 8300000, guid: 4b7f94127235cb04d86199f4c4ca72b0, type: 3}
+  _landing:
+  - {fileID: 8300000, guid: 47023269b25d78243a171cc7107f676a, type: 3}
+  _carLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _environmentLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &7555388642147856610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10708,6 +10727,7 @@ MonoBehaviour:
   _wheels:
   - {fileID: 1151132858695969470}
   - {fileID: 1359310593452191876}
+  _useReduceSteerangle: 1
 --- !u!114 &8714457509065778732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10798,6 +10818,102 @@ MonoBehaviour:
   _minSpeed: 0
   _maxSpeed: 0
   idlingPitch: 0.4
+--- !u!82 &3765985018924107342
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891037485863812168}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5718363711884497894
 GameObject:
   m_ObjectHideFlags: 0
@@ -10807,7 +10923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7717066322411237585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10843,7 +10959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571394526754958096}
   - component: {fileID: 7673886119586923027}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FL Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10917,7 +11033,7 @@ GameObject:
   - component: {fileID: 3668851298182708133}
   - component: {fileID: 8427604410627105088}
   - component: {fileID: 1359310593452191876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11060,7 +11176,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -11114,7 +11230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1171510024624894736}
   - component: {fileID: 8679216890442487820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RL Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11184,7 +11300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7715017693806509969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11222,7 +11338,7 @@ GameObject:
   - component: {fileID: 6772730057029845100}
   - component: {fileID: 1283661253442904804}
   - component: {fileID: 868978515236733167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RL Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16061,7 +16177,7 @@ GameObject:
   - component: {fileID: 8996728793317237096}
   - component: {fileID: 1312153870918688186}
   - component: {fileID: 4864206631949675085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FL Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20897,7 +21013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8887872580187247647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AudioSources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20936,7 +21052,7 @@ GameObject:
   - component: {fileID: 7902207033920246878}
   - component: {fileID: 4042138976085339327}
   - component: {fileID: 1151132858695969470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21079,7 +21195,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21133,7 +21249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3643779602186750933}
   - component: {fileID: 430143263070781334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EndineIdling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21211,7 +21327,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21226,7 +21342,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21261,7 +21377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408425302589523569}
   - component: {fileID: 7606650398270854097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21339,7 +21455,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21354,7 +21470,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -21389,7 +21505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4547911947684329272}
   - component: {fileID: 1513404810150368927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FR Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vehicleId: 3
   _name: 
-  _speed: 200
+  _speed: 250
   _numberOfGears: 8

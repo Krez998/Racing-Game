@@ -1,4 +1,4 @@
-interface IMovable
+public interface IMovable
 {
     public void Acceleration();
     public void Reverse();

@@ -4,8 +4,8 @@ using UnityEngine;
 public class CarInput : MonoBehaviour
 {
     [SerializeField, Range(0, 40)] private float _rotationAngle;
-    IMovable _movable;
-    ISteerable _steerable;
+    private IMovable _movable;
+    private ISteerable _steerable;
 
     private void Awake()
     {

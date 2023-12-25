@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(CarEngine))]
-public class CarSounds : MonoBehaviour
+[RequireComponent(typeof(CarEngine), typeof(GearBox))]
+public class CarEngineSounds : MonoBehaviour
 {
     [SerializeField] private AudioSource _engineAudio;
     [SerializeField] private AudioSource _engineIdlingAudio;
@@ -15,19 +15,29 @@ public class CarSounds : MonoBehaviour
     [SerializeField] private float _maxSpeed;
     private float _currentSpeed;
 
-    private Rigidbody _rb;
     private CarEngine _carEngine;
     private GearBox _gearShift;
 
     public float idlingPitch;
 
-    private void EngineSound()
+    private void Awake()
+    {
+        _carEngine = GetComponent<CarEngine>();
+        _gearShift = GetComponent<GearBox>();
+    }
+
+    private void Update()
+    {
+        SoundEngine();
+    }
+
+    private void SoundEngine()
     {
         ChangePitchFromCar();
         ChangeMinPicth();
         ChangeIdleVolume();
 
-        _currentSpeed = Mathf.Round(transform.InverseTransformDirection(_rb.velocity).z * 3.6f);
+        _currentSpeed = _gearShift.GetSpeed();
 
         ChangeEngineVolume();
 
@@ -49,7 +59,6 @@ public class CarSounds : MonoBehaviour
         ChangePicthIdlingAudio();
         ChangeIdlingVolume();
     }
-
 
     private void ChangePicthIdlingAudio()
     {
@@ -126,18 +135,5 @@ public class CarSounds : MonoBehaviour
                 _engineAudio.volume -= 0.1f;
             //    _gearAudio.Play();
         }
-    }
-
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _carEngine = GetComponent<CarEngine>();
-        _gearShift = GetComponent<GearBox>();
-    }
-
-    private void Update()
-    {
-        EngineSound();
-    }
+    }   
 }

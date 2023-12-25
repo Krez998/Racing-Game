@@ -55,7 +55,6 @@ public class GearBox : MonoBehaviour, IGearBox
         _engine = GetComponent<CarEngine>();
         _gearShiftDelay = new WaitForSeconds(0.2f);
         InitSpeedValues();
-
     }
 
     private void Start()
