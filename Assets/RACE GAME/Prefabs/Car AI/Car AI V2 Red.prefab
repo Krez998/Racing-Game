@@ -21476,7 +21476,6 @@ GameObject:
   - component: {fileID: 8264200397656734458}
   - component: {fileID: 1760500033406160465}
   - component: {fileID: 2184050593775687720}
-  - component: {fileID: 7571141281990315476}
   - component: {fileID: 399953167177681288}
   - component: {fileID: 8525096410822217621}
   - component: {fileID: 6584020798683787997}
@@ -21614,7 +21613,8 @@ MonoBehaviour:
   _torqueForce: 500
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
-  _gasInput: 0
+  _wheelMaxAngularVelocity: 0
+  _wheelAngularVelocity: 0
 --- !u!114 &2184050593775687720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21641,20 +21641,6 @@ MonoBehaviour:
   _currentGearMaxSpeed: 0
   _speed: 0
   Torque: 0
---- !u!114 &7571141281990315476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8894291204426264435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edb0e68cb6cd5548888c607542ae35d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 0
-  _spedometerText: {fileID: 0}
 --- !u!114 &399953167177681288
 MonoBehaviour:
   m_ObjectHideFlags: 0

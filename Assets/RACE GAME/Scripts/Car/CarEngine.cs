@@ -48,12 +48,13 @@ public class CarEngine : MonoBehaviour, IMovable
     private float _motorTorque; // крутящий момент мотора
     private float _wheelTorque; // крутящий момент на колеса
     private float _wheelMinAngularVelocity;
-    private float _wheelMaxAngularVelocity;
+    public float _wheelMaxAngularVelocity;
+    public float _wheelAngularVelocity;
 
     // временно
     //public float ROT_SPEED;
     //public float DIFF_POS_Z;
-    public float _gasInput;
+    private float _gasInput;
 
     private void Awake()
     {
@@ -142,7 +143,9 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
-                _drivingWheels[i].WheelCollider.rotationSpeed = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
+
+                _wheelAngularVelocity = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
+                _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
             }
         }
 
@@ -171,7 +174,9 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _drivingWheels.Length; i++)
             {
                 _drivingWheels[i].WheelCollider.motorTorque = _wheelTorque;
-                _drivingWheels[i].WheelCollider.rotationSpeed = -Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
+
+                _wheelAngularVelocity = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
+                _drivingWheels[i].WheelCollider.rotationSpeed = -_wheelAngularVelocity;
             }
         }
 
