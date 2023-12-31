@@ -15,7 +15,6 @@ public class CarInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Позже переделать под New Input System
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             _movable.Acceleration();
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))

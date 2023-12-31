@@ -1,13 +1,13 @@
 
 public static class Numbers
 {
-    public static readonly string[] GeneratedNumsStr = new string[10_000];
+    public static readonly string[] CachedNums = new string[10000];
 
     public static void GenerateNums()
     {
-        for (int i = 0; i < GeneratedNumsStr.Length; i++)
+        for (int i = 0; i < CachedNums.Length; i++)
         {
-            GeneratedNumsStr[i] = $"{i}";
+            CachedNums[i] = $"{i}";
         }
     }
 }

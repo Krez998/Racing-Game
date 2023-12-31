@@ -3,14 +3,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Speedometer : MonoBehaviour
+public class Speedometer : MonoBehaviour, ISpeedometer
 {
     [SerializeField] private float _speed;
     [SerializeField] private TextMeshProUGUI _spedometerText;
     [SerializeField] private Image _speedometerFill;
     private Rigidbody _rigidbody;
-
     private GearBox _gearBox;
+
+    public float GetSpeed()
+    {
+        return _speed;
+    }
 
     private void Awake()
     {
@@ -18,14 +22,30 @@ public class Speedometer : MonoBehaviour
         _gearBox = GetComponent<GearBox>();
     }
 
+    private void FixedUpdate()
+    {
+        //_speed = (_rigidbody.velocity.magnitude * 3.6f);
+        _speed = Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f);
+    }
+
     private void LateUpdate()
     {
-        _speed = (_rigidbody.velocity.magnitude * 3.6f);
-        _spedometerText.text = Numbers.GeneratedNumsStr[(int)Mathf.Round(_speed)];
+        if (_spedometerText)
+        {
+            if (_speed > 0)
+                _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(_speed)];
+            else
+                _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(-_speed)];
+        }
 
-        if (_gearBox._gearBoxMode == GearBoxMode.Neutral && _gearBox.Speed == 0)
-            _speedometerFill.fillAmount = 0f;
-        else
-            _speedometerFill.fillAmount = _gearBox.Speed / _gearBox.CurrentGearMaxSpeed;
+        if (_speedometerFill)
+        {
+            if (_gearBox._gearBoxMode == GearBoxMode.Neutral && _speed == 0)
+            {
+                _speedometerFill.fillAmount = 0f;
+            }
+            else
+                _speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
+        }
     }
 }

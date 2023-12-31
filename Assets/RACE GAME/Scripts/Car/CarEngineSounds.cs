@@ -17,6 +17,7 @@ public class CarEngineSounds : MonoBehaviour
 
     private CarEngine _carEngine;
     private GearBox _gearShift;
+    private ISpeedometer _speedometer;
 
     public float idlingPitch;
 
@@ -24,6 +25,7 @@ public class CarEngineSounds : MonoBehaviour
     {
         _carEngine = GetComponent<CarEngine>();
         _gearShift = GetComponent<GearBox>();
+        _speedometer = GetComponent<Speedometer>();
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class CarEngineSounds : MonoBehaviour
         ChangeMinPicth();
         ChangeIdleVolume();
 
-        _currentSpeed = _gearShift.GetSpeed();
+        _currentSpeed = _speedometer.GetSpeed();
 
         ChangeEngineVolume();
 

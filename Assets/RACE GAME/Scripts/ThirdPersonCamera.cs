@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -8,7 +9,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private float _cameraForward;
     [SerializeField] private float _speed;
     [SerializeField] private float _angleSpeed;
-  
+
     private Vector3 _offset;
 
     public void SetTarget(Car car)

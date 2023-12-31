@@ -10,8 +10,8 @@ public class Car : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_cameraTarget != null)
-            _cameraTarget.position = new Vector3(transform.position.x, transform.position.y + 1.8f, transform.position.z); // смещение цели для камеры
+        //if (_cameraTarget != null)
+        //   _cameraTarget.position = new Vector3(transform.position.x, transform.position.y + 1.8f, transform.position.z); // смещение цели для камеры
 
         CalculateCarTiltX();
     }

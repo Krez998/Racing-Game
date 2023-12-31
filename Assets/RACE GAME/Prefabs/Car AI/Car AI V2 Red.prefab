@@ -21471,9 +21471,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8138600838186159180}
   - component: {fileID: 1539900097125677525}
+  - component: {fileID: 862827667547938799}
   - component: {fileID: 8830835182720683587}
   - component: {fileID: 5706390765568179403}
   - component: {fileID: 8264200397656734458}
+  - component: {fileID: 4144424151102081084}
   - component: {fileID: 1760500033406160465}
   - component: {fileID: 2184050593775687720}
   - component: {fileID: 399953167177681288}
@@ -21535,6 +21537,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &862827667547938799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894291204426264435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7d78ef9b39bb241a4295cf9cd98b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _carLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _triggers:
+  - {fileID: 13010442105616326}
+  - {fileID: 6096476932281511174}
+  - {fileID: 6564016230329671705}
 --- !u!114 &8830835182720683587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21549,10 +21570,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
   _reverseTime: 2
-  _triggers:
-  - {fileID: 13010442105616326}
-  - {fileID: 6096476932281511174}
-  - {fileID: 6564016230329671705}
 --- !u!114 &5706390765568179403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21585,6 +21602,21 @@ MonoBehaviour:
   - {fileID: 9037937598899604487}
   - {fileID: 3906581399479452299}
   _useReduceSteerangle: 1
+--- !u!114 &4144424151102081084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894291204426264435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edb0e68cb6cd5548888c607542ae35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
+  _spedometerText: {fileID: 0}
+  _speedometerFill: {fileID: 0}
 --- !u!114 &1760500033406160465
 MonoBehaviour:
   m_ObjectHideFlags: 0

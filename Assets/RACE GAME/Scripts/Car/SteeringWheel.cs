@@ -8,16 +8,16 @@ public class SteeringWheel : MonoBehaviour, ISteerable
     [SerializeField] private Wheel[] _wheels = new Wheel[2];
     [SerializeField] bool _useReduceSteerangle;
     private float _reducedSteerangle;
-    private IGearBox _gearBox;
+    private ISpeedometer _speedometer;
 
     private void Awake()
     {
-        _gearBox = GetComponent<IGearBox>();
+        _speedometer = GetComponent<Speedometer>();
     }
 
     public void TurnLeft(float angle)
     {
-        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _gearBox.GetSpeed() : angle;
+        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _speedometer.GetSpeed() : angle;
 
         if (_reducedSteerangle > _maxRotationAngle)
             _reducedSteerangle = _maxRotationAngle;
@@ -28,7 +28,7 @@ public class SteeringWheel : MonoBehaviour, ISteerable
 
     public void TurnRight(float angle)
     {
-        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _gearBox.GetSpeed() : angle;
+        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _speedometer.GetSpeed() : angle;
 
         if (_reducedSteerangle > _maxRotationAngle)
             _reducedSteerangle = _maxRotationAngle;

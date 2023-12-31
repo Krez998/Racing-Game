@@ -117,7 +117,6 @@ public class CarEngine : MonoBehaviour, IMovable
         rl_brake = _wheels[2].WheelCollider.brakeTorque;
         rr_brake = _wheels[3].WheelCollider.brakeTorque;
 
-        _gearShift.GetEngineData(_motorTorque);
         CheckGasInput();
     }
 

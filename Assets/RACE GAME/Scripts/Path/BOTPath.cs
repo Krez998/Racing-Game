@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class AIPath : MonoBehaviour
+public class BOTPath : MonoBehaviour
 {
     public List<Waypoint> Waypoints => _waypoints;
 
@@ -45,14 +45,14 @@ public class AIPath : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(AIPath))]
+[CustomEditor(typeof(BOTPath))]
 [CanEditMultipleObjects]
 public class PathEditor : Editor
 {   
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        AIPath path = (AIPath)target;
+        BOTPath path = (BOTPath)target;
         if (GUILayout.Button("Add new waypoint"))
         {
             path.AddNewWaypoint();

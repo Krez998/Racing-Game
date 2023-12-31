@@ -1,17 +1,16 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody))]
-public class AI : MonoBehaviour
+public class BOT : MonoBehaviour
 {
-    [Header("Path Params")]
-    [SerializeField] private AIPath _path;
+    [SerializeField] private BOTPath _path;
     [SerializeField] private float _reverseTime;
-    [SerializeField] private CustomTrigger[] _triggers;
 
     private FinalStateMashine _finalStateMashine;
+    private RivalsDetector _rivalsDetector;
     private IMovable _movable;
     private ISteerable _steerable;
-    private IGearBox _gearBox;
+    private ISpeedometer _speedometer;
 
     //[SerializeField] private bool _isOverturned;
     //private float _rotationZ;
@@ -19,12 +18,13 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
+        _rivalsDetector = GetComponent<RivalsDetector>();
         _movable = GetComponent<IMovable>();
         _steerable = GetComponent<ISteerable>();
-        _gearBox = GetComponent<IGearBox>();
+        _speedometer = GetComponent<Speedometer>();
 
         _finalStateMashine = new FinalStateMashine();
-        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _triggers, _movable, _steerable, _gearBox, _path));
+        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _rivalsDetector, _movable, _steerable, _speedometer, _path));
         _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _movable, _reverseTime));
 
         _finalStateMashine.SetState<RunToWaypointState>();
