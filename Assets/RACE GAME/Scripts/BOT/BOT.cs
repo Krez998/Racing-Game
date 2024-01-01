@@ -1,13 +1,17 @@
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(EnvironmentDetector))]
+[RequireComponent(typeof(IMovable))]
+[RequireComponent(typeof(ISteerable))]
+[RequireComponent(typeof(ISpeedometer))]
 public class BOT : MonoBehaviour
 {
     [SerializeField] private BOTPath _path;
     [SerializeField] private float _reverseTime;
 
     private FinalStateMashine _finalStateMashine;
-    private RivalsDetector _rivalsDetector;
+    private EnvironmentDetector _rivalsDetector;
     private IMovable _movable;
     private ISteerable _steerable;
     private ISpeedometer _speedometer;
@@ -18,10 +22,10 @@ public class BOT : MonoBehaviour
 
     private void Awake()
     {
-        _rivalsDetector = GetComponent<RivalsDetector>();
+        _rivalsDetector = GetComponent<EnvironmentDetector>();
         _movable = GetComponent<IMovable>();
         _steerable = GetComponent<ISteerable>();
-        _speedometer = GetComponent<Speedometer>();
+        _speedometer = GetComponent<ISpeedometer>();
 
         _finalStateMashine = new FinalStateMashine();
         _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _rivalsDetector, _movable, _steerable, _speedometer, _path));

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vehicleId: 1
   _name: Toyota
-  _speed: 280
-  _numberOfGears: 8
+  _mass: 1000
+  _speed: 100
+  _numberOfGears: 3

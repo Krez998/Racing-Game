@@ -45,7 +45,14 @@ public class Speedometer : MonoBehaviour, ISpeedometer
                 _speedometerFill.fillAmount = 0f;
             }
             else
-                _speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
+            {
+                //_speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
+                var value = _gearBox.CurrentGearMinSpeed;
+                var amount = (_speed - value) / (_gearBox.CurrentGearMaxSpeed - value);
+                Debug.Log((_speed - value) + "/" + (_gearBox.CurrentGearMaxSpeed - value));
+                _speedometerFill.fillAmount = amount;
+            }
         }
     }
 }
+

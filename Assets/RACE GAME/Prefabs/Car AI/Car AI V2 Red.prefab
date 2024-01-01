@@ -11105,7 +11105,7 @@ GameObject:
   - component: {fileID: 692353093766396085}
   - component: {fileID: 5092997901037081538}
   - component: {fileID: 6564016230329671705}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Right Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16210,7 +16210,7 @@ GameObject:
   - component: {fileID: 5270252312041976307}
   - component: {fileID: 4484440839927995149}
   - component: {fileID: 6096476932281511174}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Left Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21406,7 +21406,7 @@ GameObject:
   - component: {fileID: 9134450030971427741}
   - component: {fileID: 1336023112359882255}
   - component: {fileID: 13010442105616326}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Front Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21479,7 +21479,6 @@ GameObject:
   - component: {fileID: 1760500033406160465}
   - component: {fileID: 2184050593775687720}
   - component: {fileID: 399953167177681288}
-  - component: {fileID: 8525096410822217621}
   - component: {fileID: 6584020798683787997}
   m_Layer: 6
   m_Name: Car AI V2 Red
@@ -21536,7 +21535,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &862827667547938799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21552,10 +21551,17 @@ MonoBehaviour:
   _carLayer:
     serializedVersion: 2
     m_Bits: 64
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
   _triggers:
   - {fileID: 13010442105616326}
   - {fileID: 6096476932281511174}
   - {fileID: 6564016230329671705}
+  _rivalsInFront: 0
+  _leftIsOccupied: 0
+  _rightIsOccupied: 0
+  _rivalIsSlow: 0
 --- !u!114 &8830835182720683587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21582,6 +21588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a40508e568094a832f1d94dd42536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _cameraTarget: {fileID: 146417324942902088}
   _tiltX: 0
 --- !u!114 &8264200397656734458
@@ -21664,7 +21671,6 @@ MonoBehaviour:
   _wheelAngleSpeed: 0
   _wheelMinAngularVelocity: 0
   _wheelMaxAngularVelocity: 0
-  _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _currentGear: 0
   _gearBoxMode: 1
   _isShifting: 0
@@ -21672,7 +21678,7 @@ MonoBehaviour:
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
-  Torque: 0
+  _motorTorque: 0
 --- !u!114 &399953167177681288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21694,102 +21700,6 @@ MonoBehaviour:
   _minSpeed: 0
   _maxSpeed: 0
   idlingPitch: 0.4
---- !u!82 &8525096410822217621
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8894291204426264435}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &6584020798683787997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21816,7 +21726,7 @@ MonoBehaviour:
   _carLayer:
     serializedVersion: 2
     m_Bits: 64
-  _environmentLayer:
+  _wallLayer:
     serializedVersion: 2
     m_Bits: 128
   _groundLayer:

@@ -104,7 +104,7 @@ public class CarEngine : MonoBehaviour, IMovable
         _gasInput = 0f;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //ROT_SPEED = _drivingWheels[0].WheelCollider.rotationSpeed;
         //DIFF_POS_Z = (float)Math.Round(_differencePosition.z, 2);

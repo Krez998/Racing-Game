@@ -5,6 +5,7 @@ public class CarCharacteristics : ScriptableObject
 {
     public int VehicleId => _vehicleId;
     public string Name => _name;
+    public float Mass => _mass;
     public float Speed => _speed;
     public int NumberOfGears => _numberOfGears;
 
@@ -12,6 +13,7 @@ public class CarCharacteristics : ScriptableObject
 
     [SerializeField] private int _vehicleId;
     [SerializeField] private string _name;
+    [SerializeField] private float _mass;
     [SerializeField] private float _speed;
     [SerializeField] private int _numberOfGears;
 

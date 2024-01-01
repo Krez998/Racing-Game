@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    public CarCharacteristics CarCharacteristics => _carCharacteristics;
     public Transform CameraTarget => _cameraTarget;
     public float TiltX => _tiltX;
 
+    [SerializeField] private CarCharacteristics _carCharacteristics;
     [SerializeField] private Transform _cameraTarget;
     [SerializeField] private float _tiltX;
 

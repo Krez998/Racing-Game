@@ -11,7 +11,7 @@ public class CamImpactSounds : MonoBehaviour
     [SerializeField] private AudioClip[] _accident;
     [SerializeField] private AudioClip[] _landing;
     [SerializeField] private LayerMask _carLayer;
-    [SerializeField] private LayerMask _environmentLayer;
+    [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _groundLayer;
 
     private float _relativeVelocity;
@@ -19,7 +19,7 @@ public class CamImpactSounds : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & _carLayer) != 0 || ((1 << collision.gameObject.layer) & _environmentLayer) != 0)
+        if (((1 << collision.gameObject.layer) & _carLayer) != 0 || ((1 << collision.gameObject.layer) & _wallLayer) != 0)
         {
             _relativeVelocity = Mathf.Abs(collision.relativeVelocity.z * 3.6f);
             _volume = (float)Math.Round(_relativeVelocity / 50  /*_maxSpeed*/, 2);

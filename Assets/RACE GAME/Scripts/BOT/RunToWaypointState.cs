@@ -14,13 +14,13 @@ public class RunToWaypointState : State
 
     // constructor
     private Transform _transform;
-    private RivalsDetector _rivalsDetector;
+    private EnvironmentDetector _rivalsDetector;
     private BOTPath _path;
     private IMovable _movable;
     private ISteerable _steerable;
     private ISpeedometer _speedometer;
 
-    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, RivalsDetector rivalsDetector,
+    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, EnvironmentDetector rivalsDetector,
         IMovable movable, ISteerable steerable, ISpeedometer speedometer, BOTPath path) : base(finalStateMashine)
     {
         _transform = transform;

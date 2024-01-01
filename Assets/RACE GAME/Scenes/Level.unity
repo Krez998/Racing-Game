@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 80bc125d0b949974695993ca53e79ac4, type: 2}
   m_LightingSettings: {fileID: 645629281}
 --- !u!196 &4
 NavMeshSettings:
@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 100}
+  m_AnchoredPosition: {x: -50, y: 60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &21362353
@@ -560,6 +560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365951827}
     m_Modifications:
+    - target: {fileID: 1539900097125677525, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.8
@@ -607,10 +611,6 @@ PrefabInstance:
     - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
       propertyPath: m_Name
       value: Car AI V2 Red (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fce8656970f32914f9491621a6893ebf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77605114f0962084397f556889baf517, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1530,7 +1530,6 @@ MonoBehaviour:
   _wheelAngleSpeed: 22.843567
   _wheelMinAngularVelocity: 1308.84
   _wheelMaxAngularVelocity: 1308.84
-  _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _currentGear: 1
   _gearBoxMode: 1
   _isShifting: 0
@@ -1555,6 +1554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365951827}
     m_Modifications:
+    - target: {fileID: 1539900097125677525, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.81
@@ -2165,7 +2168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 20, y: -20}
   m_SizeDelta: {x: 280, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &715590513
@@ -2710,7 +2713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetCar: {fileID: 856458590}
   _cameraHeight: 0
-  _cameraForward: -8
+  _cameraForward: -5
   _speed: 0.3
   _angleSpeed: 0.5
 --- !u!124 &963194230
@@ -2780,6 +2783,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 126071e6b99e70e48b011a0bd856a307, type: 3}
       propertyPath: m_Name
       value: "\u0437\u0430\u0431\u043E\u0440_\u0432\u043D\u0443\u0442\u0440\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 126071e6b99e70e48b011a0bd856a307, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2999,6 +3006,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365951827}
     m_Modifications:
+    - target: {fileID: 1539900097125677525, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -3198,7 +3209,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -300, y: 200}
-  m_SizeDelta: {x: 500, y: 250}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1406636808 stripped
 Transform:
@@ -5008,12 +5019,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: be1f1b1542e69fe4694f1ce87d08a8b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93d3dddb921881f4caf42b7bdf86f303, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 3
-  m_FillAmount: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -5143,10 +5154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car AI V2 Red
       objectReference: {fileID: 0}
-    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5242,10 +5249,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car PLAYER
       objectReference: {fileID: 0}
-    - target: {fileID: 3891037485863812168, guid: 33f13750576b365428793ceaa2b49248, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4428618512415990846, guid: 33f13750576b365428793ceaa2b49248, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.17
@@ -5285,14 +5288,6 @@ PrefabInstance:
     - target: {fileID: 4428618512415990846, guid: 33f13750576b365428793ceaa2b49248, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484211069557290224, guid: 33f13750576b365428793ceaa2b49248, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484211069557290224, guid: 33f13750576b365428793ceaa2b49248, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ISpeedometer))]
-public class RivalsDetector : MonoBehaviour
+public class EnvironmentDetector : MonoBehaviour
 {
     public Collider RivalCollier => _rivalCollider;
     public bool RivalIsSlow => _rivalIsSlow;
@@ -11,15 +11,16 @@ public class RivalsDetector : MonoBehaviour
     public Transform Rival => _rivalCollider.transform;
 
     [SerializeField] private LayerMask _carLayer;
+    [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private CustomTrigger[] _triggers;
 
     private ISpeedometer _speedometer;
 
-    private bool _rivalsInFront;
-    private bool _leftIsOccupied;
-    private bool _rightIsOccupied;
+    public bool _rivalsInFront;
+    public bool _leftIsOccupied;
+    public bool _rightIsOccupied;
     private float _rivalVelocity;
-    private bool _rivalIsSlow;
+    public bool _rivalIsSlow;
     private Collider _rivalCollider;
     private Vector3 _vectorToTarget;
 
@@ -108,8 +109,35 @@ public class RivalsDetector : MonoBehaviour
         }
     }
 
-    private void OnLeftTriggerEntered(Collider collider) => _leftIsOccupied = true;
-    private void OnLeftTriggerExited(Collider collider) => _leftIsOccupied = false;
-    private void OnRightTriggerEntered(Collider collider) => _rightIsOccupied = true;
-    private void OnRightTriggerExited(Collider collider) => _rightIsOccupied = false;
+    private void OnLeftTriggerEntered(Collider collider)
+    {
+        if ((((1 << collider.gameObject.layer) & _carLayer) != 0) || (((1 << collider.gameObject.layer) & _wallLayer) != 0))
+        {
+            _leftIsOccupied = true;
+        }
+    }
+
+    private void OnLeftTriggerExited(Collider collider)
+    {
+        if ((((1 << collider.gameObject.layer) & _carLayer) != 0) || (((1 << collider.gameObject.layer) & _wallLayer) != 0))
+        {
+            _leftIsOccupied = false;
+        }
+    }
+
+    private void OnRightTriggerEntered(Collider collider)
+    {
+        if ((((1 << collider.gameObject.layer) & _carLayer) != 0) || (((1 << collider.gameObject.layer) & _wallLayer) != 0))
+        {
+            _rightIsOccupied = true;
+        }
+    }
+
+    private void OnRightTriggerExited(Collider collider)
+    {
+        if ((((1 << collider.gameObject.layer) & _carLayer) != 0) || (((1 << collider.gameObject.layer) & _wallLayer) != 0))
+        {
+            _rightIsOccupied = false;
+        }
+    }
 }
