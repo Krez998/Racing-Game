@@ -13,7 +13,7 @@ public class CarInput : MonoBehaviour
         _steerable = GetComponent<ISteerable>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             _movable.Acceleration();
