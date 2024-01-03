@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(GearBox))]
 public class Speedometer : MonoBehaviour, ISpeedometer
 {
     [SerializeField] private float _speed;
@@ -40,19 +41,19 @@ public class Speedometer : MonoBehaviour, ISpeedometer
 
         if (_speedometerFill)
         {
-            if (_gearBox._gearBoxMode == GearBoxMode.Neutral && _speed == 0)
+            if (_gearBox.GearBoxMode == GearBoxMode.Neutral && _speed == 0)
             {
                 _speedometerFill.fillAmount = 0f;
             }
             else
             {
                 //_speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
+
                 var value = _gearBox.CurrentGearMinSpeed;
                 var amount = (_speed - value) / (_gearBox.CurrentGearMaxSpeed - value);
-                Debug.Log((_speed - value) + "/" + (_gearBox.CurrentGearMaxSpeed - value));
+                //Debug.Log((_speed - value) + "/" + (_gearBox.CurrentGearMaxSpeed - value));
                 _speedometerFill.fillAmount = amount;
             }
         }
     }
 }
-

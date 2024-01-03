@@ -4928,13 +4928,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4999,13 +4999,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5211,10 +5211,11 @@ MonoBehaviour:
   _wheelCollider: {fileID: 2559699085026385601}
   _skidTrail: {fileID: 9210456876611907358}
   _tyreBurnoutSmoke: {fileID: 1215488322985310216}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _isGrounded: 0
   _skidAudioVolume: 0.2
-  _sidewaysSlip: 0
-  _forwardSlip: 0
-  isGrounded: 0
 --- !u!1 &2147328748382534254
 GameObject:
   m_ObjectHideFlags: 0
@@ -5260,7 +5261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146417324942902088}
   m_Layer: 6
-  m_Name: CameraTarget
+  m_Name: Camera Point Of View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10351,10 +10352,11 @@ MonoBehaviour:
   _wheelCollider: {fileID: 8570628426120061772}
   _skidTrail: {fileID: 858797943231146676}
   _tyreBurnoutSmoke: {fileID: 5285438034862442366}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _isGrounded: 0
   _skidAudioVolume: 0.2
-  _sidewaysSlip: 0
-  _forwardSlip: 0
-  isGrounded: 0
 --- !u!1 &4136991177549505494
 GameObject:
   m_ObjectHideFlags: 0
@@ -10403,7 +10405,7 @@ GameObject:
   - component: {fileID: 7216417933942888097}
   - component: {fileID: 678954117636440031}
   m_Layer: 6
-  m_Name: BOT Body
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10692,10 +10694,11 @@ MonoBehaviour:
   _wheelCollider: {fileID: 2338940355994654780}
   _skidTrail: {fileID: 1997201544165666571}
   _tyreBurnoutSmoke: {fileID: 6729929586746997454}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _isGrounded: 0
   _skidAudioVolume: 0.2
-  _sidewaysSlip: 0
-  _forwardSlip: 0
-  isGrounded: 0
 --- !u!1 &5293014986945020620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10751,13 +10754,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10906,7 +10909,7 @@ GameObject:
   - component: {fileID: 6539484091322004159}
   - component: {fileID: 5720122043463931769}
   m_Layer: 6
-  m_Name: EndineIdling
+  m_Name: Deceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11078,13 +11081,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -11356,10 +11359,11 @@ MonoBehaviour:
   _wheelCollider: {fileID: 6858121850126004623}
   _skidTrail: {fileID: 1582634951013990161}
   _tyreBurnoutSmoke: {fileID: 1525555274368503988}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _isGrounded: 0
   _skidAudioVolume: 0.2
-  _sidewaysSlip: 0
-  _forwardSlip: 0
-  isGrounded: 0
 --- !u!1 &7924240884338551842
 GameObject:
   m_ObjectHideFlags: 0
@@ -16294,8 +16298,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6539484091322004159}
   - {fileID: 1721319110183759942}
+  - {fileID: 6539484091322004159}
   - {fileID: 4690731266219745765}
   - {fileID: 6537366935140023977}
   m_Father: {fileID: 8138600838186159180}
@@ -21588,9 +21592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a40508e568094a832f1d94dd42536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carCharacteristics: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
-  _cameraTarget: {fileID: 146417324942902088}
-  _tiltX: 0
+  _isPlayerCar: 0
+  _carData: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
+  _cameraPointOfView: {fileID: 146417324942902088}
 --- !u!114 &8264200397656734458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21672,7 +21676,6 @@ MonoBehaviour:
   _wheelMinAngularVelocity: 0
   _wheelMaxAngularVelocity: 0
   _currentGear: 0
-  _gearBoxMode: 1
   _isShifting: 0
   _speedValues: []
   _currentGearMinSpeed: 0
@@ -21691,10 +21694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8505fb70322424f4cb15099f4e4d6716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _engineAudio: {fileID: 2983581962644322541}
-  _engineIdlingAudio: {fileID: 5720122043463931769}
+  _accelerationAudio: {fileID: 2983581962644322541}
+  _decelerationAudio: {fileID: 5720122043463931769}
   _idleAudio: {fileID: 1752843075293319907}
-  _gearAudio: {fileID: 7578587285499657775}
   _minPitch: 1
   _maxPitch: 3
   _minSpeed: 0

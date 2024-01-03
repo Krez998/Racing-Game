@@ -1,12 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CarEngine), typeof(GearBox))]
+[RequireComponent(typeof(CarEngine))]
+[RequireComponent(typeof(GearBox))]
+[RequireComponent(typeof(Speedometer))]
 public class CarEngineSounds : MonoBehaviour
 {
-    [SerializeField] private AudioSource _engineAudio;
-    [SerializeField] private AudioSource _engineIdlingAudio;
+    [SerializeField] private AudioSource _accelerationAudio;
+    [SerializeField] private AudioSource _decelerationAudio;
     [SerializeField] private AudioSource _idleAudio;
-    [SerializeField] private AudioSource _gearAudio;
 
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
@@ -16,15 +17,22 @@ public class CarEngineSounds : MonoBehaviour
     private float _currentSpeed;
 
     private CarEngine _carEngine;
-    private GearBox _gearShift;
-    private ISpeedometer _speedometer;
+    private GearBox _gearBox;
+    private Speedometer _speedometer;
 
     public float idlingPitch;
+
+    public void SetEngineAudioclips(AudioClip acceleration, AudioClip deceleration, AudioClip idle)
+    {
+        _accelerationAudio.clip = acceleration;
+        _decelerationAudio.clip = deceleration;
+        _idleAudio.clip = idle;
+    }
 
     private void Awake()
     {
         _carEngine = GetComponent<CarEngine>();
-        _gearShift = GetComponent<GearBox>();
+        _gearBox = GetComponent<GearBox>();
         _speedometer = GetComponent<Speedometer>();
     }
 
@@ -41,7 +49,7 @@ public class CarEngineSounds : MonoBehaviour
 
         _currentSpeed = _speedometer.GetSpeed();
 
-        ChangeEngineVolume();
+        ChangeAccelerationVolume();
 
         if (_currentSpeed < _minSpeed)
         {
@@ -58,32 +66,32 @@ public class CarEngineSounds : MonoBehaviour
             //_engineIdlingAudio.pitch = _maxPitch;
         }
 
-        ChangePicthIdlingAudio();
-        ChangeIdlingVolume();
+        ChangePitchDecelerationAudio();
+        ChangeDecelerationVolume();
     }
 
-    private void ChangePicthIdlingAudio()
+    private void ChangePitchDecelerationAudio()
     {
-        if (_gearShift.CurrentGearMaxSpeed != 0)
-            _engineIdlingAudio.pitch = idlingPitch + _currentSpeed / _gearShift.CurrentGearMaxSpeed;
+        if (_gearBox.CurrentGearMaxSpeed != 0)
+            _decelerationAudio.pitch = idlingPitch + _currentSpeed / _gearBox.CurrentGearMaxSpeed;
 
         if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) == 0)
-            _engineIdlingAudio.pitch = 0.5f;
+            _decelerationAudio.pitch = 0.5f;
     }
 
     private void ChangeMinPicth()
     {
-        if (_gearShift.CurrentGear != 0)
-            _minPitch = 1.1f - 0.15f * _gearShift.CurrentGear;
+        if (_gearBox.CurrentGear != 0)
+            _minPitch = 1.1f - 0.15f * _gearBox.CurrentGear;
     }
 
     private void ChangePitchFromCar()
     {
-        if (_gearShift.CurrentGearMaxSpeed != 0)
-            _engineAudio.pitch = _minPitch + _currentSpeed / _gearShift.CurrentGearMaxSpeed;
+        if (_gearBox.CurrentGearMaxSpeed != 0)
+            _accelerationAudio.pitch = _minPitch + _currentSpeed / _gearBox.CurrentGearMaxSpeed;
 
         if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) == 0)
-            _engineAudio.pitch = 0.5f;
+            _accelerationAudio.pitch = 0.5f;
     }
 
     private void ChangeIdleVolume()
@@ -96,27 +104,27 @@ public class CarEngineSounds : MonoBehaviour
             _idleAudio.volume -= 0.01f;
     }
 
-    private void ChangeIdlingVolume()
+    private void ChangeDecelerationVolume()
     {
-        if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) < 10 && _engineIdlingAudio.volume > 0.1f)
+        if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) < 10 && _decelerationAudio.volume > 0.1f)
         {
-            _engineIdlingAudio.volume -= 0.05f;
+            _decelerationAudio.volume -= 0.05f;
         }
-        else if (_carEngine.MotorTorque > 0 && Mathf.Abs(_currentSpeed) > 10 && _engineIdlingAudio.volume != 0.1f)
+        else if (_carEngine.MotorTorque > 0 && Mathf.Abs(_currentSpeed) > 10 && _decelerationAudio.volume != 0.1f)
         {
-            _engineIdlingAudio.volume = 0.15f;
+            _decelerationAudio.volume = 0.15f;
         }
-        else if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) > 10 && _engineIdlingAudio.volume < 0.25f)
+        else if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) > 10 && _decelerationAudio.volume < 0.25f)
         {
-            _engineIdlingAudio.volume += 0.05f;
+            _decelerationAudio.volume += 0.05f;
         }
     }
 
-    private void ChangeEngineVolume()
+    private void ChangeAccelerationVolume()
     {
-        if (_carEngine.MotorTorque == 0 && _engineAudio.volume > 0f)
+        if (_carEngine.MotorTorque == 0 && _accelerationAudio.volume > 0f)
         {
-            _engineAudio.volume -= 0.1f;
+            _accelerationAudio.volume -= 0.1f;
         }
         //if (_carEngine.MotorTorque == 0 && _engineAudio.volume > 0.35f)
         //{
@@ -125,16 +133,16 @@ public class CarEngineSounds : MonoBehaviour
         //}
         else if (_carEngine.MotorTorque == 0 && Mathf.Abs(_currentSpeed) < 5)
         {
-            _engineAudio.volume -= 0.1f;
+            _accelerationAudio.volume -= 0.1f;
         }
-        else if (_carEngine.MotorTorque != 0 && _engineAudio.volume < 0.5f && _gearShift.CurrentGear != 0)
+        else if (_carEngine.MotorTorque != 0 && _accelerationAudio.volume < 0.5f && _gearBox.CurrentGear != 0)
         {
-            _engineAudio.volume += 0.05f;
+            _accelerationAudio.volume += 0.05f;
         }
-        else if (_gearShift.CurrentGear == 0)
+        else if (_gearBox.CurrentGear == 0)
         {
-            if (_engineAudio.volume > 0f)
-                _engineAudio.volume -= 0.1f;
+            if (_accelerationAudio.volume > 0f)
+                _accelerationAudio.volume -= 0.1f;
             //    _gearAudio.Play();
         }
     }   

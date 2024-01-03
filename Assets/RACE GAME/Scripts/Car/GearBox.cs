@@ -25,14 +25,14 @@ public class GearBox : MonoBehaviour, IGearBox
     [SerializeField] private TextMeshProUGUI _gearText;
 
     [Header("Wheel Speed Params")]
-    public float _speedMPS; // скорость колеса в м/с
-    public float _wheelAngleSpeed; // углова€ скорость колеса м/с, –ад./с 
-    public float _wheelMinAngularVelocity;
-    public float _wheelMaxAngularVelocity; // скорость вращени€ колеса √рад./сек.
+    [SerializeField] private float _speedMPS; // скорость колеса в м/с
+    [SerializeField] private float _wheelAngleSpeed; // углова€ скорость колеса м/с, –ад./с 
+    [SerializeField] private float _wheelMinAngularVelocity;
+    [SerializeField] private float _wheelMaxAngularVelocity; // скорость вращени€ колеса √рад./сек.
 
     [SerializeField] int _currentGear;
 
-    public GearBoxMode _gearBoxMode;
+    private GearBoxMode _gearBoxMode;
     private Rigidbody _rigidbody;
     private CarEngine _engine;
     private Car _car;
@@ -74,8 +74,8 @@ public class GearBox : MonoBehaviour, IGearBox
 
     private void InitSpeedValues()
     {
-        _speedValues = new float[_car.CarCharacteristics.NumberOfGears];
-        float speedDelta = _car.CarCharacteristics.Speed / _car.CarCharacteristics.NumberOfGears;
+        _speedValues = new float[_car.CarData.NumberOfGears];
+        float speedDelta = _car.CarData.Speed / _car.CarData.NumberOfGears;
 
         float speedValueGrowth = 0;
         for (int i = 0; i < _speedValues.Length; i++)
@@ -95,7 +95,7 @@ public class GearBox : MonoBehaviour, IGearBox
             StartCoroutine(SetGear(1));
         }
 
-        if (!_isShifting && _speed > 0 && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _car.CarCharacteristics.NumberOfGears)
+        if (!_isShifting && _speed > 0 && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _car.CarData.NumberOfGears)
         {
             //Debug.Log("Gear UP");
             StartCoroutine(SetGear(++_currentGear));

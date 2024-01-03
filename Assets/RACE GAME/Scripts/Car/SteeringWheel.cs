@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(ISpeedometer))]
 public class SteeringWheel : MonoBehaviour, ISteerable
 {
     [SerializeField, Range(0, 40)] private float _maxRotationAngle;
@@ -12,7 +13,7 @@ public class SteeringWheel : MonoBehaviour, ISteerable
 
     private void Awake()
     {
-        _speedometer = GetComponent<Speedometer>();
+        _speedometer = GetComponent<ISpeedometer>();
     }
 
     public void TurnLeft(float angle)

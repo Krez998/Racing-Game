@@ -9,6 +9,7 @@ public enum WheelDriveMode
 }
 
 [RequireComponent(typeof(GearBox))]
+[RequireComponent(typeof(Speedometer))]
 public class CarEngine : MonoBehaviour, IMovable
 {
     public float MotorTorque => _motorTorque;
@@ -43,6 +44,7 @@ public class CarEngine : MonoBehaviour, IMovable
     //[SerializeField, Range(0, 50)] private float _decelerationForce;
 
     private GearBox _gearShift;
+    private Speedometer _speedometer;
     private Vector3 _lastPosition;
     private Vector3 _differencePosition;
     private float _motorTorque; // крутящий момент мотора
@@ -59,12 +61,14 @@ public class CarEngine : MonoBehaviour, IMovable
     private void Awake()
     {
         _gearShift = GetComponent<GearBox>();
-        ConfigureDriveMode();
+        _speedometer = GetComponent<Speedometer>();
         Deceleration();
     }
 
-    private void ConfigureDriveMode()
+    public void SetWheelDriveMode(WheelDriveMode wheelDriveMode)
     {
+        _wheelDriveMode = wheelDriveMode;
+
         switch (_wheelDriveMode)
         {
             case WheelDriveMode.FWD:
@@ -121,11 +125,12 @@ public class CarEngine : MonoBehaviour, IMovable
     }
 
     public void Acceleration()
-    {        
-        _differencePosition = transform.position - _lastPosition;
-        _differencePosition = transform.InverseTransformDirection(_differencePosition);
+    {
+        //_differencePosition = transform.position - _lastPosition;
+        //_differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        if (_differencePosition.z < -0.001)
+        //if (_differencePosition.z < -0.001)
+        if (_speedometer.GetSpeed() < 0)
             Brake();
         else
         {
@@ -148,15 +153,17 @@ public class CarEngine : MonoBehaviour, IMovable
             }
         }
 
-        _lastPosition = transform.position;
+        //_lastPosition = transform.position;
     }
 
     public void Reverse()
     {      
-        _differencePosition = transform.position - _lastPosition;
-        _differencePosition = transform.InverseTransformDirection(_differencePosition);
+        //_differencePosition = transform.position - _lastPosition;
+        //_differencePosition = transform.InverseTransformDirection(_differencePosition);
 
-        if (_differencePosition.z > 0.001f)
+        //if (_differencePosition.z > 0.001f)
+
+        if(_speedometer.GetSpeed() > 0)
             Brake();
         else
         {
@@ -179,7 +186,7 @@ public class CarEngine : MonoBehaviour, IMovable
             }
         }
 
-        _lastPosition = transform.position;
+        //_lastPosition = transform.position;
     }
 
     public void Brake()
@@ -208,23 +215,5 @@ public class CarEngine : MonoBehaviour, IMovable
         for (int i = 0; i < _wheels.Length; i++)
             _wheels[i].WheelCollider.brakeTorque = 0f;
             //_wheels[i].WheelCollider.brakeTorque = _decelerationForce;
-    }
-
-    public void SetRWDWheelDriveMode()
-    {
-        _wheelDriveMode = WheelDriveMode.RWD;
-        ConfigureDriveMode();
-    }
-
-    public void SetFWDWheelDriveMode()
-    {
-        _wheelDriveMode = WheelDriveMode.FWD;
-        ConfigureDriveMode();
-    }
-
-    public void SetAWDWheelDriveMode()
-    {
-        _wheelDriveMode = WheelDriveMode.AWD;
-        ConfigureDriveMode();
     }
 }

@@ -24,9 +24,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 targetPosition = _targetCar.CameraTarget.TransformPoint(_offset);
+        Vector3 targetPosition = _targetCar.CameraPointOfView.TransformPoint(_offset);
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, _speed);
-        transform.LookAt(_targetCar.CameraTarget.position);
+        transform.LookAt(_targetCar.CameraPointOfView.position);
     }
 }
