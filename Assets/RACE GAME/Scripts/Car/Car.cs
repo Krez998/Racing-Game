@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
+[RequireComponent(typeof(GearBox))]
 [RequireComponent(typeof(CarEngineSounds))]
 public class Car : MonoBehaviour
 {
@@ -14,17 +15,20 @@ public class Car : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
+    private GearBox _gearBox;
     private CarEngineSounds _engineSounds;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _carEngine = GetComponent<CarEngine>();
+        _gearBox = GetComponent<GearBox>();
         _engineSounds = GetComponent<CarEngineSounds>();
 
         _rigidbody.mass = _carData.Mass;
-        _carEngine.SetWheelDriveMode(_carData.WheelDriveMode);
-        _engineSounds.SetEngineAudioclips(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
+        _carEngine.GetData(_carData.MotorTorque, _carData.BrakeTorque, _carData.WheelDriveMode);
+        _gearBox.GetData(_carData.Speed, _carData.NumberOfGears);
+        _engineSounds.GetData(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
 
         if (_isPlayerCar)
         {
@@ -46,14 +50,4 @@ public class Car : MonoBehaviour
             camera.SetTarget(this);
         }
     }
-
-
-    /// <summary>
-    /// Наклон автомобиля по оси X
-    /// </summary>
-    //private void CalculateCarTiltX()
-    //{
-    //    Vector3 verticVector = Vector3.up;
-    //    _tiltX = Vector3.Angle(verticVector, transform.forward);
-    //}
 }

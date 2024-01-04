@@ -1,9 +1,9 @@
 using System;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
-using System.Diagnostics;
 
-public class Timer : MonoBehaviour
+public class ImprovedTimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textMeshPro;
     [SerializeField] private int _milliseconds;
@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
 
     private void Awake()
     {
-        _chars = new char[12] { '0', '0', ':', '0', '0', ':', '0', '0', '.', '0', '0', '0' };
+        _chars = new char[12] { ' ', ' ', ' ', ' ', '0', ':', '0', '0', '.', '0', '0', '0' };
 
         StartTimer();
     }
@@ -38,10 +38,11 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimer()
     {
-        _chars[0] = (char)((stopwatch.Elapsed.Hours / 10) + 48);
-        _chars[1] = (char)((stopwatch.Elapsed.Hours % 10) + 48);
+        _chars[0] = (char)((stopwatch.Elapsed.Hours / 10) + 48) == '0' ? ' ' : (char)((stopwatch.Elapsed.Hours / 10) + 48);
+        _chars[1] = (char)((stopwatch.Elapsed.Hours % 10) + 48) == '0' ? ' ' : (char)((stopwatch.Elapsed.Hours % 10) + 48);
+        _chars[2] = _chars[1] == '0' ? ' ' : ':';
 
-        _chars[3] = (char)((stopwatch.Elapsed.Minutes / 10) + 48);
+        _chars[3] = (char)((stopwatch.Elapsed.Minutes / 10) + 48) == '0' ? ' ' : (char)((stopwatch.Elapsed.Minutes / 10) + 48);
         _chars[4] = (char)((stopwatch.Elapsed.Minutes % 10) + 48);
 
         _chars[6] = (char)((stopwatch.Elapsed.Seconds / 10) + 48);
@@ -58,7 +59,7 @@ public class Timer : MonoBehaviour
 
         _textMeshPro.SetCharArray(_chars, 0, _chars.Length);
     }
- 
+
     public TimeSpan GetData()
     {
         var _timeInSurvival = new TimeSpan(_hours, _minutes, _seconds);

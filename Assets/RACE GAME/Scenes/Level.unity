@@ -612,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car AI V2 Red (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -947,11 +951,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149694202}
   m_CullTransparentMesh: 1
---- !u!4 &195836366 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-  m_PrefabInstance: {fileID: 613550475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &199362049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68dd7d50a1c653a41bbd496bf894b395, type: 3}
@@ -1012,7 +1011,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f018860efa8cde409d625728ae9a416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TIME_SPEED: 0
   _textMeshPro: {fileID: 946238766}
   _milliseconds: 0
   _seconds: 0
@@ -1565,115 +1563,6 @@ Transform:
   - {fileID: 1840947502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &559528574 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-  m_PrefabInstance: {fileID: 613550475}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &559528577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559528574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gearText: {fileID: 0}
-  _speedMPS: 8.680555
-  _wheelAngleSpeed: 22.843567
-  _wheelMinAngularVelocity: 1308.84
-  _wheelMaxAngularVelocity: 1308.84
-  _currentGear: 1
-  _isShifting: 0
-  _speedValues:
-  - 31.25
-  - 62.5
-  - 93.75
-  - 125
-  - 156.25
-  - 187.5
-  - 218.75
-  - 250
-  _currentGearMinSpeed: 0
-  _currentGearMaxSpeed: 31.25
-  _speed: 23
-  _motorTorque: 0
---- !u!1001 &613550475
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1365951827}
-    m_Modifications:
-    - target: {fileID: 1539900097125677525, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 48.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8830835182720683587, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: _path
-      value: 
-      objectReference: {fileID: 1137036318}
-    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_Name
-      value: Car AI V2 Red (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 559528577}
-  m_SourcePrefab: {fileID: 100100000, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
 --- !u!1 &619269389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,7 +3370,7 @@ Transform:
   m_Children:
   - {fileID: 7822474798993033855}
   - {fileID: 811823253}
-  - {fileID: 195836366}
+  - {fileID: 1894770052}
   - {fileID: 223406646}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4679,6 +4568,76 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &1894770051
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1365951827}
+    m_Modifications:
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8830835182720683587, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: _path
+      value: 
+      objectReference: {fileID: 1137036318}
+    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_Name
+      value: Car AI V2 Red (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894291204426264435, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+--- !u!4 &1894770052 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8138600838186159180, guid: 44f93d0ef4902f94b81014f9053e2356, type: 3}
+  m_PrefabInstance: {fileID: 1894770051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1901400267
 GameObject:
   m_ObjectHideFlags: 0

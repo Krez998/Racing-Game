@@ -31,7 +31,7 @@ public class EnvironmentDetector : MonoBehaviour
 
     private void Awake()
     {
-        _speedometer = GetComponent<Speedometer>();
+        _speedometer = GetComponent<ISpeedometer>();
     }
 
     private void OnEnable()

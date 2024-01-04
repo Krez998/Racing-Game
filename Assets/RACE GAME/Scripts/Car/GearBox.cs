@@ -12,8 +12,7 @@ public enum GearBoxMode
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
-[RequireComponent(typeof(Car))]
-[RequireComponent(typeof(ISpeedometer))]
+[RequireComponent(typeof(Speedometer))]
 public class GearBox : MonoBehaviour, IGearBox
 {
     public int CurrentGear => _currentGear;
@@ -26,21 +25,15 @@ public class GearBox : MonoBehaviour, IGearBox
 
     [Header("Wheel Speed Params")]
     [SerializeField] private float _speedMPS; // скорость колеса в м/с
-    [SerializeField] private float _wheelAngleSpeed; // углова€ скорость колеса м/с, –ад./с 
+   
+    [SerializeField] private float _wheelAngleSpeed; // углова€ скорость колеса м/с, –ад./с
+    [Header("MIN MAX")]
     [SerializeField] private float _wheelMinAngularVelocity;
     [SerializeField] private float _wheelMaxAngularVelocity; // скорость вращени€ колеса √рад./сек.
 
-    [SerializeField] int _currentGear;
-
-    private GearBoxMode _gearBoxMode;
-    private Rigidbody _rigidbody;
-    private CarEngine _engine;
-    private Car _car;
-    private ISpeedometer _speedometer;
-    private WaitForSeconds _gearShiftDelay;
-    [SerializeField] private bool _isShifting;
-
-    [SerializeField] private float[] _speedValues;
+    [Header("Gear Settings")]
+    [SerializeField] private int _currentGear;
+    [SerializeField] private int _maxGear;
 
     [Header("Gear Speed Limits")]
     [SerializeField] private float _currentGearMinSpeed;
@@ -50,32 +43,33 @@ public class GearBox : MonoBehaviour, IGearBox
     [SerializeField] private float _speed;
     [SerializeField] private float _motorTorque;
 
+    private GearBoxMode _gearBoxMode;
+    private CarEngine _engine;
+    private Speedometer _speedometer;
+    private WaitForSeconds _gearShiftDelay;
+    [SerializeField] private bool _isShifting;
 
+    [SerializeField] private float[] _speedValues;
+    
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
         _engine = GetComponent<CarEngine>();
-        _car = GetComponent<Car>();
-        _speedometer = GetComponent<ISpeedometer>();
+        _speedometer = GetComponent<Speedometer>();
         _gearShiftDelay = new WaitForSeconds(0.2f);
-        InitSpeedValues();
-    }
-
-    private void Start()
-    {
         StartCoroutine(SetGear(0));
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _speed = _speedometer.GetSpeed();
         ChangeGears();
     }
 
-    private void InitSpeedValues()
+    public void GetData(float speed, int numberOfGears)
     {
-        _speedValues = new float[_car.CarData.NumberOfGears];
-        float speedDelta = _car.CarData.Speed / _car.CarData.NumberOfGears;
+        _maxGear = numberOfGears;
+        _speedValues = new float[_maxGear];
+        float speedDelta = speed / _maxGear;
 
         float speedValueGrowth = 0;
         for (int i = 0; i < _speedValues.Length; i++)
@@ -95,13 +89,13 @@ public class GearBox : MonoBehaviour, IGearBox
             StartCoroutine(SetGear(1));
         }
 
-        if (!_isShifting && _speed > 0 && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _car.CarData.NumberOfGears)
+        if (!_isShifting && _speedometer.MovesInForwardDirection && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _maxGear)
         {
             //Debug.Log("Gear UP");
             StartCoroutine(SetGear(++_currentGear));
         }
 
-        if (!_isShifting && _speed > 0 && _speed < _currentGearMinSpeed - 3f)
+        if (!_isShifting && _speedometer.MovesInForwardDirection && _speed < _currentGearMinSpeed - 3f)
         {
             //Debug.Log("Gear DOWN");
             StartCoroutine(SetGear(--_currentGear));
@@ -115,7 +109,7 @@ public class GearBox : MonoBehaviour, IGearBox
 
         if (!_isShifting && _motorTorque == 0 && _currentGear != 0 && _speed == 0)
         {
-            //Debug.Log("Stop Car");
+            //Debug.Log("Stop Car & N");
             StartCoroutine(SetGear(0));
         }
     }
@@ -156,20 +150,24 @@ public class GearBox : MonoBehaviour, IGearBox
 
         _isShifting = false;
         UpdateGearText();
-        SetWheelAngularVelocity(_currentGearMaxSpeed);
+        SetWheelAngularVelocity(_currentGearMinSpeed, _currentGearMaxSpeed);
         _engine.ResetGasInput();
     }
 
-    private void SetWheelAngularVelocity(float speed)
+    private void SetWheelAngularVelocity(float currentGearMinSpeed, float currentGearMaxSpeed)
     {
-        _wheelMinAngularVelocity = _wheelMaxAngularVelocity;
+        //_wheelMinAngularVelocity = _wheelMaxAngularVelocity;
 
-        _speedMPS = Mathf.Abs(speed) * 1000 / 3600;
+        _speedMPS = currentGearMinSpeed * 1000 / 3600;
+        _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
+        _wheelMinAngularVelocity = _wheelAngleSpeed * Mathf.Rad2Deg;
+
+        _speedMPS = currentGearMaxSpeed * 1000 / 3600;
         _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
         _wheelMaxAngularVelocity = _wheelAngleSpeed * Mathf.Rad2Deg;
 
-        if (_wheelMinAngularVelocity > _wheelMaxAngularVelocity)
-            _wheelMinAngularVelocity -= _wheelMaxAngularVelocity;
+        //if (_wheelMinAngularVelocity > _wheelMaxAngularVelocity)
+        //    _wheelMinAngularVelocity -= _wheelMaxAngularVelocity;
 
         _engine.SetWheelAngularVelocity(_wheelMinAngularVelocity, _wheelMaxAngularVelocity);
     }
@@ -185,15 +183,5 @@ public class GearBox : MonoBehaviour, IGearBox
             else
                 _gearText.text = Numbers.CachedNums[_currentGear];
         }
-    }
-
-    /// <summary>
-    /// отображает центр массы автомобил€
-    /// </summary>
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (_rigidbody)
-            Gizmos.DrawSphere(_rigidbody.worldCenterOfMass, 0.1f);
     }
 }

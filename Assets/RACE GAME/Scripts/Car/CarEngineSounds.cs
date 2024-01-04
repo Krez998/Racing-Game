@@ -22,7 +22,7 @@ public class CarEngineSounds : MonoBehaviour
 
     public float idlingPitch;
 
-    public void SetEngineAudioclips(AudioClip acceleration, AudioClip deceleration, AudioClip idle)
+    public void GetData(AudioClip acceleration, AudioClip deceleration, AudioClip idle)
     {
         _accelerationAudio.clip = acceleration;
         _decelerationAudio.clip = deceleration;

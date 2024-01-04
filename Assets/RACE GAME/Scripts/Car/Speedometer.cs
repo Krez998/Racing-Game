@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,11 +7,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(GearBox))]
 public class Speedometer : MonoBehaviour, ISpeedometer
 {
+    public bool MovesInForwardDirection => _movesInForwardDirection;
     [SerializeField] private float _speed;
+    [SerializeField] private float _speedABS;
     [SerializeField] private TextMeshProUGUI _spedometerText;
     [SerializeField] private Image _speedometerFill;
     private Rigidbody _rigidbody;
     private GearBox _gearBox;
+
+    public bool _movesInForwardDirection;
 
     public float GetSpeed()
     {
@@ -24,9 +29,10 @@ public class Speedometer : MonoBehaviour, ISpeedometer
     }
 
     private void FixedUpdate()
-    {
-        //_speed = (_rigidbody.velocity.magnitude * 3.6f);
+    {     
         _speed = Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f);
+        _speedABS = _rigidbody.velocity.magnitude * 3.6f;
+        _movesInForwardDirection = _speed > 0 ? true : false;   
     }
 
     private void LateUpdate()
@@ -50,7 +56,7 @@ public class Speedometer : MonoBehaviour, ISpeedometer
                 //_speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
 
                 var value = _gearBox.CurrentGearMinSpeed;
-                var amount = (_speed - value) / (_gearBox.CurrentGearMaxSpeed - value);
+                var amount = (_speedABS - value) / (Mathf.Abs(_gearBox.CurrentGearMaxSpeed) - value);
                 //Debug.Log((_speed - value) + "/" + (_gearBox.CurrentGearMaxSpeed - value));
                 _speedometerFill.fillAmount = amount;
             }

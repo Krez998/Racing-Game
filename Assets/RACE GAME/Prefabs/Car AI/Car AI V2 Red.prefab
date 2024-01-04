@@ -21626,8 +21626,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
+  _speedABS: 0
   _spedometerText: {fileID: 0}
   _speedometerFill: {fileID: 0}
+  _movesInForwardDirection: 0
 --- !u!114 &1760500033406160465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21647,17 +21649,14 @@ MonoBehaviour:
   - {fileID: 1162583321572532456}
   - {fileID: 9018673351233824705}
   _drivingWheels: []
-  fl_gas: 0
-  fr_gas: 0
-  fl_brake: 0
-  fr_brake: 0
-  rl_brake: 0
-  rr_brake: 0
   _torqueForce: 500
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
+  _motorTorque: 0
+  _wheelMinAngularVelocity: 0
   _wheelMaxAngularVelocity: 0
   _wheelAngularVelocity: 0
+  _gasInput: 0
 --- !u!114 &2184050593775687720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21676,12 +21675,13 @@ MonoBehaviour:
   _wheelMinAngularVelocity: 0
   _wheelMaxAngularVelocity: 0
   _currentGear: 0
-  _isShifting: 0
-  _speedValues: []
+  _maxGear: 0
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
+  _isShifting: 0
+  _speedValues: []
 --- !u!114 &399953167177681288
 MonoBehaviour:
   m_ObjectHideFlags: 0
