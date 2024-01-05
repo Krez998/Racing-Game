@@ -8,7 +8,7 @@ public class RunToWaypointState : State
     [SerializeField] private float _speedLimit = 9999f;
     private float _speed;
     private float _distanceToWaypoint;
-    private float _waypointRange = 5f;
+    private float _acceptableDistance = 8f;
     private Vector3 _vectorToTarget;
     private float _jamTimer;
 
@@ -41,7 +41,7 @@ public class RunToWaypointState : State
     {
         if (_targetWaypoint != null)
         {
-            if (_distanceToWaypoint < _waypointRange)
+            if (_distanceToWaypoint < _acceptableDistance)
             {
                 _currentTargetIndex = (_currentTargetIndex + 1) % _path.Waypoints.Count;
                 _targetWaypoint = _path.Waypoints[_currentTargetIndex];
@@ -127,12 +127,17 @@ public class RunToWaypointState : State
 
     private void DetectJam()
     {
-        _jamTimer = _speed < 5 ? _jamTimer += Time.deltaTime : _jamTimer = 0;
+        _jamTimer = _speed < 1 ? _jamTimer += Time.deltaTime : _jamTimer = 0;
 
-        if (_jamTimer > 3f)
-        {
-            FinalStateMashine.SetState<ReverseState>();
-            _jamTimer = 0;
-        }
+        if (_jamTimer > 1.5f)
+            RotateWheelsToWaypoint(-_angleBetweenCarAndWaypoint);
+        if (_jamTimer > 2.2f)
+            MoveBackward();
+    }
+
+    private void MoveBackward()
+    {
+        FinalStateMashine.SetState<ReverseState>();
+        _jamTimer = 0;
     }
 }
