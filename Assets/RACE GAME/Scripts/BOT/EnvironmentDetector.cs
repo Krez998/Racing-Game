@@ -31,11 +31,11 @@ public class EnvironmentDetector : MonoBehaviour
     private float _rivalVelocity;
     public bool _rivalIsSlow;
     private Collider _rivalCollider;
-    private Vector3 _vectorToTarget;
+    private Vector3 _targetPosition;
 
     public void SetTargetWaypoint(Vector3 target)
     {
-        _vectorToTarget = target;
+        _targetPosition = target;
     }
 
     private void Awake()
@@ -66,7 +66,7 @@ public class EnvironmentDetector : MonoBehaviour
 
     private void CheckWaypointPosition()
     {
-        _angleBetweenCarAndWaypoint = Vector3.SignedAngle(transform.forward, _vectorToTarget - transform.position, Vector3.up);
+        _angleBetweenCarAndWaypoint = Vector3.SignedAngle(transform.forward, _targetPosition - transform.position, Vector3.up);
 
         if (_angleBetweenCarAndWaypoint < 0)
             _waypointPosition = WaypointPosition.Left;
@@ -78,7 +78,7 @@ public class EnvironmentDetector : MonoBehaviour
 
     private void RotateFrontTrigger()
     {
-        Vector3 direction = _vectorToTarget - _triggers[0].transform.position;
+        Vector3 direction = _targetPosition - _triggers[0].transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         rotation.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
         _triggers[0].transform.rotation = rotation;

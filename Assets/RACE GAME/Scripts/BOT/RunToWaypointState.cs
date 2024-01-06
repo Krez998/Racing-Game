@@ -9,7 +9,7 @@ public class RunToWaypointState : State
     private float _speed;
     private float _distanceToWaypoint;
     private float _acceptableDistance = 8f;
-    private Vector3 _vectorToTarget;
+    private Vector3 _targetPosition;
     private float _jamTimer;
 
     // constructor
@@ -49,9 +49,9 @@ public class RunToWaypointState : State
             }
 
             _distanceToWaypoint = Vector3.Distance(_transform.position, _targetWaypoint.transform.position);
-            _vectorToTarget = new Vector3(_targetWaypoint.transform.position.x, _transform.position.y, _targetWaypoint.transform.position.z);
-            _environmentDetector.SetTargetWaypoint(_vectorToTarget);
-            _angleBetweenCarAndWaypoint = Vector3.SignedAngle(_transform.forward, _vectorToTarget - _transform.position, Vector3.up);
+            _targetPosition = new Vector3(_targetWaypoint.transform.position.x, _transform.position.y, _targetWaypoint.transform.position.z);
+            _environmentDetector.SetTargetWaypoint(_targetPosition);
+            _angleBetweenCarAndWaypoint = Vector3.SignedAngle(_transform.forward, _targetPosition - _transform.position, Vector3.up);
 
             //if (_angleBetweenCarAndWaypoint < 0)
             //    Debug.Log("öåëü ÑËÅÂÀ");

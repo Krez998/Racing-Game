@@ -29,10 +29,10 @@ public class Speedometer : MonoBehaviour, ISpeedometer
     }
 
     private void FixedUpdate()
-    {     
+    {
         _speed = Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f);
         _speedABS = _rigidbody.velocity.magnitude * 3.6f;
-        _movesInForwardDirection = _speed > 0 ? true : false;   
+        _movesInForwardDirection = _speed > 0 ? true : false;
     }
 
     private void LateUpdate()
