@@ -14,17 +14,17 @@ public class RunToWaypointState : State
 
     // constructor
     private Transform _transform;
-    private EnvironmentDetector _rivalsDetector;
+    private EnvironmentDetector _environmentDetector;
     private BOTPath _path;
     private IMovable _movable;
     private ISteerable _steerable;
     private ISpeedometer _speedometer;
 
-    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, EnvironmentDetector rivalsDetector,
+    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, EnvironmentDetector environmentDetector,
         IMovable movable, ISteerable steerable, ISpeedometer speedometer, BOTPath path) : base(finalStateMashine)
     {
         _transform = transform;
-        _rivalsDetector = rivalsDetector;
+        _environmentDetector = environmentDetector;
         _movable = movable;
         _steerable = steerable;
         _speedometer = speedometer;
@@ -50,26 +50,53 @@ public class RunToWaypointState : State
 
             _distanceToWaypoint = Vector3.Distance(_transform.position, _targetWaypoint.transform.position);
             _vectorToTarget = new Vector3(_targetWaypoint.transform.position.x, _transform.position.y, _targetWaypoint.transform.position.z);
-            _rivalsDetector.SetTargetWaypoint(_vectorToTarget);
-            _angleBetweenCarAndWaypoint = Vector3.SignedAngle(_vectorToTarget - _transform.position, _transform.forward, Vector3.up);
+            _environmentDetector.SetTargetWaypoint(_vectorToTarget);
+            _angleBetweenCarAndWaypoint = Vector3.SignedAngle(_transform.forward, _vectorToTarget - _transform.position, Vector3.up);
+
+            //if (_angleBetweenCarAndWaypoint < 0)
+            //    Debug.Log("цель СЛЕВА");
+            //else if( _angleBetweenCarAndWaypoint > 0)
+            //    Debug.Log("цель СПРАВА");
         }
 
-        if (_rivalsDetector.RivalIsSlow && _rivalsDetector.RivalsInFront)
-        {
+        if (_environmentDetector.RivalIsSlow && _environmentDetector.RivalsInFront)
             DriveAroundRival(40);
-        }
-        else if (_rivalsDetector.RivalsInFront && _rivalsDetector.LeftIsOccupied && _rivalsDetector.RightIsOccupied)
-        {
+        else if (_environmentDetector.RivalsInFront && _environmentDetector.LeftIsOccupied && _environmentDetector.RightIsOccupied)
             RotateWheelsToWaypoint(_angleBetweenCarAndWaypoint);
-        }
         else
-        {
             RotateWheelsToWaypoint(_angleBetweenCarAndWaypoint);
-        }
 
         _speed = _speedometer.GetSpeed();
-        Gas();
+        Move();
         DetectJam();
+    }
+
+    private void DriveAroundRival(float angle)
+    {
+        float rivalPosX = _transform.InverseTransformPoint(_environmentDetector.RivalTransform.position).x;
+
+        // если цель СЛЕВА, а препятствие СЛЕВА, тогда обгон СПРАВА
+        if (_angleBetweenCarAndWaypoint < 0 && rivalPosX < 0 && !_environmentDetector.RightIsOccupied)
+        {
+            _steerable.TurnRight(angle);
+        }
+        // если цель СЛЕВА, а препятствие СПРАВА, тогда обгон СЛЕВА
+        else if (_angleBetweenCarAndWaypoint < 0 && rivalPosX > 0 && !_environmentDetector.LeftIsOccupied)
+        {
+            _steerable.TurnLeft(angle);
+        }
+        // если цель СПРАВА, а препятствие СЛЕВА, тогда обгон СПРАВА
+        else if (_angleBetweenCarAndWaypoint > 0 && rivalPosX < 0 && !_environmentDetector.RightIsOccupied)
+        {
+            _steerable.TurnRight(angle);
+        }
+        // если цель СПРАВА, а препятствие СПРАВА, тогда обгон СЛЕВА
+        else if (_angleBetweenCarAndWaypoint > 0 && rivalPosX > 0 && !_environmentDetector.LeftIsOccupied)
+        {
+            _steerable.TurnLeft(angle);
+        }
+        else
+            RotateWheelsToWaypoint(_angleBetweenCarAndWaypoint);
     }
 
     private void FindFirstWaypoint()
@@ -82,29 +109,15 @@ public class RunToWaypointState : State
         }
     }
 
-    private void DriveAroundRival(float angle)
-    {
-        float deltaX = _transform.position.x - _rivalsDetector.Rival.position.x;
-
-        if (!_rivalsDetector.LeftIsOccupied && deltaX > 0)
-        {
-            _steerable.TurnLeft(angle);
-        }
-        else if (!_rivalsDetector.RightIsOccupied && deltaX < 0)
-        {
-            _steerable.TurnRight(angle);
-        }
-    }
-
     private void RotateWheelsToWaypoint(float angle)
     {
-        if (angle > 0 && !_rivalsDetector.LeftIsOccupied)
+        if (angle < 0) // && !_environmentDetector.LeftIsOccupied
             _steerable.TurnLeft(angle);
-        else if (angle < 0 && !_rivalsDetector.RightIsOccupied)
-            _steerable.TurnRight(-angle);
+        else if (angle > 0) //  && !_environmentDetector.RightIsOccupied
+            _steerable.TurnRight(angle);
     }
 
-    private void Gas()
+    private void Move()
     {
         if (_speed < _speedLimit)
         {
@@ -129,9 +142,7 @@ public class RunToWaypointState : State
     {
         _jamTimer = _speed < 1 ? _jamTimer += Time.deltaTime : _jamTimer = 0;
 
-        if (_jamTimer > 1.5f)
-            RotateWheelsToWaypoint(-_angleBetweenCarAndWaypoint);
-        if (_jamTimer > 2.2f)
+        if (_jamTimer > 2f)
             MoveBackward();
     }
 

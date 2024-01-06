@@ -1,19 +1,28 @@
 using UnityEngine;
 
+public enum WaypointPosition
+{
+    Left,
+    Right,
+    Middle
+}
+
 [RequireComponent(typeof(ISpeedometer))]
 public class EnvironmentDetector : MonoBehaviour
 {
-    public Collider RivalCollier => _rivalCollider;
     public bool RivalIsSlow => _rivalIsSlow;
     public bool LeftIsOccupied => _leftIsOccupied;
     public bool RightIsOccupied => _rightIsOccupied;
     public bool RivalsInFront => _rivalsInFront;
-    public Transform Rival => _rivalCollider.transform;
+    public Transform RivalTransform => _rivalCollider.transform;
+    public WaypointPosition WaypointPosition => _waypointPosition;
 
     [SerializeField] private LayerMask _carLayer;
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private CustomTrigger[] _triggers;
+    [SerializeField] private WaypointPosition _waypointPosition;
 
+    private float _angleBetweenCarAndWaypoint;
     private ISpeedometer _speedometer;
 
     public bool _rivalsInFront;
@@ -47,11 +56,24 @@ public class EnvironmentDetector : MonoBehaviour
     private void Update()
     {
         RotateFrontTrigger();
+        CheckWaypointPosition();
 
         if (_rivalsInFront)
             CalculateVelocityBetweenMeAndRival();
 
         //Debug.Log("Я: " + _gearBox.GetSpeed() + " Противник: " + _rivalVelocity);
+    }
+
+    private void CheckWaypointPosition()
+    {
+        _angleBetweenCarAndWaypoint = Vector3.SignedAngle(transform.forward, _vectorToTarget - transform.position, Vector3.up);
+
+        if (_angleBetweenCarAndWaypoint < 0)
+            _waypointPosition = WaypointPosition.Left;
+        else if (_angleBetweenCarAndWaypoint > 0)
+            _waypointPosition = WaypointPosition.Right;
+        else
+            _waypointPosition = WaypointPosition.Middle;
     }
 
     private void RotateFrontTrigger()

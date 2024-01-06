@@ -5,9 +5,9 @@ using UnityEngine;
 public class SteeringWheel : MonoBehaviour, ISteerable
 {
     [SerializeField, Range(0, 40)] private float _maxRotationAngle;
-    [SerializeField] private float _defaultSteeringAngle;
     [SerializeField] private Wheel[] _wheels = new Wheel[2];
     [SerializeField] bool _useReduceSteerangle;
+    private float _defaultSteeringAngle = 0f;
     private float _reducedSteerangle;
     private Speedometer _speedometer;
 
@@ -18,8 +18,8 @@ public class SteeringWheel : MonoBehaviour, ISteerable
 
     public void TurnLeft(float angle)
     {
-        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _speedometer.GetSpeed() : angle;
-
+        _reducedSteerangle = _useReduceSteerangle ? Mathf.Abs(angle) - (Mathf.Abs(angle) / 200f) * _speedometer.GetSpeed() : Mathf.Abs(angle);
+        
         if (_reducedSteerangle > _maxRotationAngle)
             _reducedSteerangle = _maxRotationAngle;
 

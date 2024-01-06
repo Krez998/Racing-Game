@@ -11,7 +11,7 @@ public class BOT : MonoBehaviour
     [SerializeField] private float _reverseTime;
 
     private FinalStateMashine _finalStateMashine;
-    private EnvironmentDetector _rivalsDetector;
+    private EnvironmentDetector _environmentDetector;
     private IMovable _movable;
     private ISteerable _steerable;
     private ISpeedometer _speedometer;
@@ -22,14 +22,14 @@ public class BOT : MonoBehaviour
 
     private void Awake()
     {
-        _rivalsDetector = GetComponent<EnvironmentDetector>();
+        _environmentDetector = GetComponent<EnvironmentDetector>();
         _movable = GetComponent<IMovable>();
         _steerable = GetComponent<ISteerable>();
         _speedometer = GetComponent<ISpeedometer>();
 
         _finalStateMashine = new FinalStateMashine();
-        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _rivalsDetector, _movable, _steerable, _speedometer, _path));
-        _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _movable, _reverseTime));
+        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _environmentDetector, _movable, _steerable, _speedometer, _path));
+        _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _environmentDetector, _movable, _steerable, _reverseTime));
 
         _finalStateMashine.SetState<RunToWaypointState>();
     }

@@ -71,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 577762103575885451}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -100.55, y: 0, z: -0.25}
+  m_LocalPosition: {x: -99.7, y: 0, z: -39.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -310,6 +310,7 @@ Transform:
   - {fileID: 3448711256077735459}
   - {fileID: 7991557747050990219}
   - {fileID: 5407197858606091833}
+  - {fileID: 3561505414993535327}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3524591108509237429
@@ -335,6 +336,7 @@ MonoBehaviour:
   - {fileID: 3651706688653012276}
   - {fileID: 781011880575180634}
   - {fileID: 7218391330046338123}
+  - {fileID: 9072408107513649593}
   _pathNodePrefab: {fileID: -5943171669525253913, guid: c118860dcfdb0c445ad924e4e714c042, type: 3}
 --- !u!1 &6568072774881450971
 GameObject:
@@ -516,3 +518,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetSpeed: 20
+--- !u!1 &9058088148171718441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3561505414993535327}
+  - component: {fileID: 9072408107513649593}
+  m_Layer: 0
+  m_Name: Waypoint 10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3561505414993535327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058088148171718441}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -121.26, y: 0, z: -22.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9070569226933545860}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9072408107513649593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058088148171718441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99dc3a8f8b29f7479728c596bc2b145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetSpeed: 50

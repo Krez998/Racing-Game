@@ -21562,6 +21562,7 @@ MonoBehaviour:
   - {fileID: 13010442105616326}
   - {fileID: 6096476932281511174}
   - {fileID: 6564016230329671705}
+  _waypointPosition: 0
   _rivalsInFront: 0
   _leftIsOccupied: 0
   _rightIsOccupied: 0
@@ -21608,7 +21609,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxRotationAngle: 30
-  _defaultSteeringAngle: 0
   _wheels:
   - {fileID: 9037937598899604487}
   - {fileID: 3906581399479452299}

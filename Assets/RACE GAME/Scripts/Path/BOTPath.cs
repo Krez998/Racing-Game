@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BOTPath : MonoBehaviour
 {
     public List<Waypoint> Waypoints => _waypoints;
-
+    [SerializeField] private bool _showLines;
     [SerializeField] private List<Waypoint> _waypoints;
     [SerializeField] private Waypoint _pathNodePrefab;
 
@@ -34,7 +34,7 @@ public class BOTPath : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_waypoints != null && _waypoints.Count > 1)
+        if (_waypoints != null && _waypoints.Count > 1 && _showLines)
         {
             Gizmos.color = Color.white;
             for (int i = 0; i < _waypoints.Count; i++)
