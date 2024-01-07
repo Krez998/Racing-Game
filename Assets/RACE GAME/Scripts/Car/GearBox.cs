@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public enum GearBoxMode
@@ -20,13 +19,13 @@ public class GearBox : MonoBehaviour, IGearBox
     public float CurrentGearMaxSpeed => _currentGearMaxSpeed;
     public float CurrentGearMinSpeed => _currentGearMinSpeed;
 
-    [Header("Gear Hud")]
-    [SerializeField] private TextMeshProUGUI _gearText;
+    [SerializeField] private bool _isShifting;
+    [SerializeField] private float[] _speedValues;
 
     [Header("Wheel Speed Params")]
     [SerializeField] private float _speedMPS; // скорость колеса в м/с
-   
     [SerializeField] private float _wheelAngleSpeed; // углова€ скорость колеса м/с, –ад./с
+
     [Header("MIN MAX")]
     [SerializeField] private float _wheelMinAngularVelocity;
     [SerializeField] private float _wheelMaxAngularVelocity; // скорость вращени€ колеса √рад./сек.
@@ -47,10 +46,8 @@ public class GearBox : MonoBehaviour, IGearBox
     private CarEngine _engine;
     private Speedometer _speedometer;
     private WaitForSeconds _gearShiftDelay;
-    [SerializeField] private bool _isShifting;
+    private bool _isPlayerCar;
 
-    [SerializeField] private float[] _speedValues;
-    
     private void Awake()
     {
         _engine = GetComponent<CarEngine>();
@@ -65,8 +62,10 @@ public class GearBox : MonoBehaviour, IGearBox
         ChangeGears();
     }
 
-    public void GetData(float speed, int numberOfGears)
+    public void GetData(bool isPlayerCar, float speed, int numberOfGears)
     {
+        _isPlayerCar = isPlayerCar;
+
         _maxGear = numberOfGears;
         _speedValues = new float[_maxGear];
         float speedDelta = speed / _maxGear;
@@ -174,14 +173,7 @@ public class GearBox : MonoBehaviour, IGearBox
 
     private void UpdateGearText()
     {
-        if (_gearText)
-        {
-            if (_gearBoxMode == GearBoxMode.Backward)
-                _gearText.text = "R";
-            else if (_gearBoxMode == GearBoxMode.Neutral)
-                _gearText.text = "N";
-            else
-                _gearText.text = Numbers.CachedNums[_currentGear];
-        }
+        if (_isPlayerCar)
+            GameEvents.OnGearShifted?.Invoke(_currentGear);
     }
 }

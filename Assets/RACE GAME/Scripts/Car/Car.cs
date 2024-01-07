@@ -3,39 +3,41 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
 [RequireComponent(typeof(GearBox))]
+[RequireComponent(typeof(Speedometer))]
 [RequireComponent(typeof(CarEngineSounds))]
+[RequireComponent(typeof(CarProgress))]
 public class Car : MonoBehaviour
 {
-    public int Number => _number;
     public CarData CarData => _carData;
     public Transform CameraPointOfView => _cameraPointOfView;
 
-    public bool IsPlayerCar;
+    [SerializeField] private bool IsPlayerCar;
     [SerializeField] private CarData _carData;
     [SerializeField] private Transform _cameraPointOfView;
 
-    [SerializeField] private int _number;
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
     private GearBox _gearBox;
+    private Speedometer _speedometer;
     private CarEngineSounds _engineSounds;
-
-    public void SetNumber(int number)
-    {
-        _number = number;
-    }
+    private CarProgress _carProgress;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _carEngine = GetComponent<CarEngine>();
         _gearBox = GetComponent<GearBox>();
+        _speedometer = GetComponent<Speedometer>();
         _engineSounds = GetComponent<CarEngineSounds>();
+        _carProgress = GetComponent<CarProgress>();
 
         _rigidbody.mass = _carData.Mass;
+
         _carEngine.GetData(_carData.MotorTorque, _carData.BrakeTorque, _carData.WheelDriveMode);
-        _gearBox.GetData(_carData.Speed, _carData.NumberOfGears);
+        _gearBox.GetData(IsPlayerCar, _carData.Speed, _carData.NumberOfGears);
         _engineSounds.GetData(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
+        _carProgress.GetData(IsPlayerCar);
+        _speedometer.GetData(IsPlayerCar);
 
         if (IsPlayerCar)
         {

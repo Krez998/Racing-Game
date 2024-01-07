@@ -10700,7 +10700,6 @@ MonoBehaviour:
   IsPlayerCar: 1
   _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
   _cameraPointOfView: {fileID: 6484211069557290224}
-  _number: 0
 --- !u!114 &2430499978387984702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10745,9 +10744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _speedABS: 0
-  _spedometerText: {fileID: 0}
   _speedometerFill: {fileID: 0}
-  _movesInForwardDirection: 0
 --- !u!114 &8714457509065778732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10787,7 +10784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729d09df64d53ed42a92dcb1770c8821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gearText: {fileID: 0}
+  _isShifting: 0
+  _speedValues: []
   _speedMPS: 0
   _wheelAngleSpeed: 0
   _wheelMinAngularVelocity: 0
@@ -10798,8 +10796,6 @@ MonoBehaviour:
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
-  _isShifting: 0
-  _speedValues: []
 --- !u!114 &8724143695070027380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10832,9 +10828,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67720d10bda890408e0b681cd827210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkpointLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _number: 0
   _checkpoints: []
-  _targetCheckpoint: {x: 0, y: 0, z: 0}
-  _completedCheckpoint: []
+  _targetCheckpoint: {fileID: 0}
+  _targetCheckpointIndex: 0
+  _distanceToCheckpoint: 0
+  _points: 0
   _laps: 0
 --- !u!1 &5718363711884497894
 GameObject:

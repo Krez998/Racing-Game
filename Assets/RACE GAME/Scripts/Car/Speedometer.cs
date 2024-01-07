@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +7,19 @@ using UnityEngine.UI;
 public class Speedometer : MonoBehaviour, ISpeedometer
 {
     public bool MovesInForwardDirection => _movesInForwardDirection;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _speedABS;
-    [SerializeField] private TextMeshProUGUI _spedometerText;
     [SerializeField] private Image _speedometerFill;
     private Rigidbody _rigidbody;
     private GearBox _gearBox;
+    private bool _movesInForwardDirection;
+    private bool _isPlayerCar;
 
-    public bool _movesInForwardDirection;
+    public void GetData(bool isPlayerCar)
+    {
+        _isPlayerCar = isPlayerCar;
+    }
 
     public float GetSpeed()
     {
@@ -37,30 +41,14 @@ public class Speedometer : MonoBehaviour, ISpeedometer
 
     private void LateUpdate()
     {
-        if (_spedometerText)
+        if (_isPlayerCar)
         {
-            _spedometerText.text = Mathf.Round(_speedABS).ToString();
-            //if (_speed > 0)
-            //    _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(_speed)];
-            //else
-            //    _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(-_speed)];
-        }
-
-        if (_speedometerFill)
-        {
-            if (_gearBox.GearBoxMode == GearBoxMode.Neutral && _speed == 0)
-            {
-                _speedometerFill.fillAmount = 0f;
-            }
-            else
-            {
-                //_speedometerFill.fillAmount = _speed / _gearBox.CurrentGearMaxSpeed;
-
-                var value = _gearBox.CurrentGearMinSpeed;
-                var amount = (_speedABS - value) / (Mathf.Abs(_gearBox.CurrentGearMaxSpeed) - value);
-                //Debug.Log((_speed - value) + "/" + (_gearBox.CurrentGearMaxSpeed - value));
-                _speedometerFill.fillAmount = amount;
-            }
+            GameEvents.OnSpeedometerUpdating?.Invoke(_speedABS);
+            GameEvents.OnSpeedIndicatorUpdating?.Invoke(
+                _speed,
+                _gearBox.GearBoxMode, 
+                _gearBox.CurrentGearMinSpeed,
+                _gearBox.CurrentGearMaxSpeed);
         }
     }
 }

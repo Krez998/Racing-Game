@@ -34,7 +34,7 @@ public class RunToWaypointState : State
     public override void Enter()
     {
         if (_targetWaypoint == null)
-            FindFirstWaypoint();
+            AssignFirstWaypoint();
     }
 
     public override void Update()
@@ -99,7 +99,7 @@ public class RunToWaypointState : State
             RotateWheelsToWaypoint(_angleBetweenCarAndWaypoint);
     }
 
-    private void FindFirstWaypoint()
+    private void AssignFirstWaypoint()
     {
         if (_path != null && _path.Waypoints.Count > 0)
         {
