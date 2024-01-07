@@ -87,7 +87,7 @@ public class EnvironmentDetector : MonoBehaviour
     private void CalculateVelocityBetweenMeAndRival()
     {
         _rivalVelocity = Mathf.Round(transform.InverseTransformDirection(_rivalCollider.attachedRigidbody.velocity).z * 3.6f);
-        if (Mathf.Abs(_rivalVelocity - _speedometer.GetSpeed()) > 5f)
+        if (_rivalVelocity < _speedometer.GetSpeed() && _speedometer.GetSpeed() - _rivalVelocity > 5f)
             _rivalIsSlow = true;
         else
             _rivalIsSlow = false;

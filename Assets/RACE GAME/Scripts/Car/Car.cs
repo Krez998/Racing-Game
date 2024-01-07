@@ -6,17 +6,24 @@ using UnityEngine;
 [RequireComponent(typeof(CarEngineSounds))]
 public class Car : MonoBehaviour
 {
+    public int Number => _number;
     public CarData CarData => _carData;
     public Transform CameraPointOfView => _cameraPointOfView;
 
-    [SerializeField] private bool _isPlayerCar;
+    public bool IsPlayerCar;
     [SerializeField] private CarData _carData;
     [SerializeField] private Transform _cameraPointOfView;
 
+    [SerializeField] private int _number;
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
     private GearBox _gearBox;
     private CarEngineSounds _engineSounds;
+
+    public void SetNumber(int number)
+    {
+        _number = number;
+    }
 
     private void Awake()
     {
@@ -30,7 +37,7 @@ public class Car : MonoBehaviour
         _gearBox.GetData(_carData.Speed, _carData.NumberOfGears);
         _engineSounds.GetData(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
 
-        if (_isPlayerCar)
+        if (IsPlayerCar)
         {
             SetCameraTargetOffset();
             SetCameraTarget();

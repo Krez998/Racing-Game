@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI _lapsTMP;
+    [SerializeField] private TextMeshProUGUI _positionTMP;
+
+    private void Awake()
     {
-        
+        _lapsTMP.SetText("0/3");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        ProgresEvents.OnLapCompleted += UpdateLapCounter;
+        ProgresEvents.OnCheckpointReached += UpdatePositionCounter;
+    }
+
+    private void OnDisable()
+    {
+        ProgresEvents.OnLapCompleted -= UpdateLapCounter;
+        ProgresEvents.OnCheckpointReached -= UpdatePositionCounter;
+    }
+
+    private void UpdateLapCounter(int lap)
+    {
+        _lapsTMP.SetText($"{lap}/3");
+    }
+
+    private void UpdatePositionCounter(int position, int totalRivals)
+    {
+        _positionTMP.SetText($"{position}/{totalRivals}");
     }
 }

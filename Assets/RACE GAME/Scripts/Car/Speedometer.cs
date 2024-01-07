@@ -39,10 +39,11 @@ public class Speedometer : MonoBehaviour, ISpeedometer
     {
         if (_spedometerText)
         {
-            if (_speed > 0)
-                _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(_speed)];
-            else
-                _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(-_speed)];
+            _spedometerText.text = Mathf.Round(_speedABS).ToString();
+            //if (_speed > 0)
+            //    _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(_speed)];
+            //else
+            //    _spedometerText.text = Numbers.CachedNums[(int)Mathf.Round(-_speed)];
         }
 
         if (_speedometerFill)

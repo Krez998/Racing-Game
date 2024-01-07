@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 9070569226933545860}
   - component: {fileID: 3524591108509237429}
   m_Layer: 0
-  m_Name: Path
+  m_Name: BOT Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdc11e439992904192405f5d29ba772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showLines: 1
   _waypoints:
   - {fileID: 8087485281016364828}
   - {fileID: 4122705940181888030}
@@ -544,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 9058088148171718441}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -121.26, y: 0, z: -22.1}
+  m_LocalPosition: {x: -98.8, y: 0, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
