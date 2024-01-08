@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private int _seconds;
     [SerializeField] private int _minutes;
     [SerializeField] private int _hours;
+    public static bool GameIsPaused = true;
 
     private Stopwatch stopwatch = new Stopwatch();
     private char[] _chars;
@@ -24,16 +25,25 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         stopwatch.Start();
+        GameIsPaused = true;
     }
 
     public void StopTimer()
     {
         stopwatch.Stop();
+        GameIsPaused = false;
     }
 
     private void Update()
     {
         UpdateTimer();
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (GameIsPaused) {
+                StopTimer();
+            } else {
+                StartTimer();
+            }
+        }
     }
 
     private void UpdateTimer()

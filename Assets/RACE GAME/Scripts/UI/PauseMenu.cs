@@ -17,15 +17,17 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void Resume() {
+        public void Resume() {
         PauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         GameIsPaused = false;
     }
 
     void Pause() {
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        AudioListener.pause = true;
         GameIsPaused = true;
     }
 }
