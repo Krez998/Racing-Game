@@ -9,26 +9,25 @@ public class Level : MonoBehaviour
 
     [Header("Game Rules")]
     public int Laps;
+
+    public int Reward => _reward;
+    [Header("Reward")]
     [SerializeField] private int _reward;
 
     [Header("Current PLayer Data")]
     [SerializeField] private int _currentPlayerRating;
 
     public int position;
-    public Finish finish;
+    [SerializeField] private Finish finish;
 
     private void Awake()
     {
         Numbers.GenerateNums();
         //SpawnPlayerCar();
 
-        if (_gameData != null)
-        {
-            _gameData.Load();
-            _currentPlayerRating = _gameData.Data.Rating;
-        }
+        _gameData.Load();
+        _currentPlayerRating = _gameData.Data.Rating;
     }
-
 
     private void OnEnable()
     {
@@ -48,7 +47,6 @@ public class Level : MonoBehaviour
 
     private void FinishGame()
     {
-        finish.checkLaps(_playerPosition.Position);
         switch (_playerPosition.Position)
         {
             case 1:
@@ -64,6 +62,9 @@ public class Level : MonoBehaviour
                 _reward = 1000;
                 break;
         }
+
+        finish.gameObject.SetActive(true);
+        finish.OpenWindowFinish(_playerPosition.Position);
 
         Data data = new Data()
         {

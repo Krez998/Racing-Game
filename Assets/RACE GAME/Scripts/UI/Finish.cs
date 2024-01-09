@@ -1,32 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using TMPro;
-using UnityEngine.UI;
-
-using System;
-
 
 public class Finish : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI _position;
-    [SerializeField] public GameObject _windowFinish;
-    private int Position;
+    [SerializeField] public TextMeshProUGUI _rewardTMP;
 
-    public void checkLaps(int position)
+    [SerializeField] public GameObject _windowFinish;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private Level _level;
+
+    private void Awake()
     {
         _position.SetText("");
-        Position = position;
-        Update();
+        _rewardTMP.SetText("");
     }
 
-    void Update()
+    public void OpenWindowFinish(int position)
     {
+        _timer.StopTimer();
         Time.timeScale = 0f;
         AudioListener.pause = true;
         _windowFinish.SetActive(true);
-        _position.SetText("         " + Position.ToString());
-        
+        _position.SetText(position.ToString());
+        _rewardTMP.SetText(_level.Reward.ToString());
     }
 }
