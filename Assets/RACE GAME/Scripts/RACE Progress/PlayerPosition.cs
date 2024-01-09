@@ -3,10 +3,13 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class RaceProgress : MonoBehaviour
+public class PlayerPosition : MonoBehaviour
 {
+    public int Position => _position;
+
     [SerializeField] private CarProgress[] _cars;
-    [SerializeField] private int _playerCarNumber;
+    [SerializeField] private int _playerRacingNumber;
+    private int _position;
     private WaitForSeconds _checkDelay;
     private CarProgress[] _sortedProgress;
 
@@ -17,10 +20,10 @@ public class RaceProgress : MonoBehaviour
 
         for (int i = 0; i < _cars.Length; i++)
         {
-            _cars[i].SetNumber(i);
+            _cars[i].SetRacingNumber(i);
 
             if (_cars[i].IsPlayerCar)
-                _playerCarNumber = _cars[i].Number;
+                _playerRacingNumber = _cars[i].RacingNumber;
         }
     }
 
@@ -34,15 +37,16 @@ public class RaceProgress : MonoBehaviour
         while (true)
         {
             _sortedProgress = _cars
-                .OrderByDescending(x => x.Points)
+                .OrderByDescending(x => x.CheckpointsCompleted)
                 .ThenBy(d => d.DistanceToCheckpoint)
                 .ToArray();
 
             for (int i = 0; i < _sortedProgress.Length; i++)
             {
-                if (_sortedProgress[i].Number == _playerCarNumber)
+                if (_sortedProgress[i].RacingNumber == _playerRacingNumber)
                 {
-                    GameEvents.OnCheckpointReached?.Invoke(i + 1, _cars.Length);
+                    _position = i + 1;
+                    GameEvents.OnUpdatingPosition?.Invoke(_position, _cars.Length);
                 }
             }
 

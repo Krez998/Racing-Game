@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnLapCompleted += UpdateLapCounter;
-        GameEvents.OnCheckpointReached += UpdatePositionCounter;
+        GameEvents.OnUpdatingPosition += UpdatePositionCounter;
         GameEvents.OnSpeedometerUpdating += UpdateSpeedometer;
         GameEvents.OnSpeedIndicatorUpdating += UpdateSpeedIndicator;
         GameEvents.OnGearShifted += UpdateGearCounter;
@@ -27,7 +27,7 @@ public class HUD : MonoBehaviour
     private void OnDisable()
     {
         GameEvents.OnLapCompleted -= UpdateLapCounter;
-        GameEvents.OnCheckpointReached -= UpdatePositionCounter;
+        GameEvents.OnUpdatingPosition -= UpdatePositionCounter;
         GameEvents.OnSpeedometerUpdating -= UpdateSpeedometer;
         GameEvents.OnSpeedIndicatorUpdating -= UpdateSpeedIndicator;
         GameEvents.OnGearShifted -= UpdateGearCounter;

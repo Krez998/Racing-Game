@@ -21747,10 +21747,10 @@ MonoBehaviour:
   _checkpointLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _number: 0
+  _racingNumber: 0
   _checkpoints: []
   _targetCheckpoint: {fileID: 0}
   _targetCheckpointIndex: 0
   _distanceToCheckpoint: 0
-  _points: 0
+  _checkpointsCompleted: 0
   _laps: 0

@@ -4,17 +4,18 @@ using UnityEngine;
 public class CarProgress : MonoBehaviour
 {
     public bool IsPlayerCar => _isPlayerCar;
-    public int Number => _number;
-    public int Points => _points;
+    public int RacingNumber => _racingNumber;
+    public int CheckpointsCompleted => _checkpointsCompleted;
+    public int Laps => _laps;
     public float DistanceToCheckpoint => _distanceToCheckpoint;
 
     [SerializeField] private LayerMask _checkpointLayer;
-    [SerializeField] private int _number;
+    [SerializeField] private int _racingNumber;
     [SerializeField] private Transform[] _checkpoints;
     [SerializeField] private Transform _targetCheckpoint;
     [SerializeField] private int _targetCheckpointIndex;
     [SerializeField] private float _distanceToCheckpoint;
-    [SerializeField] private int _points;
+    [SerializeField] private int _checkpointsCompleted;
     [SerializeField] private int _laps;
     private bool _isPlayerCar;
 
@@ -23,7 +24,7 @@ public class CarProgress : MonoBehaviour
         _isPlayerCar = isPlayerCar;
     }
 
-    public void SetNumber(int number) => _number = number;
+    public void SetRacingNumber(int racingNumber) => _racingNumber = racingNumber;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class CarProgress : MonoBehaviour
             && (((1 << component.gameObject.layer) & _checkpointLayer) != 0)
             && _targetCheckpoint == component.transform)
         {
-            _points++;
+            _checkpointsCompleted++;
             _targetCheckpointIndex++;
 
             if (_targetCheckpointIndex == _checkpoints.Length)
