@@ -8,6 +8,7 @@ public class menuButton : MonoBehaviour
     public void LoadScene(int index)
     {
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         SceneManager.LoadScene(index);
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntryPoint : MonoBehaviour
+public class Level : MonoBehaviour
 {
     [Header("Init Settings")]
     [SerializeField] private GameData _gameData;
@@ -8,11 +8,14 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Car _playerCar;
 
     [Header("Game Rules")]
-    [SerializeField] private int _laps;
+    public int Laps;
     [SerializeField] private int _reward;
 
     [Header("Current PLayer Data")]
     [SerializeField] private int _currentPlayerRating;
+
+    public int position;
+    public Finish finish;
 
     private void Awake()
     {
@@ -39,12 +42,13 @@ public class EntryPoint : MonoBehaviour
 
     private void CheckLapsCounter(int laps)
     {
-        if(_laps == laps)
+        if(Laps == laps)
             FinishGame();
     }
 
     private void FinishGame()
     {
+        finish.checkLaps(_playerPosition.Position);
         switch (_playerPosition.Position)
         {
             case 1:

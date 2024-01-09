@@ -1,18 +1,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class HUD : MonoBehaviour
 {
+
     [SerializeField] private TextMeshProUGUI _lapsTMP;
     [SerializeField] private TextMeshProUGUI _positionTMP;
     [SerializeField] private TextMeshProUGUI _spedometerTMP;
     [SerializeField] private Image _speedometerFill;
     [SerializeField] private TextMeshProUGUI _gearTMP;
+    [SerializeField] private Level _level;
 
     private void Awake()
     {
-        _lapsTMP.SetText("0/3");
+        _lapsTMP.SetText($"0/{_level.Laps}");
     }
 
     private void OnEnable()
@@ -35,7 +38,7 @@ public class HUD : MonoBehaviour
 
     private void UpdateLapCounter(int lap)
     {
-        _lapsTMP.SetText($"{lap}/3");
+        _lapsTMP.SetText($"{lap}/{_level.Laps}");
     }
 
     private void UpdatePositionCounter(int position, int totalRivals)
