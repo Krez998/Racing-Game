@@ -10,8 +10,8 @@ public class PlayerPosition : MonoBehaviour
     [SerializeField] private CarProgress[] _cars;
     [SerializeField] private int _playerRacingNumber;
     [SerializeField] private int _position;
-    private WaitForSeconds _checkDelay;
     [SerializeField] private CarProgress[] _sortedProgress;
+    private WaitForSeconds _checkDelay;
 
     private void Awake()
     {

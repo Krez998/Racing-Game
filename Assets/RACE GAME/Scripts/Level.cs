@@ -2,23 +2,20 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [Header("Init Settings")]
+    public int Laps => _laps;
+
     [SerializeField] private GameData _gameData;
     [SerializeField] private PlayerPosition _playerPosition;
     [SerializeField] private Car _playerCar;
 
-    [Header("Game Rules")]
-    public int Laps;
+    [Header("Правила игры")]
+    [SerializeField] private int _laps;
 
-    public int Reward => _reward;
-    [Header("Reward")]
+    [Header("Награда")]
     [SerializeField] private int _reward;
 
-    [Header("Current PLayer Data")]
+    [Header("Текущие данные игрока")]
     [SerializeField] private int _currentPlayerRating;
-
-    public int position;
-    [SerializeField] private Finish finish;
 
     private void Awake()
     {
@@ -41,7 +38,7 @@ public class Level : MonoBehaviour
 
     private void CheckLapsCounter(int laps)
     {
-        if(Laps == laps)
+        if(_laps == laps)
             FinishGame();
     }
 
@@ -63,8 +60,10 @@ public class Level : MonoBehaviour
                 break;
         }
 
-        finish.gameObject.SetActive(true);
-        finish.OpenWindowFinish(_playerPosition.Position);
+        GameEvents.OnGameFinished?.Invoke(_playerPosition.Position, _reward);
+
+        //finish.gameObject.SetActive(true);
+        //finish.OpenWindowFinish(_playerPosition.Position);
 
         Data data = new Data()
         {

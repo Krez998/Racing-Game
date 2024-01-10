@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7443957746853633135}
   - component: {fileID: 7954173786623683135}
   m_Layer: 0
-  m_Name: RACE Progress
+  m_Name: Player Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

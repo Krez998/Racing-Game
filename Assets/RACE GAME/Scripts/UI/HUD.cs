@@ -11,10 +11,11 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _spedometerTMP;
     [SerializeField] private Image _speedometerFill;
     [SerializeField] private TextMeshProUGUI _gearTMP;
-    [SerializeField] private Level _level;
+    private Level _level;
 
     private void Awake()
     {
+        _level = FindObjectOfType<Level>();
         _lapsTMP.SetText($"0/{_level.Laps}");
     }
 

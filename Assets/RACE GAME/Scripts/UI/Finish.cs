@@ -3,26 +3,35 @@ using TMPro;
 
 public class Finish : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI _position;
-    [SerializeField] public TextMeshProUGUI _rewardTMP;
+    [SerializeField] private TextMeshProUGUI _positionTMP;
+    [SerializeField] private TextMeshProUGUI _rewardTMP;
 
-    [SerializeField] public GameObject _windowFinish;
+    [SerializeField] private GameObject _windowFinish;
     [SerializeField] private Timer _timer;
-    [SerializeField] private Level _level;
 
     private void Awake()
     {
-        _position.SetText("");
+        _positionTMP.SetText("");
         _rewardTMP.SetText("");
     }
 
-    public void OpenWindowFinish(int position)
+    private void OnEnable()
     {
-        _timer.StopTimer();
-        Time.timeScale = 0f;
-        AudioListener.pause = true;
+        GameEvents.OnGameFinished += OnGameFinished;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnGameFinished -= OnGameFinished;
+    }
+
+    public void OnGameFinished(int position, int reawrd)
+    {
         _windowFinish.SetActive(true);
-        _position.SetText(position.ToString());
-        _rewardTMP.SetText(_level.Reward.ToString());
+        _timer.StopTimer();
+        AudioListener.pause = true;
+        _positionTMP.SetText(position.ToString());
+        _rewardTMP.SetText(reawrd.ToString());
+        Time.timeScale = 0f;
     }
 }
