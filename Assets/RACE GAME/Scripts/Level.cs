@@ -1,18 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    public float TimeRemainingToStartRace => _timeRemainingToStartRace;
     public int Laps => _laps;
 
     [SerializeField] private GameData _gameData;
+    [SerializeField] private PlayerSpawner _playerSpawner;
     [SerializeField] private PlayerPosition _playerPosition;
-    [SerializeField] private Car _playerCar;
 
     [Header("Правила игры")]
+    [SerializeField] private float _timeRemainingToStartRace;
     [SerializeField] private int _laps;
-
-    [Header("Награда")]
-    [SerializeField] private int _reward;
 
     [Header("Текущие данные игрока")]
     [SerializeField] private int _currentPlayerRating;
@@ -20,10 +20,11 @@ public class Level : MonoBehaviour
     private void Awake()
     {
         Numbers.GenerateNums();
-        //SpawnPlayerCar();
-
         _gameData.Load();
         _currentPlayerRating = _gameData.Data.Rating;
+        _playerSpawner.SpawnPlayer();
+        _playerPosition.FindAllCars();
+        StartCoroutine(StartTimerToStartRace());
     }
 
     private void OnEnable()
@@ -36,46 +37,58 @@ public class Level : MonoBehaviour
         GameEvents.OnLapCompleted -= CheckLapsCounter;
     }
 
+    private IEnumerator StartTimerToStartRace()
+    {
+        while (true)
+        {
+            _timeRemainingToStartRace -= 1;
+
+            if (_timeRemainingToStartRace <= 0)
+            {
+                StartRace();
+                yield break;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     private void CheckLapsCounter(int laps)
     {
         if(_laps == laps)
-            FinishGame();
+            FinishRace();
     }
 
-    private void FinishGame()
+    private void StartRace()
     {
+        GameEvents.OnRaceStarted?.Invoke();
+    }
+
+    private void FinishRace()
+    {
+        int reward;
         switch (_playerPosition.Position)
         {
             case 1:
-                _reward = 10000;
+                reward = 10000;
                 break;
             case 2:
-                _reward = 5000;
+                reward = 5000;
                 break;
             case 3:
-                _reward = 2500;
+                reward = 2500;
                 break;
             default:
-                _reward = 1000;
+                reward = 1000;
                 break;
         }
 
-        GameEvents.OnGameFinished?.Invoke(_playerPosition.Position, _reward);
-
-        //finish.gameObject.SetActive(true);
-        //finish.OpenWindowFinish(_playerPosition.Position);
+        GameEvents.OnRaceFinished?.Invoke(_playerPosition.Position, reward);
 
         Data data = new Data()
         {
-            Rating = _currentPlayerRating + _reward
+            Rating = _currentPlayerRating + reward
         };
 
-        _gameData.Save(data);
+        _gameData.Save(data);        
     }
-
-    //private void SpawnPlayerCar()
-    //{
-    //    var car = Instantiate(_playerCar, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-    //    //car.SetCameraTarget();
-    //}
 }

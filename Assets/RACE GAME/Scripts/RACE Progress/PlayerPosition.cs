@@ -16,6 +16,10 @@ public class PlayerPosition : MonoBehaviour
     private void Awake()
     {
         _checkDelay = new WaitForSeconds(0.2f);
+    }
+
+    public void FindAllCars()
+    {
         _cars = FindObjectsOfType<CarProgress>();
 
         for (int i = 0; i < _cars.Length; i++)
@@ -25,10 +29,7 @@ public class PlayerPosition : MonoBehaviour
             if (_cars[i].IsPlayerCar)
                 _playerRacingNumber = _cars[i].RacingNumber;
         }
-    }
 
-    private void Start()
-    {
         StartCoroutine(CheckPlayerPosition());
     }
 

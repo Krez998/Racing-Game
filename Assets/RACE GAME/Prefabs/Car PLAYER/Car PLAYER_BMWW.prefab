@@ -7859,7 +7859,7 @@ GameObject:
   - component: {fileID: 1957649022090748905}
   m_Layer: 6
   m_Name: Car PLAYER_BMWW
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7956,9 +7956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a40508e568094a832f1d94dd42536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsPlayerCar: 1
+  _isPlayerCar: 1
   _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
-  _cameraPointOfView: {fileID: 7255362852319317510}
+  _cameraTarget: {fileID: 7255362852319317510}
 --- !u!114 &8644450159631650927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23947,7 +23947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7255362852319317510}
   m_Layer: 6
-  m_Name: Camera Point Of View
+  m_Name: Camera Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

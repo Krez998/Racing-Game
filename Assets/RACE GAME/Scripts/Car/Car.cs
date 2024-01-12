@@ -8,12 +8,13 @@ using UnityEngine;
 [RequireComponent(typeof(CarProgress))]
 public class Car : MonoBehaviour
 {
+    public bool IsPlayerCar => _isPlayerCar;
     public CarData CarData => _carData;
-    public Transform CameraPointOfView => _cameraPointOfView;
+    public Transform CameraTarget => _cameraTarget;
 
-    [SerializeField] private bool IsPlayerCar;
+    [SerializeField] private bool _isPlayerCar;
     [SerializeField] private CarData _carData;
-    [SerializeField] private Transform _cameraPointOfView;
+    [SerializeField] private Transform _cameraTarget;
 
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
@@ -34,29 +35,29 @@ public class Car : MonoBehaviour
         _rigidbody.mass = _carData.Mass;
 
         _carEngine.GetData(_carData.MotorTorque, _carData.BrakeTorque, _carData.WheelDriveMode);
-        _gearBox.GetData(IsPlayerCar, _carData.Speed, _carData.NumberOfGears);
+        _gearBox.GetData(_isPlayerCar, _carData.Speed, _carData.NumberOfGears);
         _engineSounds.GetData(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
-        _carProgress.GetData(IsPlayerCar);
-        _speedometer.GetData(IsPlayerCar);
+        _carProgress.GetData(_isPlayerCar);
+        _speedometer.GetData(_isPlayerCar);
 
-        if (IsPlayerCar)
-        {
-            SetCameraTargetOffset();
-            SetCameraTarget();
-        }
+        //if (IsPlayerCar)
+        //{
+        //    //SetCameraTargetOffset();
+        //    SetCameraTarget();
+        //}
     }
 
-    private void SetCameraTargetOffset()
-    {
-        _cameraPointOfView.transform.position = new Vector3(transform.position.x, transform.position.y + 1.8f, transform.position.z);
-    }
+    //private void SetCameraTargetOffset()
+    //{
+    //    _cameraPointOfView.transform.position = new Vector3(transform.position.x, transform.position.y + 1.8f, transform.position.z);
+    //}
 
-    private void SetCameraTarget()
-    {
-        var camera = FindObjectOfType<ThirdPersonCamera>();
-        if (camera != null)
-        {
-            camera.SetTarget(this);
-        }
-    }
+    //private void SetCameraTarget()
+    //{
+    //    var camera = FindObjectOfType<ThirdPersonCamera>();
+    //    if (camera != null)
+    //    {
+    //        camera.SetTarget(this);
+    //    }
+    //}
 }

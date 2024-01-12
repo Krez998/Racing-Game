@@ -52,11 +52,6 @@ public class RunToWaypointState : State
             _targetPosition = new Vector3(_targetWaypoint.transform.position.x, _transform.position.y, _targetWaypoint.transform.position.z);
             _environmentDetector.SetTargetWaypoint(_targetPosition);
             _angleBetweenCarAndWaypoint = Vector3.SignedAngle(_transform.forward, _targetPosition - _transform.position, Vector3.up);
-
-            //if (_angleBetweenCarAndWaypoint < 0)
-            //    Debug.Log("öåëü ÑËÅÂÀ");
-            //else if( _angleBetweenCarAndWaypoint > 0)
-            //    Debug.Log("öåëü ÑÏÐÀÂÀ");
         }
 
         if (_environmentDetector.RivalIsSlow && _environmentDetector.RivalsInFront)

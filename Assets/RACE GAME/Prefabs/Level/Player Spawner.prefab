@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6619280090771766791
+--- !u!1 &3364642606397987947
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8768187891638461275}
-  - component: {fileID: 4960848996458484602}
+  - component: {fileID: 5162315007108068487}
+  - component: {fileID: 8912375547497924877}
   m_Layer: 0
-  m_Name: LEVEL INSTANCE
+  m_Name: Player Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8768187891638461275
+--- !u!4 &5162315007108068487
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6619280090771766791}
+  m_GameObject: {fileID: 3364642606397987947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 15.52834, y: -26.269026, z: 113.3233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4960848996458484602
+--- !u!114 &8912375547497924877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6619280090771766791}
+  m_GameObject: {fileID: 3364642606397987947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46dd25dd7e158c4b958a86028261af4, type: 3}
+  m_Script: {fileID: 11500000, guid: efadb85bd3e12434897b71b61e81fc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameData: {fileID: 7875751699339740193, guid: 63ec2c8b96a865e41b71c5a7add380e7, type: 3}
-  _playerSpawner: {fileID: 8912375547497924877, guid: a845eeb42cfb0f94aa1aa2fb3e842a30, type: 3}
-  _playerPosition: {fileID: 7954173786623683135, guid: b87aea5b5d68878428f7be1cf45d2670, type: 3}
-  _timeRemainingToStartRace: 6
-  _laps: 1
-  _currentPlayerRating: 0
+  _playerCars:
+  - {fileID: 485233505599164695, guid: f415495cb83d7e44e90dc082bbe3a2ee, type: 3}
+  - {fileID: 9002178058897073046, guid: 90c653ae206cc4846bb1c5b364aa29c5, type: 3}
+  - {fileID: 2827104463377860313, guid: 4204161485015ae4da1977d04b612a9b, type: 3}
+  - {fileID: 1399050659754447197, guid: 3decfce77302a7c48987ab7d827e0e3e, type: 3}
+  CHOSEN: 0

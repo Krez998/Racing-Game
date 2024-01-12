@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(EnvironmentDetector))]
 [RequireComponent(typeof(IMovable))]
 [RequireComponent(typeof(ISteerable))]
@@ -8,7 +8,6 @@ using UnityEngine;
 public class BOT : MonoBehaviour
 {
     [SerializeField] private BOTPath _path;
-    [SerializeField] private float _reverseTime;
 
     private FinalStateMashine _finalStateMashine;
     private EnvironmentDetector _environmentDetector;
@@ -26,17 +25,23 @@ public class BOT : MonoBehaviour
         _movable = GetComponent<IMovable>();
         _steerable = GetComponent<ISteerable>();
         _speedometer = GetComponent<ISpeedometer>();
+    }
 
+    private void OnEnable() => GameEvents.OnRaceStarted += InitStateMashine;
+    private void OnDisable() => GameEvents.OnRaceStarted -= InitStateMashine;
+
+    private void InitStateMashine()
+    {
         _finalStateMashine = new FinalStateMashine();
         _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _environmentDetector, _movable, _steerable, _speedometer, _path));
-        _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _environmentDetector, _movable, _steerable, _reverseTime));
+        _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _environmentDetector, _movable, _steerable));
 
         _finalStateMashine.SetState<RunToWaypointState>();
     }
 
     private void FixedUpdate()
     {
-        _finalStateMashine.Update();
+        _finalStateMashine?.Update();
         //CheckOverturn();
     }
 

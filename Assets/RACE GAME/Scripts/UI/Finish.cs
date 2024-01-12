@@ -17,21 +17,21 @@ public class Finish : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnGameFinished += OnGameFinished;
+        GameEvents.OnRaceFinished += OnGameFinished;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnGameFinished -= OnGameFinished;
+        GameEvents.OnRaceFinished -= OnGameFinished;
     }
 
     public void OnGameFinished(int position, int reawrd)
     {
         _windowFinish.SetActive(true);
         _timer.StopTimer();
-        AudioListener.pause = true;
         _positionTMP.SetText(position.ToString());
         _rewardTMP.SetText(reawrd.ToString());
+        AudioListener.pause = true;
         Time.timeScale = 0f;
     }
 }

@@ -55,6 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cars: []
   _playerRacingNumber: 0
+  _position: 0
+  _sortedProgress: []
 --- !u!1001 &2128444008522518597
 PrefabInstance:
   m_ObjectHideFlags: 0

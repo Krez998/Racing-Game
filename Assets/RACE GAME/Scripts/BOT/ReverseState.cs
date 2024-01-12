@@ -5,17 +5,16 @@ public class ReverseState : State
     private EnvironmentDetector _environmentDetector;
     private IMovable _movable;
     private ISteerable _steerable;
-    private float _reverseTime;
+    private float _reverseTime = 2f;
     private float _reverseTimeTemp;
 
     public ReverseState(FinalStateMashine finalStateMashine, 
-        EnvironmentDetector environmentDetector, IMovable movable, ISteerable steerable, float reverseTime)
+        EnvironmentDetector environmentDetector, IMovable movable, ISteerable steerable)
         : base(finalStateMashine)
     {
         _environmentDetector = environmentDetector;
         _movable = movable;
         _steerable = steerable;
-        _reverseTime = reverseTime;
     }
 
     public override void Enter()
