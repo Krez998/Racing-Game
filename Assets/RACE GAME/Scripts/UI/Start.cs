@@ -16,7 +16,7 @@ public class NewBehaviourScript : MonoBehaviour
     double countdownInternal;
     bool countdownOver = false;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,21 +30,20 @@ public class NewBehaviourScript : MonoBehaviour
         if (countdownInternal > 0)
         {
             countdownInternal -= Time.deltaTime;
-
-            //Clamp the timer value so it never goes below 0
-            if (countdownInternal < 0)
+            if (countdownInternal < 4 && countdownInternal > 0)
             {
-                countdownInternal = 0;
+                countdownText.text = FormatTime(countdownInternal);
             }
-
-            countdownText.text = FormatTime(countdownInternal, countdownFormatting, showMilliseconds);
+            else
+            {
+                countdownText.text = "";
+            }
         }
         else
         {
             if (!countdownOver)
             {
                 countdownOver = true;
-
                 Debug.Log("Countdown has finished running...");
                 _windowStart.SetActive(false);
                 _timers.StartTimer();
@@ -53,59 +52,16 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    string FormatTime(double time, CountdownFormatting formatting, bool includeMilliseconds)
+    //string FormatTime(double time, CountdownFormatting formatting, bool includeMilliseconds)
+    string FormatTime(double time)
     {
         string timeText = "";
 
         int intTime = (int)time;
-        int days = intTime / 86400;
-        int hoursTotal = intTime / 3600;
-        int hoursFormatted = hoursTotal % 24;
-        int minutesTotal = intTime / 60;
-        int minutesFormatted = minutesTotal % 60;
-        int secondsTotal = intTime;
-        int secondsFormatted = intTime % 60;
-        int milliseconds = (int)(time * 100);
-        milliseconds = milliseconds % 100;
 
-        if (includeMilliseconds)
-        {
-            if (formatting == CountdownFormatting.DaysHoursMinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}:{2:00}:{3:00}:{4:00}", days, hoursFormatted, minutesFormatted, secondsFormatted, milliseconds);
-            }
-            else if (formatting == CountdownFormatting.HoursMinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", hoursTotal, minutesFormatted, secondsFormatted, milliseconds);
-            }
-            else if (formatting == CountdownFormatting.MinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}:{2:00}", minutesTotal, secondsFormatted, milliseconds);
-            }
-            else if (formatting == CountdownFormatting.Seconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}", secondsTotal, milliseconds);
-            }
-        }
-        else
-        {
-            if (formatting == CountdownFormatting.DaysHoursMinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}:{2:00}:{3:00}", days, hoursFormatted, minutesFormatted, secondsFormatted);
-            }
-            else if (formatting == CountdownFormatting.HoursMinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}:{2:00}", hoursTotal, minutesFormatted, secondsFormatted);
-            }
-            else if (formatting == CountdownFormatting.MinutesSeconds)
-            {
-                timeText = string.Format("{0:00}:{1:00}", minutesTotal, secondsFormatted);
-            }
-            else if (formatting == CountdownFormatting.Seconds)
-            {
-                timeText = string.Format("{0:00}", secondsTotal);
-            }
-        }
+        int secondsTotal = intTime;
+
+        timeText = string.Format("{0}", secondsTotal);
 
         return timeText;
     }

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using System.Diagnostics;
 
-using System.Threading;
+
 
 public class Timer : MonoBehaviour
 {
