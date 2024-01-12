@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using System.Diagnostics;
 
+using System.Threading;
+
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textMeshPro;
@@ -19,7 +21,6 @@ public class Timer : MonoBehaviour
     {
         _chars = new char[12] { '0', '0', ':', '0', '0', ':', '0', '0', '.', '0', '0', '0' };
 
-        StartTimer();
     }
 
     public void StartTimer()
