@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Driver : MonoBehaviour
@@ -14,11 +12,22 @@ public class Driver : MonoBehaviour
     private void Update()
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            _animator.SetTrigger("Left");
+        {
+            _animator.SetBool("LEFT", true);
+            _animator.SetBool("RIGHT", false);
+            _animator.SetBool("ALIGN", false);
+        }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            _animator.SetTrigger("Right");
+        {
+            _animator.SetBool("LEFT", false);
+            _animator.SetBool("RIGHT", true);
+            _animator.SetBool("ALIGN", false);
+        }
         else
-            _animator.SetTrigger("Align");
-
+        {
+            _animator.SetBool("LEFT", false);
+            _animator.SetBool("RIGHT", false);
+            _animator.SetBool("ALIGN", true);
+        }
     }
 }
