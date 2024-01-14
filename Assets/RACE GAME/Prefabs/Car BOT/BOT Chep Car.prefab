@@ -22049,7 +22049,7 @@ GameObject:
   - component: {fileID: 5578559546895099447}
   - component: {fileID: 6058422522482839539}
   m_Layer: 6
-  m_Name: Car BOT_nova
+  m_Name: BOT Chep Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

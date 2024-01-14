@@ -1571,7 +1571,7 @@ GameObject:
   - component: {fileID: 1477775665890423473}
   - component: {fileID: 7670903098331544173}
   m_Layer: 6
-  m_Name: Car BOT_BMWW
+  m_Name: BOT Sedan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -36,9 +36,9 @@ public class CarEngine : MonoBehaviour, IMovable
 
     //private float _motorTorque; // крутящий момент мотора
     public float _motorTorque; // крутящий момент на колеса
-    public float _wheelMinAngularVelocity;
-    public float _wheelMaxAngularVelocity;
-    public float _wheelAngularVelocity;
+    public float _wheelMinRotationSpeed;
+    public float _wheelMaxRotationSpeed;
+    public float _wheelRotationSpeed;
 
     public float _gasInput;
 
@@ -68,10 +68,10 @@ public class CarEngine : MonoBehaviour, IMovable
         }
     }
 
-    public void SetWheelAngularVelocity(float wheelMinAngularVelocity, float wheelMaxAngularVelocity)
+    public void SetWheelsRotationSpeed(float wheelMinRotationSpeed, float wheelMaxRotationSpeed)
     {
-        _wheelMinAngularVelocity = wheelMinAngularVelocity;
-        _wheelMaxAngularVelocity = wheelMaxAngularVelocity;
+        _wheelMinRotationSpeed = wheelMinRotationSpeed;
+        _wheelMaxRotationSpeed = wheelMaxRotationSpeed;
     }
 
     public void ResetGasInput()
@@ -115,8 +115,8 @@ public class CarEngine : MonoBehaviour, IMovable
                 {
                     _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
 
-                    _wheelAngularVelocity = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
-                    _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
+                    _wheelRotationSpeed = Mathf.Lerp(_wheelMinRotationSpeed, _wheelMaxRotationSpeed, _gasInput);
+                    _drivingWheels[i].WheelCollider.rotationSpeed = _wheelRotationSpeed;
                 }
             }
         }
@@ -139,8 +139,8 @@ public class CarEngine : MonoBehaviour, IMovable
                 {
                     _drivingWheels[i].WheelCollider.motorTorque = _motorTorque;
 
-                    _wheelAngularVelocity = Mathf.Lerp(_wheelMinAngularVelocity, _wheelMaxAngularVelocity, _gasInput);
-                    _drivingWheels[i].WheelCollider.rotationSpeed = _wheelAngularVelocity;
+                    _wheelRotationSpeed = Mathf.Lerp(_wheelMinRotationSpeed, _wheelMaxRotationSpeed, _gasInput);
+                    _drivingWheels[i].WheelCollider.rotationSpeed = _wheelRotationSpeed;
                 }
             }
         }

@@ -22,7 +22,7 @@ public class Level : MonoBehaviour
         Numbers.GenerateNums();
         _gameData.Load();
         _currentPlayerRating = _gameData.Data.Rating;
-        _playerSpawner.SpawnPlayer();
+        _playerSpawner.SpawnPlayerCar();
         _playerPosition.FindAllCars();
         StartCoroutine(StartTimerToStartRace());
     }
@@ -82,13 +82,13 @@ public class Level : MonoBehaviour
                 break;
         }
 
-        GameEvents.OnRaceFinished?.Invoke(_playerPosition.Position, reward);
-
         Data data = new Data()
         {
             Rating = _currentPlayerRating + reward
         };
 
-        _gameData.Save(data);        
+        _gameData.Save(data);
+
+        GameEvents.OnRaceFinished?.Invoke(_playerPosition.Position, reward);
     }
 }

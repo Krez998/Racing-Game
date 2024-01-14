@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameData: {fileID: 7875751699339740193, guid: 63ec2c8b96a865e41b71c5a7add380e7, type: 3}
   _playerSpawner: {fileID: 8912375547497924877, guid: a845eeb42cfb0f94aa1aa2fb3e842a30, type: 3}
-  _playerPosition: {fileID: 7954173786623683135, guid: b87aea5b5d68878428f7be1cf45d2670, type: 3}
+  _playerPosition: {fileID: 0}
   _timeRemainingToStartRace: 6
   _laps: 1
   _currentPlayerRating: 0

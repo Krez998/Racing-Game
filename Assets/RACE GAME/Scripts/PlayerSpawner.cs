@@ -3,17 +3,16 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _playerCars;
-
-    public int chosen;
+    [SerializeField] private int _chosenCarIndex;
 
     private void Awake()
     {
-        chosen = ChosenCar.CarIndex;
+        _chosenCarIndex = ChosenCar.CarIndex;
     }
 
-    public void SpawnPlayer()
+    public void SpawnPlayerCar()
     {
-        GameObject playerCar = Instantiate(_playerCars[ChosenCar.CarIndex]);
-        playerCar.transform.position = new Vector3(0f, 0f, 20f);
+        GameObject playerCar = Instantiate(_playerCars[_chosenCarIndex]);
+        playerCar.transform.position = new Vector3(0f, 0f, 18f);
     }
 }

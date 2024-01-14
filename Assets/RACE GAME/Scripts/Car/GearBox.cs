@@ -27,8 +27,8 @@ public class GearBox : MonoBehaviour, IGearBox
     [SerializeField] private float _wheelAngleSpeed; // угловая скорость колеса м/с, Рад./с
 
     [Header("MIN MAX")]
-    [SerializeField] private float _wheelMinAngularVelocity;
-    [SerializeField] private float _wheelMaxAngularVelocity; // скорость вращения колеса Град./сек.
+    [SerializeField] private float _wheelMinRotationSpeed;
+    [SerializeField] private float _wheelMaxRotationSpeed; // скорость вращения колеса Град./сек.
 
     [Header("Gear Settings")]
     [SerializeField] private int _currentGear;
@@ -149,26 +149,26 @@ public class GearBox : MonoBehaviour, IGearBox
 
         _isShifting = false;
         UpdateGearText();
-        SetWheelAngularVelocity(_currentGearMinSpeed, _currentGearMaxSpeed);
+        SetWheelsRotationSpeed(_currentGearMinSpeed, _currentGearMaxSpeed);
         _engine.ResetGasInput();
     }
 
-    private void SetWheelAngularVelocity(float currentGearMinSpeed, float currentGearMaxSpeed)
+    private void SetWheelsRotationSpeed(float currentGearMinSpeed, float currentGearMaxSpeed)
     {
         //_wheelMinAngularVelocity = _wheelMaxAngularVelocity;
 
         _speedMPS = currentGearMinSpeed * 1000 / 3600;
         _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
-        _wheelMinAngularVelocity = _wheelAngleSpeed * Mathf.Rad2Deg;
+        _wheelMinRotationSpeed = _wheelAngleSpeed * Mathf.Rad2Deg;
 
         _speedMPS = currentGearMaxSpeed * 1000 / 3600;
         _wheelAngleSpeed = _speedMPS / _engine.DrivingWheels[0].WheelCollider.radius;
-        _wheelMaxAngularVelocity = _wheelAngleSpeed * Mathf.Rad2Deg;
+        _wheelMaxRotationSpeed = _wheelAngleSpeed * Mathf.Rad2Deg;
 
         //if (_wheelMinAngularVelocity > _wheelMaxAngularVelocity)
         //    _wheelMinAngularVelocity -= _wheelMaxAngularVelocity;
 
-        _engine.SetWheelAngularVelocity(_wheelMinAngularVelocity, _wheelMaxAngularVelocity);
+        _engine.SetWheelsRotationSpeed(_wheelMinRotationSpeed, _wheelMaxRotationSpeed);
     }
 
     private void UpdateGearText()

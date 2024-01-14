@@ -12800,7 +12800,7 @@ GameObject:
   - component: {fileID: 3634923114644184144}
   - component: {fileID: 1950346623479503853}
   m_Layer: 6
-  m_Name: Car BOT_cerolet
+  m_Name: BOT Hatchback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

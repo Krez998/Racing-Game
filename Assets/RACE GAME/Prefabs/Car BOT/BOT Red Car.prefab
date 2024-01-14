@@ -21486,7 +21486,7 @@ GameObject:
   - component: {fileID: 6584020798683787997}
   - component: {fileID: 3021873180273948097}
   m_Layer: 6
-  m_Name: Car AI V2 Red
+  m_Name: BOT Red Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
