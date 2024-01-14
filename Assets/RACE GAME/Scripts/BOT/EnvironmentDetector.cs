@@ -7,7 +7,7 @@ public enum WaypointPosition
     Middle
 }
 
-[RequireComponent(typeof(ISpeedometer))]
+[RequireComponent(typeof(GearBox))]
 public class EnvironmentDetector : MonoBehaviour
 {
     public bool RivalIsSlow => _rivalIsSlow;
@@ -23,8 +23,9 @@ public class EnvironmentDetector : MonoBehaviour
     [SerializeField] private WaypointPosition _waypointPosition;
 
     private float _angleBetweenCarAndWaypoint;
-    private ISpeedometer _speedometer;
+    private GearBox _gearBox;
 
+    
     public bool _rivalsInFront;
     public bool _leftIsOccupied;
     public bool _rightIsOccupied;
@@ -40,7 +41,7 @@ public class EnvironmentDetector : MonoBehaviour
 
     private void Awake()
     {
-        _speedometer = GetComponent<ISpeedometer>();
+        _gearBox = GetComponent<GearBox>();
     }
 
     private void OnEnable()
@@ -52,6 +53,7 @@ public class EnvironmentDetector : MonoBehaviour
     {
         DisableTriggers();
     }
+
 
     private void Update()
     {
@@ -87,7 +89,7 @@ public class EnvironmentDetector : MonoBehaviour
     private void CalculateVelocityBetweenMeAndRival()
     {
         _rivalVelocity = Mathf.Round(transform.InverseTransformDirection(_rivalCollider.attachedRigidbody.velocity).z * 3.6f);
-        if (_rivalVelocity < _speedometer.GetSpeed() && _speedometer.GetSpeed() - _rivalVelocity > 5f)
+        if (_rivalVelocity < _gearBox.Speed && _gearBox.Speed - _rivalVelocity > 5f)
             _rivalIsSlow = true;
         else
             _rivalIsSlow = false;

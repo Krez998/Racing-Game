@@ -2,7 +2,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(CarEngine))]
 [RequireComponent(typeof(GearBox))]
-[RequireComponent(typeof(Speedometer))]
 public class CarEngineSounds : MonoBehaviour
 {
     [Header("Audio Sources")]
@@ -13,11 +12,9 @@ public class CarEngineSounds : MonoBehaviour
     [Header("Pitch Settings")]
     [SerializeField] private float _minPitch;
 
-
     private float _currentSpeed;
     private CarEngine _carEngine;
     private GearBox _gearBox;
-    private Speedometer _speedometer;
 
     public float idlingPitch;
 
@@ -32,7 +29,6 @@ public class CarEngineSounds : MonoBehaviour
     {
         _carEngine = GetComponent<CarEngine>();
         _gearBox = GetComponent<GearBox>();
-        _speedometer = GetComponent<Speedometer>();
     }
 
     private void Update()
@@ -42,7 +38,7 @@ public class CarEngineSounds : MonoBehaviour
 
     private void SoundEngine()
     {
-        _currentSpeed = _speedometer.GetSpeed();
+        _currentSpeed = _gearBox.Speed;
 
         ChangeMinPicth();
         ChangeIdleVolume();

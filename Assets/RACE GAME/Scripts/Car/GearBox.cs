@@ -11,11 +11,12 @@ public enum GearBoxMode
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
-[RequireComponent(typeof(Speedometer))]
 public class GearBox : MonoBehaviour, IGearBox
 {
     public int CurrentGear => _currentGear;
     public GearBoxMode GearBoxMode => _gearBoxMode;
+    public float Speed => _speed;
+    public bool IsMovingInForwardDirection => _isMovingInForwardDirection;
     public float CurrentGearMaxSpeed => _currentGearMaxSpeed;
     public float CurrentGearMinSpeed => _currentGearMinSpeed;
 
@@ -38,27 +39,29 @@ public class GearBox : MonoBehaviour, IGearBox
     [SerializeField] private float _currentGearMinSpeed;
     [SerializeField] private float _currentGearMaxSpeed;
 
-    [Header("Engine Settings")]
+    [Header("Info")]
     [SerializeField] private float _speed;
     [SerializeField] private float _motorTorque;
+    [SerializeField] private bool _isMovingInForwardDirection;
 
     private GearBoxMode _gearBoxMode;
+    private Rigidbody _rigidbody;
     private CarEngine _engine;
-    private Speedometer _speedometer;
     private WaitForSeconds _gearShiftDelay;
     private bool _isPlayerCar;
 
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _engine = GetComponent<CarEngine>();
-        _speedometer = GetComponent<Speedometer>();
         _gearShiftDelay = new WaitForSeconds(0.2f);
         StartCoroutine(SetGear(0));
     }
 
     private void FixedUpdate()
     {
-        _speed = _speedometer.GetSpeed();
+        _speed = Mathf.Round(transform.InverseTransformDirection(_rigidbody.velocity).z * 3.6f);
+        _isMovingInForwardDirection = _speed > 0 ? true : false;
         ChangeGears();
     }
 
@@ -88,13 +91,13 @@ public class GearBox : MonoBehaviour, IGearBox
             StartCoroutine(SetGear(1));
         }
 
-        if (!_isShifting && _speedometer.MovesInForwardDirection && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _maxGear)
+        if (!_isShifting && _isMovingInForwardDirection && _speed >= _currentGearMaxSpeed - 3f && _currentGear != _maxGear)
         {
             //Debug.Log("Gear UP");
             StartCoroutine(SetGear(++_currentGear));
         }
 
-        if (!_isShifting && _speedometer.MovesInForwardDirection && _speed < _currentGearMinSpeed - 3f)
+        if (!_isShifting && _isMovingInForwardDirection && _speed < _currentGearMinSpeed - 3f)
         {
             //Debug.Log("Gear DOWN");
             StartCoroutine(SetGear(--_currentGear));

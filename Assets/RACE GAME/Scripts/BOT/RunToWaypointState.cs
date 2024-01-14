@@ -18,16 +18,16 @@ public class RunToWaypointState : State
     private BOTPath _path;
     private IMovable _movable;
     private ISteerable _steerable;
-    private ISpeedometer _speedometer;
+    private GearBox _gearBox;
 
     public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, EnvironmentDetector environmentDetector,
-        IMovable movable, ISteerable steerable, ISpeedometer speedometer, BOTPath path) : base(finalStateMashine)
+        IMovable movable, ISteerable steerable, GearBox gearBox, BOTPath path) : base(finalStateMashine)
     {
         _transform = transform;
         _environmentDetector = environmentDetector;
         _movable = movable;
         _steerable = steerable;
-        _speedometer = speedometer;
+        _gearBox = gearBox;
         _path = path;
     }
 
@@ -61,7 +61,7 @@ public class RunToWaypointState : State
         else
             RotateWheelsToWaypoint(_angleBetweenCarAndWaypoint);
 
-        _speed = _speedometer.GetSpeed();
+        _speed = _gearBox.Speed;
         Move();
         DetectJam();
     }

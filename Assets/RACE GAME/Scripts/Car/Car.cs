@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
 [RequireComponent(typeof(GearBox))]
-[RequireComponent(typeof(Speedometer))]
 [RequireComponent(typeof(CarEngineSounds))]
 [RequireComponent(typeof(CarProgress))]
 public class Car : MonoBehaviour
@@ -19,7 +18,6 @@ public class Car : MonoBehaviour
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
     private GearBox _gearBox;
-    private Speedometer _speedometer;
     private CarEngineSounds _engineSounds;
     private CarProgress _carProgress;
 
@@ -28,7 +26,6 @@ public class Car : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _carEngine = GetComponent<CarEngine>();
         _gearBox = GetComponent<GearBox>();
-        _speedometer = GetComponent<Speedometer>();
         _engineSounds = GetComponent<CarEngineSounds>();
         _carProgress = GetComponent<CarProgress>();
 
@@ -38,26 +35,5 @@ public class Car : MonoBehaviour
         _gearBox.GetData(_isPlayerCar, _carData.Speed, _carData.NumberOfGears);
         _engineSounds.GetData(_carData.Acceleration, _carData.Deceleration, _carData.Idle);
         _carProgress.GetData(_isPlayerCar);
-        _speedometer.GetData(_isPlayerCar);
-
-        //if (IsPlayerCar)
-        //{
-        //    //SetCameraTargetOffset();
-        //    SetCameraTarget();
-        //}
     }
-
-    //private void SetCameraTargetOffset()
-    //{
-    //    _cameraPointOfView.transform.position = new Vector3(transform.position.x, transform.position.y + 1.8f, transform.position.z);
-    //}
-
-    //private void SetCameraTarget()
-    //{
-    //    var camera = FindObjectOfType<ThirdPersonCamera>();
-    //    if (camera != null)
-    //    {
-    //        camera.SetTarget(this);
-    //    }
-    //}
 }

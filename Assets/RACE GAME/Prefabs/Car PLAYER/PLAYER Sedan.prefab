@@ -7957,7 +7957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 1
-  _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
+  _carData: {fileID: 11400000, guid: a2d6320952af91741b494c7be7d25b60, type: 2}
   _cameraTarget: {fileID: 7255362852319317510}
 --- !u!114 &8644450159631650927
 MonoBehaviour:
@@ -8004,7 +8004,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _speedABS: 0
-  _speedometerFill: {fileID: 0}
 --- !u!114 &4484042464757173976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8028,9 +8027,9 @@ MonoBehaviour:
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
   _motorTorque: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
-  _wheelAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
+  _wheelRotationSpeed: 0
   _gasInput: 0
 --- !u!114 &4733460266153914067
 MonoBehaviour:
@@ -8048,14 +8047,15 @@ MonoBehaviour:
   _speedValues: []
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
   _currentGear: 0
   _maxGear: 0
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
+  _isMovingInForwardDirection: 0
 --- !u!114 &1184958191253235050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8072,9 +8072,6 @@ MonoBehaviour:
   _decelerationAudio: {fileID: 4878869714745700362}
   _idleAudio: {fileID: 6295052813767359366}
   _minPitch: 1
-  _maxPitch: 3
-  _minSpeed: 0
-  _maxSpeed: 0
   idlingPitch: 0.4
 --- !u!114 &1957649022090748905
 MonoBehaviour:

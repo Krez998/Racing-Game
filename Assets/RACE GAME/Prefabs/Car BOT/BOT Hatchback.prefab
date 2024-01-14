@@ -12794,7 +12794,6 @@ GameObject:
   - component: {fileID: 754832061746801549}
   - component: {fileID: 4942102042376010609}
   - component: {fileID: 1204369392998604928}
-  - component: {fileID: 6194572399835824213}
   - component: {fileID: 2705447119060751619}
   - component: {fileID: 8354253386776577778}
   - component: {fileID: 3634923114644184144}
@@ -12940,7 +12939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 0
-  _carData: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
+  _carData: {fileID: 11400000, guid: e2f39a91f203a324990ad273db3838c9, type: 2}
   _cameraTarget: {fileID: 4378450961384565301}
 --- !u!114 &1204369392998604928
 MonoBehaviour:
@@ -12959,21 +12958,6 @@ MonoBehaviour:
   - {fileID: 8491088934614521927}
   - {fileID: 4779362151485188463}
   _useReduceSteerangle: 1
---- !u!114 &6194572399835824213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3449529694665599076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edb0e68cb6cd5548888c607542ae35d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 0
-  _speedABS: 0
-  _speedometerFill: {fileID: 0}
 --- !u!114 &2705447119060751619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12997,9 +12981,9 @@ MonoBehaviour:
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
   _motorTorque: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
-  _wheelAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
+  _wheelRotationSpeed: 0
   _gasInput: 0
 --- !u!114 &8354253386776577778
 MonoBehaviour:
@@ -13017,14 +13001,15 @@ MonoBehaviour:
   _speedValues: []
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
   _currentGear: 0
   _maxGear: 0
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
+  _isMovingInForwardDirection: 0
 --- !u!114 &3634923114644184144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13041,9 +13026,6 @@ MonoBehaviour:
   _decelerationAudio: {fileID: 6503546598487352805}
   _idleAudio: {fileID: 7486730548847932300}
   _minPitch: 1
-  _maxPitch: 3
-  _minSpeed: 0
-  _maxSpeed: 0
   idlingPitch: 0.4
 --- !u!114 &1950346623479503853
 MonoBehaviour:

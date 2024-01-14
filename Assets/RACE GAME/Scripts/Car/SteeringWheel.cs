@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Speedometer))]
+[RequireComponent(typeof(GearBox))]
 public class SteeringWheel : MonoBehaviour, ISteerable
 {
     [SerializeField, Range(0, 40)] private float _maxRotationAngle;
@@ -9,16 +9,16 @@ public class SteeringWheel : MonoBehaviour, ISteerable
     [SerializeField] bool _useReduceSteerangle;
     private float _defaultSteeringAngle = 0f;
     private float _reducedSteerangle;
-    private Speedometer _speedometer;
+    private GearBox _gearBox;
 
     private void Awake()
     {
-        _speedometer = GetComponent<Speedometer>();
+        _gearBox = GetComponent<GearBox>();
     }
 
     public void TurnLeft(float angle)
     {
-        _reducedSteerangle = _useReduceSteerangle ? Mathf.Abs(angle) - (Mathf.Abs(angle) / 200f) * _speedometer.GetSpeed() : Mathf.Abs(angle);
+        _reducedSteerangle = _useReduceSteerangle ? Mathf.Abs(angle) - (Mathf.Abs(angle) / 200f) * _gearBox.Speed : Mathf.Abs(angle);
         
         if (_reducedSteerangle > _maxRotationAngle)
             _reducedSteerangle = _maxRotationAngle;
@@ -29,7 +29,7 @@ public class SteeringWheel : MonoBehaviour, ISteerable
 
     public void TurnRight(float angle)
     {
-        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _speedometer.GetSpeed() : angle;
+        _reducedSteerangle = _useReduceSteerangle ? angle - (angle / 200f) * _gearBox.Speed : angle;
 
         if (_reducedSteerangle > _maxRotationAngle)
             _reducedSteerangle = _maxRotationAngle;

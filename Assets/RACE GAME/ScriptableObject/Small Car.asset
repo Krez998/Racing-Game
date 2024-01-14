@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b9f19294da979244971ef85d65a40c9, type: 3}
-  m_Name: Purple Car
+  m_Name: Small Car
   m_EditorClassIdentifier: 
-  _vehicleId: 2
   _targetRaiting: 0
-  _name: 
-  _mass: 1000
+  _name: Toyota
+  _mass: 800
   _wheelDriveMode: 0
-  _speed: 250
-  _numberOfGears: 8
+  _speed: 150
+  _numberOfGears: 6
   _motorTorque: 500
   _brakeTorque: 3000
   _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}

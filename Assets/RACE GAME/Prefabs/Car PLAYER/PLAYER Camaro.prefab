@@ -10599,7 +10599,7 @@ GameObject:
   - component: {fileID: 8724143695070027380}
   - component: {fileID: 6170706493808743242}
   m_Layer: 6
-  m_Name: PLAYER Roadster
+  m_Name: PLAYER Camaro
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10698,7 +10698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 1
-  _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
+  _carData: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _cameraTarget: {fileID: 6484211069557290224}
 --- !u!114 &2430499978387984702
 MonoBehaviour:
@@ -10713,6 +10713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationAngle: 40
+  _allowMove: 0
 --- !u!114 &7423461205266967488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10744,7 +10745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _speedABS: 0
-  _speedometerFill: {fileID: 0}
 --- !u!114 &8714457509065778732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10768,9 +10768,9 @@ MonoBehaviour:
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
   _motorTorque: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
-  _wheelAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
+  _wheelRotationSpeed: 0
   _gasInput: 0
 --- !u!114 &1128839359620173365
 MonoBehaviour:
@@ -10788,14 +10788,15 @@ MonoBehaviour:
   _speedValues: []
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
   _currentGear: 0
   _maxGear: 0
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
+  _isMovingInForwardDirection: 0
 --- !u!114 &8724143695070027380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10812,9 +10813,6 @@ MonoBehaviour:
   _decelerationAudio: {fileID: 430143263070781334}
   _idleAudio: {fileID: 5544761209118647064}
   _minPitch: 1
-  _maxPitch: 3
-  _minSpeed: 0
-  _maxSpeed: 0
   idlingPitch: 0.4
 --- !u!114 &6170706493808743242
 MonoBehaviour:

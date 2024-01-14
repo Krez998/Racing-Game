@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnvironmentDetector))]
 [RequireComponent(typeof(IMovable))]
 [RequireComponent(typeof(ISteerable))]
-[RequireComponent(typeof(ISpeedometer))]
+[RequireComponent(typeof(GearBox))]
 public class BOT : MonoBehaviour
 {
     [SerializeField] private BOTPath _path;
@@ -13,7 +13,7 @@ public class BOT : MonoBehaviour
     private EnvironmentDetector _environmentDetector;
     private IMovable _movable;
     private ISteerable _steerable;
-    private ISpeedometer _speedometer;
+    private GearBox _gearBox;
 
     //[SerializeField] private bool _isOverturned;
     //private float _rotationZ;
@@ -24,7 +24,7 @@ public class BOT : MonoBehaviour
         _environmentDetector = GetComponent<EnvironmentDetector>();
         _movable = GetComponent<IMovable>();
         _steerable = GetComponent<ISteerable>();
-        _speedometer = GetComponent<ISpeedometer>();
+        _gearBox = GetComponent<GearBox>();
     }
 
     private void OnEnable() => GameEvents.OnRaceStarted += InitStateMashine;
@@ -33,7 +33,7 @@ public class BOT : MonoBehaviour
     private void InitStateMashine()
     {
         _finalStateMashine = new FinalStateMashine();
-        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _environmentDetector, _movable, _steerable, _speedometer, _path));
+        _finalStateMashine.AddState(new RunToWaypointState(_finalStateMashine, transform, _environmentDetector, _movable, _steerable, _gearBox, _path));
         _finalStateMashine.AddState(new ReverseState(_finalStateMashine, _environmentDetector, _movable, _steerable));
 
         _finalStateMashine.SetState<RunToWaypointState>();

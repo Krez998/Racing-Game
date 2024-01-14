@@ -9,7 +9,6 @@ public enum WheelDriveMode
 }
 
 [RequireComponent(typeof(GearBox))]
-[RequireComponent(typeof(Speedometer))]
 public class CarEngine : MonoBehaviour, IMovable
 {
     public float MotorTorque => _motorTorque;
@@ -31,8 +30,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     //[SerializeField, Range(0, 50)] private float _decelerationForce;
 
-    private GearBox _gearShift;
-    private Speedometer _speedometer;
+    private GearBox _gearBox;
 
     //private float _motorTorque; // крутящий момент мотора
     public float _motorTorque; // крутящий момент на колеса
@@ -81,8 +79,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     private void Awake()
     {
-        _gearShift = GetComponent<GearBox>();
-        _speedometer = GetComponent<Speedometer>();
+        _gearBox = GetComponent<GearBox>();
     }
 
     private void CheckGasInput()
@@ -100,7 +97,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Acceleration()
     {
-        if (_speedometer.GetSpeed() != 0 && !_speedometer.MovesInForwardDirection)
+        if (_gearBox.Speed != 0 && !_gearBox.IsMovingInForwardDirection)
             Brake();
         else
         {
@@ -109,7 +106,7 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
 
-            if (_gearShift.GearBoxMode == GearBoxMode.Forward)
+            if (_gearBox.GearBoxMode == GearBoxMode.Forward)
             {
                 for (int i = 0; i < _drivingWheels.Length; i++)
                 {
@@ -124,7 +121,7 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Reverse()
     {      
-        if(_speedometer.GetSpeed() != 0 && _speedometer.MovesInForwardDirection)
+        if(_gearBox.Speed != 0 && _gearBox.IsMovingInForwardDirection)
             Brake();
         else
         {
@@ -133,7 +130,7 @@ public class CarEngine : MonoBehaviour, IMovable
             for (int i = 0; i < _wheels.Length; i++)
                 _wheels[i].WheelCollider.brakeTorque = 0;
            
-            if (_gearShift.GearBoxMode == GearBoxMode.Backward)
+            if (_gearBox.GearBoxMode == GearBoxMode.Backward)
             {
                 for (int i = 0; i < _drivingWheels.Length; i++)
                 {
