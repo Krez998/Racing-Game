@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9f19294da979244971ef85d65a40c9, type: 3}
   m_Name: Small Car
   m_EditorClassIdentifier: 
-  _targetRaiting: 0
+  _targetRaiting: 300000
+  _image: {fileID: 21300000, guid: 8de1072da35e300489ad261844c5531f, type: 3}
   _name: Toyota
   _mass: 800
   _wheelDriveMode: 0

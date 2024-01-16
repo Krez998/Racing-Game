@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cheap Car
   m_EditorClassIdentifier: 
   _targetRaiting: 0
+  _image: {fileID: 21300000, guid: 29b96168fe2612e459abff73b7124e63, type: 3}
   _name: 
   _mass: 1100
   _wheelDriveMode: 0

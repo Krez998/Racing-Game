@@ -3380,7 +3380,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.40774006, b: 0, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5972,7 +5972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1489153938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5985,6 +5985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ba58995435c5f439580ba2e9465cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 0}
 --- !u!114 &1489153939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8206,6 +8207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4960848996458484602, guid: c27fc8e8ebe67e640a9e11b62292a96d, type: 3}
+      propertyPath: _laps
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4960848996458484602, guid: c27fc8e8ebe67e640a9e11b62292a96d, type: 3}
       propertyPath: _playerPosition
       value: 

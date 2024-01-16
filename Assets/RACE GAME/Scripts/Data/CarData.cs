@@ -4,6 +4,7 @@ using UnityEngine;
 public class CarData : ScriptableObject
 {
     public int TargetRaiting => _targetRaiting;
+    public Sprite Image => _image; 
     public string Name => _name;
     public float Mass => _mass;
     public WheelDriveMode WheelDriveMode => _wheelDriveMode;
@@ -16,6 +17,7 @@ public class CarData : ScriptableObject
     public AudioClip Idle => _idle;
 
     [SerializeField] private int _targetRaiting;
+    [SerializeField] private Sprite _image;
     [SerializeField] private string _name;
     [SerializeField] private float _mass;
     [SerializeField] private WheelDriveMode _wheelDriveMode;
@@ -26,4 +28,27 @@ public class CarData : ScriptableObject
     [SerializeField] private AudioClip _acceleration;
     [SerializeField] private AudioClip _deceleration;
     [SerializeField] private AudioClip _idle;
+
+//    public string UID;
+
+//    private void OnValidate()
+//    {
+//        if (string.IsNullOrWhiteSpace(UID))
+//        {
+//            AssignNewUID();
+//        }
+//    }
+
+//    private void Reset()
+//    {
+//        AssignNewUID();
+//    }
+
+//    public void AssignNewUID()
+//    {
+//        UID = System.Guid.NewGuid().ToString();
+//#if UNITY_EDITOR
+//        UnityEditor.EditorUtility.SetDirty(this);
+//#endif
+//    }
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9f19294da979244971ef85d65a40c9, type: 3}
   m_Name: Hatchback
   m_EditorClassIdentifier: 
-  _targetRaiting: 0
+  _targetRaiting: 260000
+  _image: {fileID: 21300000, guid: 56bca0b5e73ace145a3abb010289c6df, type: 3}
   _name: 
   _mass: 900
   _wheelDriveMode: 0

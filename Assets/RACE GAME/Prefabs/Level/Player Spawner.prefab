@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCars:
   - {fileID: 485233505599164695, guid: f415495cb83d7e44e90dc082bbe3a2ee, type: 3}
-  - {fileID: 9002178058897073046, guid: 90c653ae206cc4846bb1c5b364aa29c5, type: 3}
   - {fileID: 2827104463377860313, guid: 4204161485015ae4da1977d04b612a9b, type: 3}
   - {fileID: 1399050659754447197, guid: 3decfce77302a7c48987ab7d827e0e3e, type: 3}
-  chosen: 0
+  - {fileID: 9002178058897073046, guid: 90c653ae206cc4846bb1c5b364aa29c5, type: 3}
+  _chosenCarIndex: 0

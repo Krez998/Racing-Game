@@ -13,21 +13,21 @@ public class Driver : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            _animator.SetBool("LEFT", true);
-            _animator.SetBool("RIGHT", false);
-            _animator.SetBool("ALIGN", false);
+            _animator.SetBool("Left", true);
+            _animator.SetBool("Right", false);
+            _animator.SetBool("Align", false);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            _animator.SetBool("LEFT", false);
-            _animator.SetBool("RIGHT", true);
-            _animator.SetBool("ALIGN", false);
+            _animator.SetBool("Left", false);
+            _animator.SetBool("Right", true);
+            _animator.SetBool("Align", false);
         }
         else
         {
-            _animator.SetBool("LEFT", false);
-            _animator.SetBool("RIGHT", false);
-            _animator.SetBool("ALIGN", true);
+            _animator.SetBool("Left", false);
+            _animator.SetBool("Right", false);
+            _animator.SetBool("Align", true);
         }
     }
 }

@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class menuButton : MonoBehaviour
 {
+    [SerializeField] private GameData gameData;
+
+    private void Awake()
+    {
+        gameData.Load();
+    }
+
     public void LoadScene(int index)
     {
         Time.timeScale = 1f;
