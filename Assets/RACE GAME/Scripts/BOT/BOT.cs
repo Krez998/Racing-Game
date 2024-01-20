@@ -28,6 +28,7 @@ public class BOT : MonoBehaviour
     }
 
     private void OnEnable() => GameEvents.OnRaceStarted += InitStateMashine;
+
     private void OnDisable() => GameEvents.OnRaceStarted -= InitStateMashine;
 
     private void InitStateMashine()

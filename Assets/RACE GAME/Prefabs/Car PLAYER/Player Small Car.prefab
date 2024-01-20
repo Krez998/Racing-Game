@@ -28264,7 +28264,7 @@ Transform:
   m_GameObject: {fileID: 9002178058897073046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 5.83, y: 0.58, z: 63.49}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28381,6 +28381,7 @@ MonoBehaviour:
   - {fileID: 3978939026990469379}
   - {fileID: 7204729811960834796}
   _useReduceSteerangle: 1
+  _steerangle: 0
 --- !u!114 &3536274848535105167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28395,7 +28396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _speedABS: 0
-  _speedometerFill: {fileID: 0}
 --- !u!114 &7615625421357121596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28419,9 +28419,9 @@ MonoBehaviour:
   _brakeForce: 3000
   _brakeForceAxlesRatio: 0.2
   _motorTorque: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
-  _wheelAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
+  _wheelRotationSpeed: 0
   _gasInput: 0
 --- !u!114 &408781360115224439
 MonoBehaviour:
@@ -28439,14 +28439,15 @@ MonoBehaviour:
   _speedValues: []
   _speedMPS: 0
   _wheelAngleSpeed: 0
-  _wheelMinAngularVelocity: 0
-  _wheelMaxAngularVelocity: 0
+  _wheelMinRotationSpeed: 0
+  _wheelMaxRotationSpeed: 0
   _currentGear: 0
   _maxGear: 0
   _currentGearMinSpeed: 0
   _currentGearMaxSpeed: 0
   _speed: 0
   _motorTorque: 0
+  _isMovingInForwardDirection: 0
 --- !u!114 &6356633383360912312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28463,9 +28464,6 @@ MonoBehaviour:
   _decelerationAudio: {fileID: 4058905527309723807}
   _idleAudio: {fileID: 8096981036510875868}
   _minPitch: 1
-  _maxPitch: 3
-  _minSpeed: 0
-  _maxSpeed: 0
   idlingPitch: 0.4
 --- !u!114 &8761092818474503282
 MonoBehaviour:

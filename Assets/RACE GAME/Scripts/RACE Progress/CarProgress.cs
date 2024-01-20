@@ -28,9 +28,10 @@ public class CarProgress : MonoBehaviour
 
     private void Awake()
     {
-        _checkpoints = FindObjectsOfType<Transform>()
+        GameObject container = GameObject.FindGameObjectWithTag("CheckpointContainer");
+        _checkpoints = container.GetComponentsInChildren<Transform>()
             .Where(x => (1 << x.gameObject.layer & _checkpointLayer) != 0)
-            .OrderBy(x => x.name).ToArray();
+            .ToArray();
     }
 
     private void Start() => AssignFirstCheckpoint();

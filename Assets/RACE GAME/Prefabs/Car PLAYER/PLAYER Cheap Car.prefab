@@ -651,7 +651,7 @@ Transform:
   m_GameObject: {fileID: 485233505599164695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 3.01, y: 0.58, z: 63.43}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -768,6 +768,7 @@ MonoBehaviour:
   - {fileID: 1007556619213859864}
   - {fileID: 6591506246465212781}
   _useReduceSteerangle: 1
+  _steerangle: 0
 --- !u!114 &2899071032409503973
 MonoBehaviour:
   m_ObjectHideFlags: 0

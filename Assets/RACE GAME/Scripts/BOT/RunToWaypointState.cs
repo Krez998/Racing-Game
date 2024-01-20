@@ -97,9 +97,10 @@ public class RunToWaypointState : State
     private void AssignFirstWaypoint()
     {
         if (_path != null && _path.Waypoints.Count > 0)
-        {
+        {          
             _currentTargetIndex = 0;
             _targetWaypoint = _path.Waypoints[_currentTargetIndex];
+            _distanceToWaypoint = Vector3.Distance(_transform.position, _targetWaypoint.transform.position);
             SetSpeedLimit(_targetWaypoint.TargetSpeed);
         }
     }
