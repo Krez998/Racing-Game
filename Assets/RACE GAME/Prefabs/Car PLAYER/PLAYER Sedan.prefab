@@ -7957,8 +7957,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 1
-  _carData: {fileID: 11400000, guid: a2d6320952af91741b494c7be7d25b60, type: 2}
   _cameraTarget: {fileID: 7255362852319317510}
+  _targetRaiting: 290000
+  _image: {fileID: 21300000, guid: ebf1d9ccfc4757745ad07bff7d6a8131, type: 3}
+  _name: Sedan
+  _mass: 1500
+  _wheelDriveMode: 0
+  _speed: 280
+  _numberOfGears: 8
+  _motorTorque: 500
+  _brakeTorque: 3000
+  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
+  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &8644450159631650927
 MonoBehaviour:
   m_ObjectHideFlags: 0

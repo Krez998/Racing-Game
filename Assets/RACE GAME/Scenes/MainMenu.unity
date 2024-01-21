@@ -2608,7 +2608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarIndex: 0
   gameData: {fileID: 1373701449}
-  _carData: {fileID: 11400000, guid: 7e476c5364bb8f74eb5c5a0636e2d772, type: 2}
+  _car: {fileID: 8456098888825461052, guid: f415495cb83d7e44e90dc082bbe3a2ee, type: 3}
   _image: {fileID: 740006254}
   _button: {fileID: 976508752}
   _buttonText: {fileID: 1117917190}
@@ -2798,7 +2798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarIndex: 2
   gameData: {fileID: 1373701449}
-  _carData: {fileID: 11400000, guid: a2d6320952af91741b494c7be7d25b60, type: 2}
+  _car: {fileID: 5169348808687831581, guid: 3decfce77302a7c48987ab7d827e0e3e, type: 3}
   _image: {fileID: 937354739}
   _button: {fileID: 341616696}
   _buttonText: {fileID: 514611925}
@@ -3196,7 +3196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarIndex: 1
   gameData: {fileID: 1373701449}
-  _carData: {fileID: 11400000, guid: e2f39a91f203a324990ad273db3838c9, type: 2}
+  _car: {fileID: 6288145461816180915, guid: 4204161485015ae4da1977d04b612a9b, type: 3}
   _image: {fileID: 1697575232}
   _button: {fileID: 342086461}
   _buttonText: {fileID: 1463150658}
@@ -3327,7 +3327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarIndex: 3
   gameData: {fileID: 1373701449}
-  _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
+  _car: {fileID: 1218973110547336613, guid: 90c653ae206cc4846bb1c5b364aa29c5, type: 3}
   _image: {fileID: 2109228276}
   _button: {fileID: 1722010033}
   _buttonText: {fileID: 410634797}

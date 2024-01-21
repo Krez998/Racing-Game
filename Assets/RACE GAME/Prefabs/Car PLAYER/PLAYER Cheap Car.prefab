@@ -735,8 +735,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 1
-  _carData: {fileID: 11400000, guid: 7e476c5364bb8f74eb5c5a0636e2d772, type: 2}
   _cameraTarget: {fileID: 386470781766857040}
+  _targetRaiting: 0
+  _image: {fileID: 21300000, guid: 29b96168fe2612e459abff73b7124e63, type: 3}
+  _name: Cheap Car
+  _mass: 1100
+  _wheelDriveMode: 0
+  _speed: 180
+  _numberOfGears: 6
+  _motorTorque: 500
+  _brakeTorque: 3000
+  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
+  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &2418709390163559150
 MonoBehaviour:
   m_ObjectHideFlags: 0

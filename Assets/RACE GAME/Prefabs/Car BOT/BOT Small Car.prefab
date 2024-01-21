@@ -21489,8 +21489,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 0
-  _carData: {fileID: 11400000, guid: c4834b7e1dd59c64bab90c2b8be034fe, type: 2}
   _cameraTarget: {fileID: 5512457492791435121}
+  _targetRaiting: 300000
+  _image: {fileID: 21300000, guid: 8de1072da35e300489ad261844c5531f, type: 3}
+  _name: Small Car
+  _mass: 800
+  _wheelDriveMode: 0
+  _speed: 150
+  _numberOfGears: 6
+  _motorTorque: 500
+  _brakeTorque: 3000
+  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
+  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &7189119847140511414
 MonoBehaviour:
   m_ObjectHideFlags: 0

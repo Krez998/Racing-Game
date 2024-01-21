@@ -21593,8 +21593,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 0
-  _carData: {fileID: 11400000, guid: d2c36f2216496134ab0a1fe58dbbdd37, type: 2}
   _cameraTarget: {fileID: 0}
+  _targetRaiting: 0
+  _image: {fileID: 0}
+  _name: Camaro
+  _mass: 1200
+  _wheelDriveMode: 0
+  _speed: 250
+  _numberOfGears: 8
+  _motorTorque: 500
+  _brakeTorque: 3000
+  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
+  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &8264200397656734458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21612,6 +21623,7 @@ MonoBehaviour:
   - {fileID: 9037937598899604487}
   - {fileID: 3906581399479452299}
   _useReduceSteerangle: 1
+  _steerangle: 0
 --- !u!114 &1760500033406160465
 MonoBehaviour:
   m_ObjectHideFlags: 0

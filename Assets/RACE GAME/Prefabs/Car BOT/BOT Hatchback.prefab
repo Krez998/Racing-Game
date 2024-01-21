@@ -12939,8 +12939,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 0
-  _carData: {fileID: 11400000, guid: e2f39a91f203a324990ad273db3838c9, type: 2}
   _cameraTarget: {fileID: 4378450961384565301}
+  _targetRaiting: 260000
+  _image: {fileID: 21300000, guid: 56bca0b5e73ace145a3abb010289c6df, type: 3}
+  _name: Hatchback
+  _mass: 900
+  _wheelDriveMode: 0
+  _speed: 200
+  _numberOfGears: 6
+  _motorTorque: 500
+  _brakeTorque: 3000
+  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
+  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &1204369392998604928
 MonoBehaviour:
   m_ObjectHideFlags: 0

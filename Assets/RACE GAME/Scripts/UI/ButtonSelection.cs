@@ -8,7 +8,7 @@ public class ButtonSelection : MonoBehaviour
 
     [SerializeField] private GameData gameData;
 
-    [SerializeField] private CarData _carData;
+    [SerializeField] private Car _car;
     [SerializeField] private Image _image;
     [SerializeField] private Button _button;
     [SerializeField] private TextMeshProUGUI _buttonText;
@@ -16,9 +16,9 @@ public class ButtonSelection : MonoBehaviour
 
     private void Start()
     {
-        _image.sprite = _carData.Image;
+        _image.sprite = _car.Image;
 
-        if (gameData.Data.Rating < _carData.TargetRaiting)
+        if (gameData.Data.Rating < _car.TargetRaiting)
         {
             _button.interactable = false;
             _buttonText.SetText("Недостаточно рейтинга");
