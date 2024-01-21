@@ -21,7 +21,7 @@ public class ButtonSelection : MonoBehaviour
         if (gameData.Data.Rating < _car.TargetRaiting)
         {
             _button.interactable = false;
-            _buttonText.SetText("Недостаточно рейтинга");
+            _buttonText.SetText($"Недостаточно рейтинга {_car.TargetRaiting - gameData.Data.Rating}");
         }
         else
         {
