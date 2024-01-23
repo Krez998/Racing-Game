@@ -7,6 +7,11 @@ public class Waypoint : MonoBehaviour
 
     [SerializeField] private float _targetSpeed;
 
+    private void Start()
+    {
+        transform.name = _targetSpeed.ToString();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
