@@ -19,21 +19,13 @@ public class CarEngine : MonoBehaviour, IMovable
     [SerializeField] private Wheel[] _wheels;
     [SerializeField] private Wheel[] _drivingWheels;
 
-    [Tooltip(" рут€щий момент")]
     [SerializeField, Range(0, 5_000)] private float _torqueForce;
-    
-    [Tooltip("“ормозной момент")]
     [SerializeField, Range(2500, 5000)] private float _brakeForce;
-
-    [Tooltip("–аспределение тормозных сил между ос€ми: 0 - передн€€; 1 - задн€€")]
     [SerializeField, Range(0, 1)] private float _brakeForceAxlesRatio;
-
-    //[SerializeField, Range(0, 50)] private float _decelerationForce;
 
     private GearBox _gearBox;
 
-    //private float _motorTorque; // крут€щий момент мотора
-    public float _motorTorque; // крут€щий момент на колеса
+    public float _motorTorque;
     public float _wheelMinRotationSpeed;
     public float _wheelMaxRotationSpeed;
     public float _wheelRotationSpeed;
@@ -145,7 +137,6 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Brake()
     {
-        //Debug.Log("Brake");
         _motorTorque = 0f;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
@@ -160,7 +151,6 @@ public class CarEngine : MonoBehaviour, IMovable
 
     public void Deceleration()
     {
-        //Debug.Log("Deceleration");
         _motorTorque = 0f;
 
         for (int i = 0; i < _drivingWheels.Length; i++)
@@ -168,6 +158,5 @@ public class CarEngine : MonoBehaviour, IMovable
 
         for (int i = 0; i < _wheels.Length; i++)
             _wheels[i].WheelCollider.brakeTorque = 0f;
-            //_wheels[i].WheelCollider.brakeTorque = _decelerationForce;
     }
 }

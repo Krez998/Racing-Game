@@ -26,7 +26,6 @@ public class EnvironmentDetector : MonoBehaviour
     private float _frontTriggerAngle;
     private GearBox _gearBox;
 
-
     [SerializeField] private bool _rivalsInFront;
     [SerializeField] private bool _leftIsOccupied;
     [SerializeField] private bool _rightIsOccupied;
@@ -35,26 +34,16 @@ public class EnvironmentDetector : MonoBehaviour
     private Collider _rivalCollider;
     private Vector3 _targetPosition;
 
-    public void SetTargetWaypoint(Vector3 target)
-    {
-        _targetPosition = target;
-    }
+    public void SetTargetWaypoint(Vector3 target) => _targetPosition = target;
 
     private void Awake()
     {
         _gearBox = GetComponent<GearBox>();
     }
 
-    private void OnEnable()
-    {
-        EnableTriggers();
-    }
+    private void OnEnable() => EnableTriggers();
 
-    private void OnDisable()
-    {
-        DisableTriggers();
-    }
-
+    private void OnDisable() => DisableTriggers();
 
     private void Update()
     {
@@ -63,8 +52,6 @@ public class EnvironmentDetector : MonoBehaviour
 
         if (_rivalsInFront)
             CalculateVelocityBetweenMeAndRival();
-
-        //Debug.Log("Я: " + _gearBox.GetSpeed() + " Противник: " + _rivalVelocity);
     }
 
     private void CheckWaypointPosition()

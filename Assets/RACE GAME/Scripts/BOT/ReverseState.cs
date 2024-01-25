@@ -17,10 +17,7 @@ public class ReverseState : State
         _steerable = steerable;
     }
 
-    public override void Enter()
-    {
-        _reverseTimeTemp = _reverseTime;
-    }
+    public override void Enter() => _reverseTimeTemp = _reverseTime;
 
     public override void Update()
     {

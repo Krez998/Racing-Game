@@ -19,8 +19,6 @@ public class SteeringWheel : MonoBehaviour, ISteerable
     private void ReduceSteerangle(float angle)
     {
         _steerangle = Mathf.Abs(angle) - (Mathf.Abs(angle) / 200f) * _gearBox.Speed;
-        //float result = _gearBox.Speed * 0.5f > 30 ? 30 : _gearBox.Speed * 0.5f;
-        //_steerangle = angle - result;
     }
 
     public void TurnLeft(float angle)

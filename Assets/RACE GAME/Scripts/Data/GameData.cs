@@ -5,12 +5,10 @@ using System.IO;
 public class GameData : MonoBehaviour
 {
     public Data Data { get; private set; }
-
     public void Save(Data data)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream = new FileStream(Application.persistentDataPath + "/save.dat", FileMode.Create);
-
         binaryFormatter.Serialize(fileStream, data);
         fileStream.Close();
     }
@@ -22,7 +20,6 @@ public class GameData : MonoBehaviour
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = File.Open(Application.persistentDataPath + "/save.dat", FileMode.Open);
             Data = (Data)binaryFormatter.Deserialize(fileStream);
-
             fileStream.Close();
         }
     }

@@ -27,15 +27,9 @@ public class Level : MonoBehaviour
         StartCoroutine(StartTimerToStartRace());
     }
 
-    private void OnEnable()
-    {
-        GameEvents.OnLapCompleted += CheckLapsCounter;
-    }
+    private void OnEnable() => GameEvents.OnLapCompleted += CheckLapsCounter;
 
-    private void OnDisable()
-    {
-        GameEvents.OnLapCompleted -= CheckLapsCounter;
-    }
+    private void OnDisable() => GameEvents.OnLapCompleted -= CheckLapsCounter;
 
     private IEnumerator StartTimerToStartRace()
     {
@@ -58,10 +52,7 @@ public class Level : MonoBehaviour
             FinishRace();
     }
 
-    private void StartRace()
-    {
-        GameEvents.OnRaceStarted?.Invoke();
-    }
+    private void StartRace() => GameEvents.OnRaceStarted?.Invoke();
 
     private void FinishRace()
     {

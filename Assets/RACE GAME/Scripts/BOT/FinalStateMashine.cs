@@ -7,10 +7,7 @@ public class FinalStateMashine
     private Dictionary<Type, State> _states = new Dictionary<Type, State>();
     private Type _type;
 
-    public void AddState(State state)
-    {
-        _states.Add(state.GetType(), state);
-    }
+    public void AddState(State state) => _states.Add(state.GetType(), state);
 
     public void SetState<T>() where T : State
     {
@@ -27,8 +24,5 @@ public class FinalStateMashine
         }
     }
 
-    public void Update()
-    {
-        _currentState?.Update();
-    }
+    public void Update() => _currentState?.Update();
 }

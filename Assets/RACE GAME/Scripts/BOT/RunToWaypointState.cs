@@ -12,7 +12,6 @@ public class RunToWaypointState : State
     private Vector3 _targetPosition;
     private float _jamTimer;
 
-    // constructor
     private Transform _transform;
     private EnvironmentDetector _environmentDetector;
     private BOTPath _path;
@@ -20,8 +19,9 @@ public class RunToWaypointState : State
     private ISteerable _steerable;
     private GearBox _gearBox;
 
-    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, EnvironmentDetector environmentDetector,
-        IMovable movable, ISteerable steerable, GearBox gearBox, BOTPath path) : base(finalStateMashine)
+    public RunToWaypointState(FinalStateMashine finalStateMashine, Transform transform, 
+        EnvironmentDetector environmentDetector, IMovable movable, ISteerable steerable, 
+        GearBox gearBox, BOTPath path) : base(finalStateMashine)
     {
         _transform = transform;
         _environmentDetector = environmentDetector;
@@ -129,10 +129,7 @@ public class RunToWaypointState : State
         }
     }
 
-    public void SetSpeedLimit(float speedLimit)
-    {
-        _speedLimit = speedLimit;
-    }
+    public void SetSpeedLimit(float speedLimit) => _speedLimit = speedLimit;
 
     private void DetectJam()
     {

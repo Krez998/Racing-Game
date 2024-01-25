@@ -6,7 +6,7 @@ public class Test : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float _angle;
-    [SerializeField] private Wheel[] _wheels;
+    [SerializeField] private WheelUnused[] _wheels;
 
     private void FixedUpdate()
     {

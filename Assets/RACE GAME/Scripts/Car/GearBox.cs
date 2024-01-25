@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ public enum GearBoxMode
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarEngine))]
-public class GearBox : MonoBehaviour, IGearBox
+public class GearBox : MonoBehaviour
 {
     public int CurrentGear => _currentGear;
     public GearBoxMode GearBoxMode => _gearBoxMode;
