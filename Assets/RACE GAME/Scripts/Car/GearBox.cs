@@ -68,7 +68,6 @@ public class GearBox : MonoBehaviour, IGearBox
     public void GetData(bool isPlayerCar, float speed, int numberOfGears)
     {
         _isPlayerCar = isPlayerCar;
-
         _maxGear = numberOfGears;
         _speedValues = new float[_maxGear];
         float speedDelta = speed / _maxGear;
@@ -121,7 +120,8 @@ public class GearBox : MonoBehaviour, IGearBox
         _isShifting = true;
         _gearBoxMode = GearBoxMode.Neutral;
         _currentGear = 0;
-        UpdateGearText();
+        if (_isPlayerCar)
+            GameEvents.OnGearShifted?.Invoke(_currentGear);
         yield return _gearShiftDelay;
 
         _currentGear = gear;
@@ -151,7 +151,8 @@ public class GearBox : MonoBehaviour, IGearBox
         }
 
         _isShifting = false;
-        UpdateGearText();
+        if (_isPlayerCar)
+            GameEvents.OnGearShifted?.Invoke(_currentGear);
         SetWheelsRotationSpeed(_currentGearMinSpeed, _currentGearMaxSpeed);
         _engine.ResetGasInput();
     }
@@ -172,11 +173,5 @@ public class GearBox : MonoBehaviour, IGearBox
         //    _wheelMinAngularVelocity -= _wheelMaxAngularVelocity;
 
         _engine.SetWheelsRotationSpeed(_wheelMinRotationSpeed, _wheelMaxRotationSpeed);
-    }
-
-    private void UpdateGearText()
-    {
-        if (_isPlayerCar)
-            GameEvents.OnGearShifted?.Invoke(_currentGear);
     }
 }

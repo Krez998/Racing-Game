@@ -11,19 +11,21 @@ public class Car : MonoBehaviour
 
     [SerializeField] private bool _isPlayerCar;
     [SerializeField] private Transform _cameraTarget;
-   
+
     public int TargetRaiting => _targetRaiting;
     public Sprite Image => _image;
-    [Header("Car Data")]
+
     [SerializeField] private int _targetRaiting;
     [SerializeField] private Sprite _image;
-    [SerializeField] private string _name;
     [SerializeField] private float _mass;
+    [Header("Car Engine")]
     [SerializeField] private WheelDriveMode _wheelDriveMode;
-    [SerializeField] private float _speed;
-    [SerializeField] private int _numberOfGears;
     [SerializeField] private float _motorTorque;
     [SerializeField] private float _brakeTorque;
+    [Header("Gearbox")]
+    [SerializeField] private float _speed;
+    [SerializeField] private int _numberOfGears;
+
     [SerializeField] private AudioClip _acceleration;
     [SerializeField] private AudioClip _deceleration;
     [SerializeField] private AudioClip _idle;

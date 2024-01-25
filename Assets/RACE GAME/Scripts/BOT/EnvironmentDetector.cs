@@ -23,14 +23,15 @@ public class EnvironmentDetector : MonoBehaviour
     [SerializeField] private WaypointPosition _waypointPosition;
 
     private float _angleBetweenCarAndWaypoint;
+    private float _frontTriggerAngle;
     private GearBox _gearBox;
 
-    
-    public bool _rivalsInFront;
-    public bool _leftIsOccupied;
-    public bool _rightIsOccupied;
+
+    [SerializeField] private bool _rivalsInFront;
+    [SerializeField] private bool _leftIsOccupied;
+    [SerializeField] private bool _rightIsOccupied;
     private float _rivalVelocity;
-    public bool _rivalIsSlow;
+    [SerializeField] private bool _rivalIsSlow;
     private Collider _rivalCollider;
     private Vector3 _targetPosition;
 
@@ -80,10 +81,19 @@ public class EnvironmentDetector : MonoBehaviour
 
     private void RotateFrontTrigger()
     {
-        Vector3 direction = _targetPosition - _triggers[0].transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        rotation.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
-        _triggers[0].transform.rotation = rotation;
+        _frontTriggerAngle = _angleBetweenCarAndWaypoint;
+        if (_frontTriggerAngle > 40f)
+            _frontTriggerAngle = 40f;
+        else if (_frontTriggerAngle < -40f)
+            _frontTriggerAngle = -40f;
+
+        _triggers[0].transform.localRotation = Quaternion.Euler(0f, _frontTriggerAngle, 0f);
+        //_triggers[0].transform.localEulerAngles = new Vector3(0f, frontTriggerAngle, 0f);
+
+        //Vector3 direction = _targetPosition - _triggers[0].transform.position;
+        //Quaternion rotation = Quaternion.LookRotation(direction);
+        //rotation.eulerAngles = new Vector3(0f, rotation.eulerAngles.y, 0f);
+        //_triggers[0].transform.rotation = rotation;
     }
 
     private void CalculateVelocityBetweenMeAndRival()
