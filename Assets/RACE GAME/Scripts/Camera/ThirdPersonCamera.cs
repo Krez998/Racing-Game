@@ -31,9 +31,12 @@ public class ThirdPersonCamera : MonoBehaviour
         transform.LookAt(_targetCar.CameraTarget.position);
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawLine(transform.position, _targetCar.CameraPointOfView.position);
-    //}
+    private void OnDrawGizmos()
+    {
+        if (_targetCar != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, _targetCar.CameraTarget.position);
+        }
+    }
 }

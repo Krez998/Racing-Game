@@ -1587,7 +1587,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2058910537349125140}
   - {fileID: 1562054102855729467}
   - {fileID: 4632458557094648986}
   - {fileID: 244448208769363797}
@@ -1674,7 +1673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerCar: 0
-  _cameraTarget: {fileID: 2058910537349125140}
+  _cameraTarget: {fileID: 0}
   _targetRaiting: 290000
   _image: {fileID: 21300000, guid: ebf1d9ccfc4757745ad07bff7d6a8131, type: 3}
   _mass: 1500
@@ -1683,9 +1682,6 @@ MonoBehaviour:
   _brakeTorque: 3000
   _speed: 280
   _numberOfGears: 8
-  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
-  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
-  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &5672066675237636077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11272,37 +11268,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6654371279572435703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5661531627176965789
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2058910537349125140}
-  m_Layer: 6
-  m_Name: Camera Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2058910537349125140
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5661531627176965789}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 652250461036061271}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5744056262134748394
 GameObject:

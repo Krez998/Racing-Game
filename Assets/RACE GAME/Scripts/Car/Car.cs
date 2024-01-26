@@ -25,10 +25,6 @@ public class Car : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _numberOfGears;
 
-    [SerializeField] private AudioClip _acceleration;
-    [SerializeField] private AudioClip _deceleration;
-    [SerializeField] private AudioClip _idle;
-
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
     private GearBox _gearBox;

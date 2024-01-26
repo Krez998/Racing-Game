@@ -12,11 +12,7 @@ public class PlayerPosition : MonoBehaviour
     [SerializeField] private CarProgress[] _sortedProgress;
     private WaitForSeconds _checkDelay;
 
-    private void Awake()
-    {
-        _checkDelay = new WaitForSeconds(0.2f);
-    }
-
+    private void Awake() => _checkDelay = new WaitForSeconds(0.2f);
     public void FindAllCars()
     {
         _cars = FindObjectsOfType<CarProgress>();

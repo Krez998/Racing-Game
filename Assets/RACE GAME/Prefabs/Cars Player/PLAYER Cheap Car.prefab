@@ -673,9 +673,6 @@ MonoBehaviour:
   _brakeTorque: 3000
   _speed: 180
   _numberOfGears: 6
-  _acceleration: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
-  _deceleration: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
-  _idle: {fileID: 8300000, guid: f42ee6c61e2b5a049b588a485b2f267f, type: 3}
 --- !u!114 &2418709390163559150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,7 +1172,7 @@ GameObject:
   m_Layer: 6
   m_Name: Camera Target
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
