@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class ImproverCamera : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class ImproverCamera : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _offset;
     private Vector3 targetPosition;
+
+    //[Inject]
+    //private void Construct(Car car)
+    //{
+    //    Debug.Log(car.GetType());
+    //    _targetCar = car;
+    //}
 
     private void Start()
     {

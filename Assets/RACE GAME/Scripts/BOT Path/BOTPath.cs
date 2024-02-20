@@ -9,28 +9,28 @@ public class BOTPath : MonoBehaviour
     [SerializeField] private List<Waypoint> _waypoints;
     [SerializeField] private Waypoint _pathNodePrefab;
 
-    //private Transform _newNodeTransform;
+    private Transform _newNodeTransform;
 
-    //public void AddNewWaypoint()
-    //{
-    //    _newNodeTransform = transform;
-    //    if (_waypoints.Count > 0)
-    //        _newNodeTransform = _waypoints[_waypoints.Count - 1].transform;
+    public void AddNewWaypoint()
+    {
+        _newNodeTransform = transform;
+        if (_waypoints.Count > 0)
+            _newNodeTransform = _waypoints[_waypoints.Count - 1].transform;
 
-    //    Waypoint newTransform = Instantiate(_pathNodePrefab, _newNodeTransform.position, Quaternion.identity);
-    //    newTransform.name = $"Waypoint {_waypoints.Count}";
-    //    newTransform.transform.SetParent(transform);
-    //    _waypoints.Add(newTransform);
-    //}
+        Waypoint newTransform = Instantiate(_pathNodePrefab, _newNodeTransform.position, Quaternion.identity);
+        newTransform.name = $"Waypoint {_waypoints.Count}";
+        newTransform.transform.SetParent(transform);
+        _waypoints.Add(newTransform);
+    }
 
-    //public void RemoveLastWaypoint()
-    //{
-    //    if (_waypoints.Count > 0)
-    //    {
-    //        DestroyImmediate(_waypoints[_waypoints.Count - 1].gameObject);
-    //        _waypoints.Remove(_waypoints[_waypoints.Count - 1]);
-    //    }
-    //}
+    public void RemoveLastWaypoint()
+    {
+        if (_waypoints.Count > 0)
+        {
+            DestroyImmediate(_waypoints[_waypoints.Count - 1].gameObject);
+            _waypoints.Remove(_waypoints[_waypoints.Count - 1]);
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -45,22 +45,22 @@ public class BOTPath : MonoBehaviour
     }
 }
 
-//[CustomEditor(typeof(BOTPath))]
-//[CanEditMultipleObjects]
-//public class PathEditor : Editor
-//{   
-//    public override void OnInspectorGUI()
-//    {
-//        DrawDefaultInspector();
-//        BOTPath path = (BOTPath)target;
-//        if (GUILayout.Button("Add new waypoint"))
-//        {
-//            path.AddNewWaypoint();
-//        }
+[CustomEditor(typeof(BOTPath))]
+[CanEditMultipleObjects]
+public class PathEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        BOTPath path = (BOTPath)target;
+        if (GUILayout.Button("Add new waypoint"))
+        {
+            path.AddNewWaypoint();
+        }
 
-//        if (GUILayout.Button("Remove last waypoint"))
-//        {
-//            path.RemoveLastWaypoint();
-//        }
-//    }
-//}
+        if (GUILayout.Button("Remove last waypoint"))
+        {
+            path.RemoveLastWaypoint();
+        }
+    }
+}

@@ -25,10 +25,15 @@ public class Car : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _numberOfGears;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _acceleration;
+    [SerializeField] private AudioClip _deceleration;
+    [SerializeField] private AudioClip _idle;
+
     private Rigidbody _rigidbody;
     private CarEngine _carEngine;
     private GearBox _gearBox;
-    //private CarEngineSounds _engineSounds;
+    private CarEngineSounds _engineSounds;
     private CarProgress _carProgress;
 
     private void Awake()
@@ -36,14 +41,14 @@ public class Car : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _carEngine = GetComponent<CarEngine>();
         _gearBox = GetComponent<GearBox>();
-        //_engineSounds = GetComponent<CarEngineSounds>();
+        _engineSounds = GetComponent<CarEngineSounds>();
         _carProgress = GetComponent<CarProgress>();
 
         _rigidbody.mass = _mass;
 
         _carEngine.GetData(_motorTorque, _brakeTorque, _wheelDriveMode);
         _gearBox.GetData(_isPlayerCar, _speed, _numberOfGears);
-        //_engineSounds.GetData(_acceleration, _deceleration, _idle);
+        _engineSounds.GetData(_acceleration, _deceleration, _idle);
         _carProgress.GetData(_isPlayerCar);
     }
 }
